@@ -7,12 +7,15 @@ export default function Hero() {
     <section className="container mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
         <div>
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-[#6c5ce7]">
+          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-primary-200">
             Hi, I&apos;m Durmus Demirtas
           </h1>
 
-          <Button variant={"outline"}>Content</Button>
-          <h1 className="bg-foreground">Test</h1>
+          <Button variant={"secondary"} size={"lg"}>
+            Content
+          </Button>
+          {/* <hr className="h-8" /> */}
+          {/* <div className="bg-primary-300 h-16 rounded-2xl">Test</div> */}
 
           <p className="mt-4 text-lg text-[#7b7b7b]">
             I&apos;m a passionate full stack developer with a focus on creating
