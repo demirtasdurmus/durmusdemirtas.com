@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "./ui/button";
 
 export default function Hero() {
   return (
@@ -9,6 +10,10 @@ export default function Hero() {
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-[#6c5ce7]">
             Hi, I&apos;m Durmus Demirtas
           </h1>
+
+          <Button variant={"outline"}>Content</Button>
+          <h1 className="bg-foreground">Test</h1>
+
           <p className="mt-4 text-lg text-[#7b7b7b]">
             I&apos;m a passionate full stack developer with a focus on creating
             beautiful and functional user interfaces.
