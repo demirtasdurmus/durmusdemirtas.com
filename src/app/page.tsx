@@ -3,11 +3,11 @@ import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Projects from "@/components/Projects";
+import Portfolio from "@/components/Portfolio";
 
 export default function Home() {
   return (
-    <div className="flex min-h-[100dvh] flex-col bg-[#f5f5f5] text-[#333]">
+    <div className="flex min-h-[100dvh] flex-col bg-neutral-200 text-neutral-400">
       <Header />
 
       <main className="flex-1">
@@ -15,7 +15,7 @@ export default function Home() {
 
         <About />
 
-        <Projects />
+        <Portfolio />
 
         <Blog />
 

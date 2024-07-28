@@ -12,11 +12,11 @@ const buttonVariants = cva(
           "bg-primary-200 text-white enabled:hover:bg-primary-300 enabled:active:bg-primary-300 disabled:bg-primary-100",
         secondary:
           "bg-secondary-200 text-white enabled:hover:bg-secondary-300 enabled:active:bg-secondary-300 disabled:bg-secondary-100",
-        // TODO: rest will be implemented when needed
+        outline:
+          "border border-neutral-300 text-neutral-400 enabled:hover:bg-primary-100",
+        // TODO: the rest will be implemented when needed
         // destructive:
         //   "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        // outline:
-        //   "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         // ghost: "hover:bg-accent hover:text-accent-foreground",
         // link: "text-primary underline-offset-4 hover:underline",
       },

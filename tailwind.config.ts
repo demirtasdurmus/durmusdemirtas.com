@@ -8,6 +8,37 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // FIXME: did not work somehow, ask sb and solve
+      fontSize: {
+        "heading-1": [
+          "61px",
+          {
+            fontWeight: "900",
+            lineHeight: "80px",
+          },
+        ],
+        "heading-2": [
+          "49px",
+          {
+            fontWeight: "600",
+            lineHeight: "64px",
+          },
+        ],
+        "heading-3": [
+          "31px",
+          {
+            fontWeight: "600",
+            lineHeight: "40px",
+          },
+        ],
+        "heading-4": [
+          "25px",
+          {
+            fontWeight: "600",
+            lineHeight: "32px",
+          },
+        ],
+      },
       colors: {
         primary: {
           100: "var(--primary-100)",
@@ -38,6 +69,7 @@ const config: Config = {
           100: "var(--neutral-100)",
           200: "var(--neutral-200)",
           300: "var(--neutral-300)",
+          400: "var(--neutral-400)",
         },
         white: "var(--neutral-100)",
       },
@@ -69,7 +101,7 @@ const config: Config = {
       // },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
 
 export default config;

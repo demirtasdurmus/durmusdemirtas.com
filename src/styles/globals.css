@@ -32,6 +32,7 @@
     --neutral-100: #f8f9fa;
     --neutral-200: #e9ecef;
     --neutral-300: #ced4da;
+    --neutral-400: #7b7b7b;
 
     /* Other Variables */
     --border-radius: 0.5rem;
@@ -72,5 +73,7 @@
     --neutral-100: #2e2e2e;
     --neutral-200: #454545;
     --neutral-300: #646464;
+    /* TODO: Check this colour */
+    --neutral-400: #646464;
   }
 }
