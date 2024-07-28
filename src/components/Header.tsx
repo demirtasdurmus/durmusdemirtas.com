@@ -15,7 +15,7 @@ export default function Header() {
         <nav className="hidden space-x-4 sm:flex">
           <NavLink title="About" href="#about" />
 
-          <NavLink title="Projects" href="#projects" />
+          <NavLink title="Portfolio" href="#portfolio" />
 
           <NavLink title="Blog" href="#blog" />
 
