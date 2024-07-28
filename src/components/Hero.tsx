@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "./ui/buttonn";
+import { Button } from "./ui/Button";
 import { Heading1 } from "./ui/Heading";
 
 export default function Hero() {
@@ -38,7 +38,7 @@ export default function Hero() {
 
         <div className="justify-self-center">
           <Image
-            src="/profile-pic.png"
+            src="/profile-picture.png"
             alt="Durmus Demirtas"
             width={0}
             height={0}

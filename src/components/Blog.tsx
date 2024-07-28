@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/cardd";
+import { Card, CardContent } from "@/components/ui/Card";
 import Image from "next/image";
 import { Heading2, Heading4 } from "./ui/Heading";
-import { Button } from "./ui/buttonn";
+import { Button } from "./ui/Button";
 
 export default function Blog() {
   return (

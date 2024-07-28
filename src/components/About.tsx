@@ -10,7 +10,7 @@ export default function About() {
       <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
         <div>
           <Image
-            src="/full-stack.jpg"
+            src="/about-me.jpg"
             width="400"
             height="400"
             alt="About Durmus Demirtas"
