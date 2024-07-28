@@ -4,7 +4,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="container mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
+      className="container mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"
     >
       <Heading2 className="font-bold tracking-tight text-primary-200">
         Get in Touch

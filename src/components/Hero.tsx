@@ -22,9 +22,9 @@ export default function Hero() {
               <Button className="animate-pulse">About Me</Button>
             </Link>
 
-            <Link href="#projects" prefetch={false}>
+            <Link href="#portfolio" prefetch={false}>
               <Button variant={"outline"} className="animate-pulse">
-                My Projects
+                My Portfolio
               </Button>
             </Link>
 

@@ -7,11 +7,11 @@ import { Button } from "./ui/Button";
 export default function Portfolio() {
   return (
     <section
-      id="projects"
-      className="container mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
+      id="portfolio"
+      className="container mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8"
     >
       <Heading2 className="font-bold tracking-tight text-primary-200">
-        My Projects
+        My Portfolio
       </Heading2>
 
       <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
