@@ -7,8 +7,9 @@ export default function Hero() {
   return (
     <section className="container mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+        {/* Hero Content and CTA */}
         <div>
-          <Heading1 className="text-primary-200 font-bold tracking-tight text-center sm:text-left">
+          <Heading1 className="text-primary-200 font-bold tracking-tight">
             Hi, I&apos;m Durmus Demirtas
           </Heading1>
 
@@ -36,6 +37,7 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* Hero Image */}
         <div className="justify-self-center">
           <Image
             src="/profile-picture.png"
