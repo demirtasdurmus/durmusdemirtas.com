@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Primary and Secondary Colors */
+    --primary-100: #a29bfe;
+    --primary-200: #7e71f0;
+    --primary-300: #4527b4;
+
+    --secondary-100: #ffb3b3;
+    --secondary-200: #ff6666;
+    --secondary-300: #ff3333;
+
+    /* Green Shades */
+    --green-100: #e6f4ea;
+    --green-200: #66c082;
+    --green-300: #28a745;
+
+    /* Orange Shades */
+    --orange-100: #fff4e6;
+    --orange-200: #ffb677;
+    --orange-300: #ff8800;
+
+    /* Red Shades */
+    --red-100: #fce8e6;
+    --red-200: #f77167;
+    --red-300: #e63946;
+
+    /* Neutral Shades */
+    --neutral-100: #f8f9fa;
+    --neutral-200: #e9ecef;
+    --neutral-300: #ced4da;
+    --neutral-400: #7b7b7b;
+
+    /* Other Variables */
+    --border-radius: 0.5rem;
+    --input-height: 48px;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-neutral-300;
+  }
+
+  body {
+    @apply bg-neutral-100 text-neutral-300;
+  }
+
+  .dark {
+    --primary-100: #938eeb;
+    --primary-200: #6755c4;
+    --primary-300: #3a1d8b;
+
+    --secondary-100: #e68a8a;
+    --secondary-200: #cc2e2e;
+    --secondary-300: #a30000;
+
+    --green-100: #cce7d1;
+    --green-200: #4b9f6c;
+    --green-300: #23823a;
+
+    --orange-100: #ffe0cc;
+    --orange-200: #ffa755;
+    --orange-300: #ff6b00;
+
+    --red-100: #faccc9;
+    --red-200: #e65c55;
+    --red-300: #b92e2e;
+
+    --neutral-100: #2e2e2e;
+    --neutral-200: #454545;
+    --neutral-300: #646464;
+    /* TODO: Check this colour */
+    --neutral-400: #646464;
+  }
+}

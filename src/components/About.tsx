@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Heading2 } from "./ui/Heading";
 
 export default function About() {
   return (
@@ -9,7 +10,7 @@ export default function About() {
       <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
         <div>
           <Image
-            src="/full-stack.jpg"
+            src="/about-me.jpg"
             width="400"
             height="400"
             alt="About Durmus Demirtas"
@@ -18,16 +19,18 @@ export default function About() {
           />
         </div>
         <div>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-[#6c5ce7]">
+          <Heading2 className="font-bold tracking-tight text-primary-200">
             About Me
-          </h2>
-          <p className="mt-4 text-lg text-[#7b7b7b]">
+          </Heading2>
+
+          <p className="mt-4 text-lg text-neutral-400">
             I&apos;m a full stack developer with a passion for creating
             beautiful and functional user interfaces. I have experience working
             with a variety of technologies, including React, Next.js, Node.js,
             and Tailwind CSS.
           </p>
-          <p className="mt-4 text-lg text-[#7b7b7b]">
+
+          <p className="mt-4 text-lg text-neutral-400">
             In my free time, I enjoy exploring new technologies, reading about
             the latest industry trends, and contributing to open source
             projects. Im always eager to learn and grow as a developer.

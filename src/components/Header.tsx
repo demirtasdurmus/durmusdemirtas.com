@@ -1,17 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-[#f5f5f5]/90 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 bg-neutral-100 backdrop-blur-sm">
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link
-          href="#"
-          className="flex items-center gap-2 text-lg font-bold text-[#6c5ce7]"
-          prefetch={false}
-        >
+        <Link href="#" prefetch={false}>
           <Image src={"/logo.png"} alt="logo" width={50} height={50} />
         </Link>
 
@@ -40,7 +36,7 @@ function NavLink(props: { title: string; href: string }) {
   return (
     <Link
       href={props.href}
-      className="rounded-md px-3 py-2 text-sm font-medium hover:bg-[#e6e6e6] hover:text-[#333]"
+      className="rounded-md px-3 py-2 text-sm font-medium hover:bg-neutral-200"
       prefetch={false}
     >
       {props.title}

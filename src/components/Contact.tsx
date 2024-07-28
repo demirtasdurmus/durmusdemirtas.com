@@ -1,25 +1,28 @@
+import { Heading2 } from "./ui/Heading";
+
 export default function Contact() {
   return (
     <section
       id="contact"
       className="container mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
     >
-      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-[#6c5ce7]">
+      <Heading2 className="font-bold tracking-tight text-primary-200">
         Get in Touch
-      </h2>
+      </Heading2>
+
       <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2">
         <div>
-          <p className="text-lg text-[#7b7b7b]">
+          <p className="text-lg text-neutral-400">
             Feel free to reach out to me if you have any questions or would like
             to discuss a project.
           </p>
           <ul className="mt-4 space-y-2 animate-fade-in-up">
             <li className="flex items-center">
-              <MailIcon className="mr-2 h-5 w-5 text-[#7b7b7b]" />
+              <MailIcon className="mr-2 h-5 w-5 text-text-neutral-400" />
               <span>demirtasdurmus@gmail.com</span>
             </li>
             {/* <li className="flex items-center">
-              <PhoneIcon className="mr-2 h-5 w-5 text-[#7b7b7b]" />
+              <PhoneIcon className="mr-2 h-5 w-5 text-text-neutral-400" />
               <span>+9 (555) </span>
             </li> */}
           </ul>
