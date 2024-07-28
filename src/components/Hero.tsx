@@ -7,6 +7,7 @@ export default function Hero() {
   return (
     <section className="container mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+        {/* Hero Content and CTA */}
         <div>
           <Heading1 className="text-primary-200 font-bold tracking-tight">
             Hi, I&apos;m Durmus Demirtas
@@ -36,6 +37,7 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* Hero Image */}
         <div className="justify-self-center">
           <Image
             src="/profile-picture.png"
@@ -43,7 +45,7 @@ export default function Hero() {
             width={0}
             height={0}
             sizes="100vw"
-            className="rounded-full h-full w-96"
+            className="h-full w-72 sm:w-96"
             priority
           />
         </div>

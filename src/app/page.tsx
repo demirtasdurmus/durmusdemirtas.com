@@ -1,7 +1,8 @@
 import About from "@/components/About";
 import Blog from "@/components/Blog";
 import Contact from "@/components/Contact";
-import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Header from "@/components/header";
 import Hero from "@/components/Hero";
 import Portfolio from "@/components/Portfolio";
 
@@ -21,6 +22,8 @@ export default function Home() {
 
         <Contact />
       </main>
+
+      <Footer />
     </div>
   );
 }

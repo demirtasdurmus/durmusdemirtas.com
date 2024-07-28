@@ -5,19 +5,22 @@ export default function About() {
   return (
     <section
       id="about"
-      className="container mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8"
+      className="container mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
     >
-      <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+      <div className="grid grid-cols-1 items-center lg:gap-8 lg:grid-cols-2">
+        {/* About Me Image */}
         <div>
           <Image
             src="/about-me.jpg"
             width="400"
             height="400"
             alt="About Durmus Demirtas"
-            className="mx-auto rounded-lg animate-fade-in"
+            className="mx-auto rounded-lg hidden lg:block"
             priority
           />
         </div>
+
+        {/* About Me Content */}
         <div>
           <Heading2 className="font-bold tracking-tight text-primary-200">
             About Me
