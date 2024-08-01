@@ -5,18 +5,22 @@ export const config = {
   matcher: "/:path*",
 };
 
+// proxy_pass http://localhost:3200;
+//         proxy_set_header Host $host;
+//         proxy_set_header X-Real-IP $remote_addr;
+//         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+//         proxy_set_header X-Forwarded-Proto $scheme;
+
 export default function middleware(req: NextRequest) {
   // Extract country. Default to US if not found.
-  const country = (req.geo && req.geo.country) || "test_country";
-  const ip = req.ip || req.headers.get("x-forwarded-for") || "test_ip";
+  const country = req.geo && req.geo.country;
+  const reqIp = req.ip;
+  const xForwardedFor = req.headers.get("x-forwarded-for");
+  const xRealIp = req.headers.get("X-Real-IP");
+  const cfIp = req.headers.get("CF-Connecting-IP");
+  const tcIp = req.headers.get("true-client-ip");
 
-  console.log(`Middleware Visitor from ${country}`);
-  const data = {
-    country,
-  };
+  const url = `${req.url}?country=${country}&reqIp=${reqIp}&xForwardedFor=${xForwardedFor}&xRealIp=${xRealIp}&cfIp=${cfIp}&tcIp=${tcIp}`;
 
-  const url = `${req.url}?country=${"country"}&ip=${"ip"}`;
-  console.log("url: ", url);
-
-  return NextResponse.rewrite(`${req.url}?country=${country}&ip=${ip}`);
+  return NextResponse.rewrite(url);
 }
