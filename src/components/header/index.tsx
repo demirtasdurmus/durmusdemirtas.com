@@ -34,14 +34,6 @@ export default function Header() {
   };
   return (
     <header className="sticky top-0 z-50 bg-neutral-100 backdrop-blur-sm">
-      {/* Screen listener to toggle when clicked outside */}
-      {isOpen && (
-        <div
-          className="fixed bottom-0 left-0 right-0 top-0 z-20"
-          onClick={toggleMenu}
-        ></div>
-      )}
-
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <Link href="#" prefetch={false}>
@@ -59,7 +51,7 @@ export default function Header() {
         <Hamburger toggleMenu={toggleMenu} isOpen={isOpen} />
 
         {/* Mobile Menu */}
-        {isOpen && <MobileMenu toggleMenu={toggleMenu} />}
+        <MobileMenu isOpen={isOpen} toggleMenu={toggleMenu} />
       </div>
     </header>
   );
