@@ -5,7 +5,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="container mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
+      className="container mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 pt-24 sm:pt-32"
     >
       <div className="grid grid-cols-1 items-center lg:gap-8 lg:grid-cols-2">
         {/* About Me Image */}
@@ -14,7 +14,7 @@ export default function About() {
             src="/about-me.jpg"
             width="400"
             height="400"
-            alt="About Durmus Demirtas"
+            alt="About Durmuş Demirtaş"
             className="mx-auto rounded-lg hidden lg:block"
             priority
           />

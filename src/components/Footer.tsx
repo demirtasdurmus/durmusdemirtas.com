@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center space-y-4 sm:flex-row sm:justify-between sm:space-y-0">
           <p className="text-sm text-muted-foreground">
-            &copy; 2024 Durmus Demirtas. All rights reserved.
+            &copy; 2024 Durmuş Demirtaş. All rights reserved.
           </p>
 
           <div className="flex space-x-4">

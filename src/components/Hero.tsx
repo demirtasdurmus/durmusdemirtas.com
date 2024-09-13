@@ -10,7 +10,7 @@ export default function Hero() {
         {/* Hero Content and CTA */}
         <div>
           <Heading1 className="text-primary-200 font-bold tracking-tight">
-            Hi, I&apos;m Durmus Demirtas
+            Hi, I&apos;m Durmuş Demirtaş
           </Heading1>
 
           <p className="mt-4 text-lg text-neutral-400">
@@ -41,7 +41,7 @@ export default function Hero() {
         <div className="justify-self-center">
           <Image
             src="/profile-picture.png"
-            alt="Durmus Demirtas"
+            alt="Durmuş Demirtaş"
             width={0}
             height={0}
             sizes="100vw"
