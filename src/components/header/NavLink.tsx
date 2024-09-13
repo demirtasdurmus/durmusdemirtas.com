@@ -1,12 +1,17 @@
 import { cn } from "@/utils/cn";
 import Link, { LinkProps } from "next/link";
 
-type Props = {
+interface NavLinkProps extends LinkProps {
   title: string;
   className?: string;
-} & LinkProps;
+}
 
-export default function NavLink({ title, className, href, ...props }: Props) {
+export default function NavLink({
+  title,
+  className,
+  href,
+  ...props
+}: NavLinkProps) {
   return (
     <Link
       href={href}

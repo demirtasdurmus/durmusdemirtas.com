@@ -1,12 +1,12 @@
 import { Button } from "../ui/Button";
 import { SVGProps } from "react";
 
-type Props = {
+interface HamburgerProps {
   isOpen: boolean;
   toggleMenu: () => void;
-};
+}
 
-export default function Hamburger({ isOpen, toggleMenu }: Props) {
+export default function Hamburger({ isOpen, toggleMenu }: HamburgerProps) {
   return (
     <Button
       variant="outline"
@@ -25,7 +25,9 @@ export default function Hamburger({ isOpen, toggleMenu }: Props) {
   );
 }
 
-function MenuIcon(props: SVGProps<SVGSVGElement>) {
+interface MenuIconProps extends SVGProps<SVGSVGElement> {}
+
+const MenuIcon: React.FC<MenuIconProps> = (props) => {
   return (
     <svg
       {...props}
@@ -44,9 +46,11 @@ function MenuIcon(props: SVGProps<SVGSVGElement>) {
       <line x1="4" x2="20" y1="18" y2="18" />
     </svg>
   );
-}
+};
 
-function CloseIcon(props: SVGProps<SVGSVGElement>) {
+interface CloseIconProps extends SVGProps<SVGSVGElement> {}
+
+const CloseIcon: React.FC<CloseIconProps> = (props) => {
   return (
     <svg
       {...props}
@@ -64,4 +68,4 @@ function CloseIcon(props: SVGProps<SVGSVGElement>) {
       <line x1="6" y1="6" x2="18" y2="18" />
     </svg>
   );
-}
+};

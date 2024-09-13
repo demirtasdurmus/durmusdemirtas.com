@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/Card";
 import Image from "next/image";
+import { Card, CardContent } from "@/components/ui/Card";
 import { Heading2, Heading4 } from "./ui/Heading";
 import { Button } from "./ui/Button";
 
@@ -40,17 +40,24 @@ export default function Blog() {
   );
 }
 
-function BlogItem(props: {
+interface BlogItemProps {
   title: string;
   description: string;
   image: string;
   href: string;
-}) {
+}
+
+const BlogItem: React.FC<BlogItemProps> = ({
+  title,
+  description,
+  image,
+  href,
+}) => {
   return (
     <Card className="animate-fade-in-up h-[450px]">
       <CardContent className="pt-8">
         <Image
-          src={props.image}
+          src={image}
           width="400"
           height="300"
           alt="Blog Post 1"
@@ -58,14 +65,12 @@ function BlogItem(props: {
           priority
         />
         <div className="p-4">
-          <Heading4 className="font-bold text-primary-200">
-            {props.title}
-          </Heading4>
+          <Heading4 className="font-bold text-primary-200">{title}</Heading4>
 
-          <p className="mt-2 text-neutral-400">{props.description}</p>
+          <p className="mt-2 text-neutral-400">{description}</p>
 
           <div className="mt-4 flex justify-end">
-            <Link href={props.href} prefetch={false}>
+            <Link href={href} prefetch={false}>
               <Button>Read More</Button>
             </Link>
           </div>
@@ -73,4 +78,4 @@ function BlogItem(props: {
       </CardContent>
     </Card>
   );
-}
+};

@@ -40,31 +40,37 @@ export default function Portfolio() {
   );
 }
 
-function PortfolioItem(props: {
+interface PortfolioItemProps {
   name: string;
   description: string;
   image: string;
   href: string;
-}) {
+}
+
+const PortfolioItem: React.FC<PortfolioItemProps> = ({
+  name,
+  description,
+  image,
+  href,
+}) => {
   return (
     <Card className="animate-fade-in-up h-[550px]">
       <CardContent className="pt-8">
         <Image
-          src={props.image}
+          src={image}
           width="400"
           height="300"
           alt="Project 1"
           className="rounded-t-lg"
         />
-        <div className="p-4">
-          <Heading4 className="font-bold text-primary-200">
-            {props.name}
-          </Heading4>
 
-          <p className="mt-2 text-neutral-400">{props.description}</p>
+        <div className="p-4">
+          <Heading4 className="font-bold text-primary-200">{name}</Heading4>
+
+          <p className="mt-2 text-neutral-400">{description}</p>
 
           <div className="mt-4 flex justify-end">
-            <Link href={props.href} prefetch={false}>
+            <Link href={href} prefetch={false}>
               <Button>View Project</Button>
             </Link>
           </div>
@@ -72,4 +78,4 @@ function PortfolioItem(props: {
       </CardContent>
     </Card>
   );
-}
+};
