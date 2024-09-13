@@ -24,15 +24,11 @@ export default function Hero() {
             </Link>
 
             <Link href="#portfolio" prefetch={false}>
-              <Button variant={"outline"} className="animate-pulse">
-                My Portfolio
-              </Button>
+              <Button variant={"outline"}>My Portfolio</Button>
             </Link>
 
             <Link href="#blog" prefetch={false}>
-              <Button variant={"outline"} className="animate-pulse">
-                My Blog
-              </Button>
+              <Button variant={"outline"}>My Blog</Button>
             </Link>
           </div>
         </div>
