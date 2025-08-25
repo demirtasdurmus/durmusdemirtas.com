@@ -26,6 +26,13 @@ const portfolioItems = [
     image: "/portfolio/app-udao-org.png",
     href: "https://app.udao.org",
   },
+  {
+    name: "Rexven Platform",
+    description:
+      "A global e-commerce supply and fulfillment platform that enables entrepreneurs to sell products without holding inventory by handling sourcing, production, and shipping through a unified dashboard.",
+    image: "/portfolio/rexven-com.png",
+    href: "https://rexven.com",
+  },
 ];
 
 export default function Portfolio() {
