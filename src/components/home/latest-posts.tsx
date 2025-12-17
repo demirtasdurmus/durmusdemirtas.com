@@ -8,6 +8,7 @@ import { motion, useInView } from 'motion/react';
 import { cn, formatDate } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { containerVariants, itemVariants } from '@/components/motion';
 
 type Post = {
   slug: string;
@@ -18,29 +19,6 @@ type Post = {
 
 type LatestPostsProps = {
   posts: Post[];
-};
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-} as const;
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      type: 'spring' as const,
-      stiffness: 100,
-      damping: 15
-    }
-  }
 };
 
 export const LatestPosts: React.FC<LatestPostsProps> = ({ posts }) => {

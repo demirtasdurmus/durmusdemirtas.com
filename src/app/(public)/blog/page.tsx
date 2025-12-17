@@ -7,8 +7,7 @@ import { formatDate } from '@/lib/utils';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Blog',
-  description: 'A blog built using Velite. Posts are written in MDX.'
+  title: 'Blog'
 };
 
 export default async function BlogPage() {
@@ -24,7 +23,8 @@ export default async function BlogPage() {
         <div className="flex-1 space-y-4">
           <h1 className="font-heading inline-block text-4xl tracking-tight lg:text-5xl">Blog</h1>
           <p className="text-muted-foreground text-xl">
-            A blog built using Velite. Posts are written in MDX.
+            A collection of posts about software development, tutorials, and things I&apos;ve
+            learned along the way.
           </p>
         </div>
       </div>

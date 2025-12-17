@@ -6,19 +6,20 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { absoluteUrl, cn, formatDate } from '@/lib/utils';
+import { cn, formatDate } from '@/lib/utils';
 import { Mdx } from '@/components/mdx';
 import { buttonVariants } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
+import type { PromiseParams } from '@/types';
 
-type Params = Promise<{ slug: string[] }>;
+type BlogPostProps = { params: PromiseParams<{ slug: string[] }> };
 
 function getPostBySlug(slug: string[]) {
   const slugPath = slug.join('/');
   return allPosts.find((post) => post.slugAsParams === slugPath) ?? null;
 }
 
-export async function generateMetadata(props: { params: Params }): Promise<Metadata> {
+export async function generateMetadata(props: BlogPostProps): Promise<Metadata> {
   const { slug } = await props.params;
   const post = getPostBySlug(slug);
 
@@ -26,39 +27,42 @@ export async function generateMetadata(props: { params: Params }): Promise<Metad
     return {};
   }
 
-  const url = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
+  /**
+   * TODO: Understand what this og generation is all about and then implement it.
+   */
+  // const url = process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
 
-  const ogUrl = new URL(`${url}/api/og`);
-  ogUrl.searchParams.set('heading', post.title);
-  ogUrl.searchParams.set('type', 'Blog Post');
-  ogUrl.searchParams.set('mode', 'dark');
+  // const ogUrl = new URL(`${url}/api/og`);
+  // ogUrl.searchParams.set('heading', post.title);
+  // ogUrl.searchParams.set('type', 'Blog Post');
+  // ogUrl.searchParams.set('mode', 'dark');
 
   return {
     title: post.title,
     description: post.description,
     authors: post.authors.map((author) => ({
       name: author
-    })),
-    openGraph: {
-      title: post.title,
-      description: post.description,
-      type: 'article',
-      url: absoluteUrl(post.slug),
-      images: [
-        {
-          url: ogUrl.toString(),
-          width: 1200,
-          height: 630,
-          alt: post.title
-        }
-      ]
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: post.title,
-      description: post.description,
-      images: [ogUrl.toString()]
-    }
+    }))
+    //   openGraph: {
+    //     title: post.title,
+    //     description: post.description,
+    //     type: 'article',
+    //     url: absoluteUrl(post.slug),
+    //     images: [
+    //       {
+    //         url: ogUrl.toString(),
+    //         width: 1200,
+    //         height: 630,
+    //         alt: post.title
+    //       }
+    //     ]
+    //   },
+    //   twitter: {
+    //     card: 'summary_large_image',
+    //     title: post.title,
+    //     description: post.description,
+    //     images: [ogUrl.toString()]
+    //   }
   };
 }
 
@@ -68,7 +72,7 @@ export function generateStaticParams() {
   }));
 }
 
-export default async function PostPage(props: { params: Params }) {
+export default async function PostPage(props: BlogPostProps) {
   const { slug } = await props.params;
   const post = getPostBySlug(slug);
 

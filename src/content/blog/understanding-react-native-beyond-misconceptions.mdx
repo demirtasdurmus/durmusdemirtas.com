@@ -1,0 +1,92 @@
+---
+title: Understanding React Native - Beyond the Misconceptions
+description: Dispelling the myth that React Native compiles to native code, and exploring its true architecture with JSI, Hermes, and the multi-threaded runtime.
+image: /images/blog/react-native-architecture.webp
+date: '2025-12-16'
+authors:
+  - durmus-demirtas
+---
+
+One of the most persistent myths about React Native is that it "compiles JavaScript to native code." This idea sounds appealing, but it's fundamentally inaccurate and often leads teams to wrong assumptions about architecture, performance, and debugging.
+
+React Native doesn't turn your JavaScript into Swift, Objective-C, Kotlin, or Java. Instead, it runs your JavaScript inside a dedicated engine and uses a sophisticated communication layer to control real native UI components. Your code stays JavaScript (or bytecode) for its entire lifecycle, while the platform renders true native views on iOS and Android.
+
+Understanding this distinction is crucial when you're evaluating React Native, designing app architecture, or optimizing performance.
+
+### The Multi-Threaded Architecture
+
+React Native relies on a multi-threaded runtime where different responsibilities are intentionally separated across distinct threads. This design keeps the UI responsive while allowing JavaScript to coordinate application logic.
+
+1. **The JavaScript Thread:** This is where your entire app logic executes such as React renders, state updates, business rules, API calls, timers, and everything else JavaScript controls. It operates independently from the native UI thread.
+
+2. **The UI Thread (Main Thread):** This is the platform's native rendering environment, UIKit on iOS and the Android View system on Android. It must remain highly responsive to maintain smooth scrolling, gestures, and animations. React Native schedules UI updates from the JavaScript thread, but the actual rendering work is performed entirely in native code on this thread.
+
+3. **The Native Modules Thread:** Platform-specific operations such as camera, file system, network stacks, sensors, or any custom native module run here. This separation prevents expensive native operations from blocking the UI.
+
+4. **The Shadow Tree / Layout System:** In the legacy architecture, layout calculations were handled on a separate Shadow Thread using Yoga, React Native's cross-platform Flexbox engine. Under the new Fabric architecture, layout is integrated into a unified and more synchronous rendering pipeline, which reduces latency and improves consistency across platforms.
+
+Historically, these threads communicated through the asynchronous **Bridge**, which serialized messages into JSON and passed them across thread boundaries.
+
+The [new architecture](https://reactnative.dev/architecture/landing-page) replaces this asynchronous bridge with **JSI (JavaScript Interface).** It is a lightweight C++ layer that removes the need for JSON serialization, enabling:
+
+- Direct access to native objects
+- Synchronous calls
+- Dramatically reduced serialization overhead
+
+This shift is one of the core reasons modern React Native apps feel significantly smoother and start faster than their legacy-architecture counterparts.
+
+### The JavaScript Bundle: Your App's Beating Heart
+
+At the center of every React Native application is the **JavaScript bundle**, a single file that contains all your components, business logic, and dependencies, fully minified and packaged. When you build your app for the App Store or Play Store, this bundle (usually `main.jsbundle` on iOS or `index.android.bundle` on Android) is shipped alongside the native binary.
+
+![main.jsbundle as plain text](/images/blog/mainjs-bundle-text.webp)
+
+In modern React Native setups using [Hermes](https://reactnative.dev/docs/hermes), this bundle isn't shipped as plain JavaScript text. Instead, the build process compiles your source code into **Hermes bytecode**, a compact and optimized format that the Hermes engine can execute far faster than raw JavaScript.
+
+Traditional engines parse JavaScript source code at runtime, which slows down app startup. Hermes avoids this by performing ahead-of-time (AOT) compilation: during the build process, your JavaScript source is transformed into compact Hermes bytecode.
+
+At launch, the engine loads this bytecode directly, eliminating the parsing step and significantly improving startup performance. Apps typically see faster cold starts, reduced memory usage, and bytecode bundles that are 20–30% smaller than their plain-JavaScript equivalents.
+
+<Callout>
+  **Hermes** was designed specifically for mobile constraints: limited memory, battery-conscious CPU usage, and fast startup requirements. Unlike V8 (Chrome's engine) or JavaScriptCore (Safari's engine), which optimize for desktop browser scenarios, Hermes prioritizes the mobile experience from the ground up.
+</Callout>
+
+![main.jsbundle compiled with Hermes bytecode](/images/blog/mainjs-bundle-hermes.webp)
+
+This bundle is executed as soon as the runtime loads it at startup. The code remains JavaScript (or bytecode) running inside its own engine, orchestrating the creation and updates of truly native UI components.
+
+### What the Bundle-Driven Model Enables
+
+Understanding how the JavaScript bundle works is only part of the picture; its real significance comes from what this architecture enables:
+
+- **Cross-Platform Development:** A single JavaScript codebase drives both iOS and Android apps. Platform-specific code lives in separate native modules when needed, but the vast majority of your logic, UI, and business rules are shared.
+
+- **Dynamic Behavior:** JavaScript enables a level of runtime flexibility that is difficult to achieve with compiled languages, including rendering screens based on API data, loading modules at runtime, and supporting advanced experimentation frameworks.
+
+- **Over-the-Air Updates:** Services like CodePush can deliver JavaScript bundle updates directly to users without app store approval. Fix critical bugs in production instantly, run A/B tests with different bundle versions, or roll out features gradually, all without traditional app deployment cycles.
+
+- **Brownfield Integration:** Native apps can embed React Native as a framework, loading JavaScript bundles for specific screens. This enables gradual migration from native to React Native without rewriting entire apps.
+
+- **Rapid Iteration and Hot Reload:** Because your code is JavaScript, development workflows like Fast Refresh can update your running app instantly without recompiling native code. Change a component, save the file, and see results in under a second.
+
+### Trade-offs to Consider
+
+These strengths make the JavaScript-bundle model a defining aspect of modern React Native. But like any architectural approach, it comes with trade-offs:
+
+- **Performance Overhead:** Every interaction between JavaScript and native layers incurs some cost. While JSI dramatically reduces this overhead compared to the old bridge, there's still more latency than pure native code. High-frequency events (rapid scrolling, complex animations, gesture handling) can expose these limitations.
+
+- **Bundle Size Concerns:** Shipping a JavaScript engine adds roughly 3–5 MB to the binary. As your JavaScript codebase grows, the bundle itself can add several more megabytes even after minification and compression. When combined with images, fonts, and other assets, React Native apps commonly end up 30–40% larger than their pure native equivalents.
+
+- **Startup Time:** Initializing the JavaScript engine introduces additional work during app launch. Even with Hermes bytecode, the engine must load, execute the bundle, and construct the initial React tree before the UI appears. In practice, well-optimized React Native apps often start within 1 to 2 seconds, while less optimized setups may take noticeably longer.
+
+- **Limited Native Module Ecosystem:** Some platform-specific capabilities still require custom native modules, which means writing Swift, Objective-C, Kotlin, or Java when no maintained library exists. This adds complexity and reduces the amount of code you can share across platforms. Features such as advanced camera controls, Bluetooth integrations, or video processing often need substantial native development.
+
+- **Debugging Complexity:** Issues that occur at the boundary between JavaScript and native code can be difficult to diagnose. Stack traces frequently span multiple languages, performance profiling is done with platform-specific tools, and memory leaks may originate on either the JavaScript side or within native modules. Effective debugging often requires switching context between both environments.
+
+### Conclusion: JavaScript Power with Native Performance
+
+React Native succeeds not by compiling JavaScript into native code, but by providing an architecture where JavaScript orchestrates real native UI components through an efficient communication layer. The JavaScript bundle acts as the central logic of the application, and JSI together with Hermes ensures fast and direct interaction with native systems.
+
+Understanding this execution model is essential for choosing the right architecture. React Native offers strong advantages for content focused interfaces, form heavy applications, and products that need rapid iteration. Performance intensive work such as advanced graphics or real time processing is often better handled in native code.
+
+Modern brownfield approaches make it possible to combine these strengths by using React Native for shared and fast moving logic and native modules for performance critical features. With innovations like Fabric and TurboModules, React Native continues to narrow the gap between JavaScript driven logic and native execution.

@@ -10,45 +10,13 @@ import { buttonVariants } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Icons } from '@/components/icons';
+import { containerVariants, itemVariants, cardVariants } from '@/components/motion';
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1
-    }
-  }
-} as const;
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring' as const,
-      stiffness: 100,
-      damping: 15
-    }
-  }
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, scale: 0.95, y: 30 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      type: 'spring' as const,
-      stiffness: 80,
-      damping: 20,
-      delay: 0.3
-    }
-  }
-};
+const skills = ['React/React Native', 'Node.js', 'TypeScript', 'PostgreSQL', 'Docker'];
+const expertise = [
+  { value: '5+', label: 'Years Exp.' },
+  { value: '50+', label: 'Projects' }
+];
 
 export const HeroSection: React.FC = () => {
   return (
@@ -214,7 +182,7 @@ export const HeroSection: React.FC = () => {
                 </div>
 
                 <div className="flex flex-wrap justify-center gap-2">
-                  {['React', 'Node.js', 'TypeScript', 'PostgreSQL'].map((tech, index) => (
+                  {skills.map((tech, index) => (
                     <motion.div
                       key={tech}
                       initial={{ opacity: 0, scale: 0.8 }}
@@ -228,10 +196,7 @@ export const HeroSection: React.FC = () => {
                 </div>
 
                 <div className="text-muted-foreground mt-2 grid w-full grid-cols-2 gap-4 text-center text-sm">
-                  {[
-                    { value: '5+', label: 'Years Exp.' },
-                    { value: '50+', label: 'Projects' }
-                  ].map((stat, index) => (
+                  {expertise.map((stat, index) => (
                     <motion.div
                       key={stat.label}
                       className="bg-muted/50 rounded-lg p-3"

@@ -1,46 +1,11 @@
 'use client';
 
-import { motion, Variants } from 'motion/react';
+import { motion } from 'motion/react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { containerVariants, itemVariants, avatarVariants } from '@/components/motion';
 import { siteConfig } from '@/config/site';
 import { getNameInitials } from '@/lib/utils';
-
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15
-    }
-  }
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 100,
-      damping: 12
-    }
-  }
-};
-
-const avatarVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 100,
-      damping: 12
-    }
-  }
-};
 
 export const AboutContent: React.FC = () => {
   return (
@@ -55,7 +20,9 @@ export const AboutContent: React.FC = () => {
         variants={itemVariants}
       >
         <div className="flex-1 space-x-4">
-          <h1 className="inline-block text-4xl font-black lg:text-5xl">About Me</h1>
+          <h1 className="font-heading inline-block text-4xl tracking-tight lg:text-5xl">
+            About Me
+          </h1>
         </div>
       </motion.div>
 

@@ -9,7 +9,8 @@ export const projects: Project[] = [
     href: 'https://emparazon.com',
     github: '',
     tags: ['SaaS', 'E-commerce', 'Analytics'],
-    featured: true
+    featured: false,
+    openSource: false
   },
   {
     title: 'Udao',
@@ -19,7 +20,8 @@ export const projects: Project[] = [
     href: 'https://udao.org',
     github: '',
     tags: ['Web3', 'Blockchain', 'Landing Page'],
-    featured: false
+    featured: false,
+    openSource: false
   },
   {
     title: 'Udao Platform',
@@ -29,7 +31,8 @@ export const projects: Project[] = [
     href: 'https://app.udao.org',
     github: '',
     tags: ['dApp', 'React', 'TypeScript'],
-    featured: true
+    featured: true,
+    openSource: false
   },
   {
     title: 'Rexven',
@@ -39,8 +42,43 @@ export const projects: Project[] = [
     href: 'https://rexven.com',
     github: '',
     tags: ['Full-Stack', 'SaaS', 'Logistics'],
-    featured: true
+    featured: true,
+    openSource: false
+  },
+  {
+    title: 'Nexpresst',
+    description: 'A lightweight package for building Express-like APIs in Next.js App Router.',
+    image: '/images/projects/npm.jpg',
+    href: 'https://www.npmjs.com/package/nexpresst',
+    github: 'https://github.com/demirtasdurmus/nexpresst',
+    stars: '2',
+    tags: ['Next.js', 'API', 'Middleware', 'TypeScript'],
+    featured: true,
+    openSource: true
+  },
+  {
+    title: 'Local Branch Cleanup',
+    description: 'CLI to delete unused local git branches interactively.',
+    image: '/images/projects/npm.jpg',
+    href: 'https://www.npmjs.com/package/local-branch-cleanup',
+    github: 'https://github.com/demirtasdurmus/local-branch-cleanup',
+    stars: '7',
+    tags: ['CLI', 'Git', 'Node.js'],
+    featured: false,
+    openSource: true
+  },
+  {
+    title: 'Todo Quill',
+    description: 'A simple and elegant task manager built with React Native and Expo.',
+    image: '/images/projects/todo-quill.png',
+    href: 'https://apps.apple.com/us/app/todo-quill/id6751898106',
+    github: 'https://github.com/demirtasdurmus/todo-quill',
+    stars: '1',
+    tags: ['React Native', 'Expo', 'TypeScript'],
+    featured: false,
+    openSource: true
   }
 ];
 
 export const featuredProjects = projects.filter((p) => p.featured);
+export const openSourceProjects = projects.filter((p) => p.openSource);

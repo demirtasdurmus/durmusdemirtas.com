@@ -11,7 +11,11 @@ export type Project = {
   description: string;
   image: string;
   href: string;
-  github?: string;
   tags: string[];
+  github?: string;
+  stars?: string;
   featured?: boolean;
+  openSource?: boolean;
 };
+
+export type PromiseParams<T> = Promise<{ [K in keyof T]: T[K] }>;

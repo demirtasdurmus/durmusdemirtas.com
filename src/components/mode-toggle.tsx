@@ -1,43 +1,70 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 import { useTheme } from 'next-themes';
+import { motion } from 'motion/react';
 
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 import { Icons } from '@/components/icons';
 
 export const ModeToggle: React.FC = () => {
-  const { setTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    return (
+      <div className="bg-muted/50 h-11 w-11 rounded-full border shadow-sm" aria-hidden="true" />
+    );
+  }
+
+  const isDark = resolvedTheme === 'dark';
+
+  const handleClick = () => {
+    setTheme(isDark ? 'light' : 'dark');
+  };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="h-8 w-8 px-0">
-          <Icons.sun className="scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-          <Icons.moon className="absolute scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme('light')}>
-          <Icons.sun className="mr-2 h-4 w-4" />
-          <span>Light</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>
-          <Icons.moon className="mr-2 h-4 w-4" />
-          <span>Dark</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>
-          <Icons.laptop className="mr-2 h-4 w-4" />
-          <span>System</span>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="relative z-10 shrink-0">
+      <button
+        type="button"
+        onClick={handleClick}
+        aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
+        className={cn(
+          'from-background via-card to-muted relative h-11 w-11 rounded-full border bg-linear-to-br p-2 shadow-inner shadow-black/5',
+          'focus-visible:ring-ring/60 focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
+          'transition-all duration-300 hover:shadow-md'
+        )}
+      >
+        {/* subtle shine */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-full">
+          <motion.div
+            className="bg-primary/10 absolute -inset-6 blur-3xl"
+            animate={{ opacity: isDark ? 0.12 : 0.25, scale: isDark ? 0.9 : 1.05 }}
+            transition={{ duration: 0.6 }}
+          />
+        </div>
+
+        {/* Icon (lucide sun/moon) with motion */}
+        <motion.div
+          key={isDark ? 'moon' : 'sun'}
+          initial={{ opacity: 0, scale: 0.6, rotate: -10 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+          className="text-foreground flex items-center justify-center"
+        >
+          {isDark ? (
+            <motion.div animate={{ rotate: -10 }} transition={{ duration: 0.6, ease: 'easeInOut' }}>
+              <Icons.moon className="h-6 w-6" />
+            </motion.div>
+          ) : (
+            <motion.div animate={{ rotate: 15 }} transition={{ duration: 0.6, ease: 'easeInOut' }}>
+              <Icons.sun className="h-6 w-6" />
+            </motion.div>
+          )}
+        </motion.div>
+      </button>
+    </div>
   );
 };

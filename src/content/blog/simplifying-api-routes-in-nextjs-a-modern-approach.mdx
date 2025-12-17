@@ -1,0 +1,179 @@
+---
+title: Simplifying API Routes in Next.js - A Modern Approach
+description: Build structured Next.js APIs with a single router, shared middleware, error handling, and a 404 catch-all using Nexpresst.
+image: /images/blog/simplifying-api-routes-in-nextjs.webp
+date: '2024-09-05'
+authors:
+  - durmus-demirtas
+---
+
+In the world of full-stack development, Next.js has become a go-to framework for developers looking to build both client-side and server-side applications with ease. Its file-based routing and integrated API capabilities make it a powerful choice. However, when it comes to managing more complex API routes, developers often face challenges around middleware, error handling, and route organization.
+
+In this article, we’ll explore a solution that simplifies these challenges, making API development in Next.js more intuitive. You’ll learn how to set up a global router, handle common middleware, set up error handling, and streamline your API routes.
+
+### Scaffolding the Project and Installing Dependencies
+
+We’ll start by creating a new Next.js project and installing the required package.
+
+Scaffold your Next.js project:
+
+```bash
+npx create-next-app@latest my-next-api
+cd my-next-api
+```
+
+Install the `nexpresst` package:
+
+```bash
+npm install nexpresst
+```
+
+### Setting Up the API Router
+
+Next, we’ll create an `apiRouter` function that will manage all API routes in a structured and efficient manner. This keeps your API routing consistent and clean.
+
+```ts
+// @/lib/api-router.ts
+
+import { NextRequest } from 'next/server';
+import { ApiRouter, TNextContext } from 'nexpresst';
+
+export const apiRouter = (req: NextRequest, ctx: TNextContext) => new ApiRouter(req, ctx);
+```
+
+### Adding Global Middleware
+
+Next.js does not parse request bodies out of the box, so we will use a middleware to handle this issue, `jsonParser` from `nexpresst` package.
+
+And also for security purposes, it’s common to use middleware like `helmet`. We’ll integrate it into our router to add security headers to the API responses. To be able to use it, first install `helmet` .
+
+```ts
+// @/lib/api-router.ts
+
+import { NextRequest } from 'next/server';
+import { ApiRouter, TNextContext, jsonParser, expressMiddlewareAdapter } from 'nexpresst';
+import helmet from 'helmet';
+
+export const apiRouter = (req: NextRequest, ctx: TNextContext) =>
+  new ApiRouter(req, ctx)
+    .use(expressMiddlewareAdapter(helmet()))
+    .use(jsonParser)
+```
+
+### Setting Up an Error Handler
+
+In any production environment, proper error handling is crucial. We’ll create a middleware to catch all errors and format the response.
+
+```ts
+// @/lib/middlewares/error-handler.ts
+
+import { IMiddlewareHandler } from 'nexpresst';
+
+type TErrorResponse = { name: string; message: string };
+
+const errorHandler: IMiddlewareHandler<unknown, unknown, unknown, TErrorResponse> = (
+  req,
+  res,
+  next,
+) => {
+  return next().catch((err: unknown) => {
+    if (err instanceof Error) {
+      return res.statusCode(500).send({ name: err.name, message: err.message });
+    }
+    return res
+      .statusCode(500)
+      .send({ name: 'INTERNAL_SERVER_ERROR', message: 'Something went wrong' });
+  });
+};
+```
+
+And then in your `api-router.ts` file:
+
+```ts
+// @/lib/api-router.ts
+
+import { NextRequest } from 'next/server';
+import { ApiRouter, TNextContext, jsonParser, expressMiddlewareAdapter } from 'nexpresst';
+import helmet from 'helmet';
+import { errorHandler } from '@/lib/middlewares/error-handler';
+
+export const apiRouter = (req: NextRequest, ctx: TNextContext) =>
+  new ApiRouter(req, ctx)
+    .onError(errorHandler)
+    .use(expressMiddlewareAdapter(helmet()))
+    .use(jsonParser)
+```
+
+### Handling 404 Routes: A Catch-All Setup
+
+To ensure your API can handle non-existent routes properly, we’ll set up a catch-all handler for 404 errors.
+
+```ts
+// @/app/api/[[...params]]/route.ts
+
+import { apiRouter } from '@/lib/api-router';
+import { exportAllHttpMethods, IRouteHandler } from 'nexpresst';
+
+const notFoundHandler: IRouteHandler = async (req, res) => {
+  return res.statusCode(404).send();
+};
+
+export const { GET, POST, PUT, DELETE, PATCH, HEAD } = exportAllHttpMethods(
+  apiRouter,
+  notFoundHandler,
+);
+```
+
+Attach it to the router:
+
+```ts
+// @/lib/api-router.ts
+import { NextRequest } from 'next/server';
+import { ApiRouter, TNextContext, jsonParser, expressMiddlewareAdapter } from 'nexpresst';
+import helmet from 'helmet';
+import { errorHandler } from '@/lib/middlewares/error-handler';
+
+export const apiRouter = (req: NextRequest, ctx: TNextContext) =>
+  new ApiRouter(req, ctx)
+    .onError(errorHandler)
+    .use(expressMiddlewareAdapter(helmet()))
+    .use(jsonParser);
+```
+
+This guarantees that any unhandled routes return a clean 404 response.
+
+### Creating Endpoints
+
+With the foundation set, let’s create our first API routes. We’ll start with simple **GET** and **POST** endpoints for managing posts.
+
+```ts
+// @/app/api/posts/route.ts
+
+import { apiRouter } from '@/lib/api-router';
+import { NextRequest } from 'next/server';
+import { IRouteHandler, TNextContext } from 'nexpresst';
+
+const getPostsHandler: IRouteHandler = async (req, res) => {
+  return res.statusCode(200).send({ message: 'Hello from posts' });
+};
+
+const createPostHandler: IRouteHandler = async (req, res) => {
+  return res.statusCode(201).send({ message: 'Post created' });
+};
+
+export function GET(req: NextRequest, ctx: TNextContext) {
+  return apiRouter(req, ctx).handle(getPostsHandler);
+}
+
+export function POST(req: NextRequest, ctx: TNextContext) {
+  return apiRouter(req, ctx).handle(createPostHandler);
+}
+```
+
+You can even create route specific middleware and register them here with your `apiRouter` instance before calling the `handle` method.
+
+### Conclusion
+
+This is just the beginning! By using this approach, we’ve simplified the creation and management of API routes in Next.js. There are many more powerful features available, including better error handling, response management, typescript support, and middleware integration.
+
+Check out the [Nexpresst](https://www.npmjs.com/package/nexpresst) package and the [example repository](https://github.com/demirtasdurmus/example-nextjs-api-with-nexpresst) for more features and implementation details. Happy coding!

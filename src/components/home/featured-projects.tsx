@@ -9,31 +9,9 @@ import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Icons } from '../icons';
+import { Icons } from '@/components/icons';
 import { featuredProjects } from '@/config/projects';
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15
-    }
-  }
-} as const;
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring' as const,
-      stiffness: 100,
-      damping: 15
-    }
-  }
-} as const;
+import { containerVariants, cardVariants } from '@/components/motion';
 
 export const FeaturedProjects: React.FC = () => {
   const ref = React.useRef<HTMLDivElement>(null);
