@@ -6,6 +6,8 @@ export type NavItem = {
 
 export type MainNavItem = NavItem;
 
+export type ProjectCategory = 'client' | 'open-source';
+
 export type Project = {
   title: string;
   description: string;
@@ -15,7 +17,7 @@ export type Project = {
   github?: string;
   stars?: string;
   featured?: boolean;
-  openSource?: boolean;
+  category: ProjectCategory;
 };
 
 export type PromiseParams<T> = Promise<{ [K in keyof T]: T[K] }>;

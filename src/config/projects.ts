@@ -10,7 +10,7 @@ export const projects: Project[] = [
     github: '',
     tags: ['SaaS', 'E-commerce', 'Analytics'],
     featured: false,
-    openSource: false
+    category: 'client'
   },
   {
     title: 'Udao',
@@ -21,7 +21,7 @@ export const projects: Project[] = [
     github: '',
     tags: ['Web3', 'Blockchain', 'Landing Page'],
     featured: false,
-    openSource: false
+    category: 'client'
   },
   {
     title: 'Udao Platform',
@@ -32,7 +32,7 @@ export const projects: Project[] = [
     github: '',
     tags: ['dApp', 'React', 'TypeScript'],
     featured: true,
-    openSource: false
+    category: 'client'
   },
   {
     title: 'Rexven',
@@ -43,7 +43,7 @@ export const projects: Project[] = [
     github: '',
     tags: ['Full-Stack', 'SaaS', 'Logistics'],
     featured: true,
-    openSource: false
+    category: 'client'
   },
   {
     title: 'Nexpresst',
@@ -54,7 +54,7 @@ export const projects: Project[] = [
     stars: '2',
     tags: ['Next.js', 'API', 'Middleware', 'TypeScript'],
     featured: true,
-    openSource: true
+    category: 'open-source'
   },
   {
     title: 'Local Branch Cleanup',
@@ -65,7 +65,7 @@ export const projects: Project[] = [
     stars: '7',
     tags: ['CLI', 'Git', 'Node.js'],
     featured: false,
-    openSource: true
+    category: 'open-source'
   },
   {
     title: 'Todo Quill',
@@ -76,9 +76,10 @@ export const projects: Project[] = [
     stars: '1',
     tags: ['React Native', 'Expo', 'TypeScript'],
     featured: false,
-    openSource: true
+    category: 'open-source'
   }
 ];
 
 export const featuredProjects = projects.filter((p) => p.featured);
-export const openSourceProjects = projects.filter((p) => p.openSource);
+export const clientProjects = projects.filter((p) => p.category === 'client');
+export const openSourceProjects = projects.filter((p) => p.category === 'open-source');

@@ -4,7 +4,7 @@ import * as React from 'react';
 import { motion, useInView } from 'motion/react';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { openSourceProjects, projects } from '@/config/projects';
+import { clientProjects, openSourceProjects } from '@/config/projects';
 import { ProjectGrid } from './projects-grid';
 import { containerVariants, itemVariants } from '@/components/motion';
 
@@ -34,13 +34,13 @@ export const ProjectsContent = () => {
 
       <Tabs defaultValue="work" className="w-full">
         <TabsList>
-          <TabsTrigger value="work">Client / Product Work</TabsTrigger>
+          <TabsTrigger value="work">Client Projects</TabsTrigger>
           <TabsTrigger value="oss">Open Source</TabsTrigger>
         </TabsList>
 
         <TabsContent value="work" className="pt-4">
           <ProjectGrid
-            items={projects}
+            items={clientProjects}
             isInView={isInView}
             refProp={ref as React.RefObject<HTMLDivElement>}
           />
