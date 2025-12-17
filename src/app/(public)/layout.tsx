@@ -7,8 +7,8 @@ import { ModeToggle } from '@/components/mode-toggle';
 export default function MarketingLayout({ children }: PropsWithChildren) {
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="bg-background z-40 container mx-auto">
-        <div className="flex h-20 items-center justify-between px-6 py-6">
+      <header className="bg-background/95 supports-backdrop-filter:bg-background/60 sticky top-0 z-50 w-full backdrop-blur">
+        <div className="container mx-auto flex h-16 items-center justify-between px-6 py-6">
           <MainNav items={marketingConfig.mainNav} />
 
           <ModeToggle />
