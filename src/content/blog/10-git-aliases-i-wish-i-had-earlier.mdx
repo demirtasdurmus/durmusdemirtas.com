@@ -1,0 +1,186 @@
+---
+title: 10 Git Aliases I Wish I Had Earlier
+description: A collection of powerful Git aliases to automate repetitive tasks and enhance your productivity.
+image: /images/blog/10-git-aliases.jpeg
+date: '2024-07-29'
+authors:
+  - durmus-demirtas
+---
+
+Git is the cornerstone of modern version control, enabling developers to collaborate and manage their codebases with precision. Yet, even the most experienced Git users can benefit from customization to automate repetitive tasks and enhance productivity.
+
+Git aliases are a powerful way to tailor your Git commands to fit your unique workflow. In this article, I'll share a collection of my most effective Git aliases that have made my development process smoother and faster. Whether you're undoing a commit, navigating branches, or managing authors, these aliases are designed to save you time and reduce errors.
+
+First I'll share the complete list and show you how to add these aliases to your Git configuration. Then, I'll walk you through each one of them by exploring the functionality and use cases. While the commands and configurations are optimized for macOS, they can easily be adapted for other operating systems.
+
+Let's start.
+
+Open a terminal and open your gitconfig file with your favorite code editor. I will be using VS Code:
+
+```bash
+code ~/.gitconfig
+```
+
+If you already do not have a section for aliases, add it or paste the following aliases under your existing aliases:
+
+```bash
+# ...other configuration options
+[alias]
+  # Undo the last commit
+  u = reset --soft HEAD~1
+  # Logs the history in a short and pretty format
+  # commitHash - (tag-HEAD) commitMessage (timeUntilNow) - [committerName]
+  ls = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %C(bold)%s%Creset %Cgreen(%cr) %C(bold blue)[%an]%Creset' --abbrev-commit --decorate
+  # Logs the history in the long format
+  # commitHash (tag-HEAD) commitMessage committerName
+  # insertedCount deletedCount file
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --numstat
+  # Display conflicts
+  cf = diff --name-only --diff-filter=U
+  # Display local branches in a nice list format
+  lb = !git branch -vv | cut -c 3- | awk '$3 { print $1 }'
+  # Display repo authors in a nice list format
+  au = "!sh -c \"git log --format='%aN - [%aE]' | grep -v 'users.noreply.github.com' | sort -u --ignore-case | awk -F' - ' '{printf \\\"\\033[33m%s\\033[0m - \\033[34m%s\\033[0m\\\\n\\\", \\$1, substr(\\$2, 2, length(\\$2)-2)}'\""
+  # Use fzf to display local branches and select one to checkout
+  clb = "!sh -c 'git branch | grep -v \"^\\*\" | fzf --height=20% --reverse --info=inline | xargs git checkout'"
+  # Use fzf to display remote branches and select one to checkout
+  crb = "!sh -c 'git branch -r | grep -v \"^\\*\" | sed \"s|origin/||\" | fzf --height=20% --reverse --info=inline | xargs git checkout'"
+  # Add multiple with fzf, use arrows to navigate, tab to select and return to add
+  afz = "!sh -c 'git ls-files -m -o --exclude-standard | fzf -m --print0 | xargs -0 git add'"
+  # List all aliases
+  la = "!sh -c 'git config -l | grep alias | cut -c 7-'"
+# ...other configuration parts
+```
+
+Save the file and head over to one of your existing git repositories. Now it is time to explore these one by one and understand the use cases.
+
+### 1. Undo the Last Commit
+
+```bash
+# Alias
+u = reset --soft HEAD~1
+
+# Usage
+git u
+```
+
+Quickly undo the last commit while keeping changes in the working directory. Ideal for when you realize there's something wrong with your last commit and you need to make corrections.
+
+### 2. Short Log History
+
+```bash
+# Alias
+ls = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %C(bold)%s%Creset %Cgreen(%cr) %C(bold blue)[%an]%Creset' --abbrev-commit --decorate
+
+# Usage
+git ls
+```
+
+Displays the commit history in a concise and visually appealing format, showing the commit hash, tags, message, time, and author. Ideal for getting a quick overview of the repository's history, making it easier to understand the commit timeline and relationships.
+
+### 3. Long Log History
+
+```bash
+# Alias
+ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --numstat
+
+# Usage
+git ll
+```
+
+Provides a detailed log history, including commit hash, tags, message, author, and file changes (insertions and deletions). Useful when you need to review the specific changes in each commit, especially during code reviews or debugging sessions.
+
+### 4. Display Conflicts
+
+```bash
+# Alias
+cf = diff --name-only --diff-filter=U
+
+# Usage
+git cf
+```
+
+Lists files with merge conflicts, helping you identify and resolve conflicts quickly. Essential during merges, ensuring you can swiftly address conflicts and maintain project stability.
+
+### 5. List Local Branches
+
+```bash
+# Alias
+lb = !git branch -vv | cut -c 3- | awk '$3 { print $1 }'
+
+# Usage
+git lb
+```
+
+Displays local branches in a clean, readable format. Makes it easy to manage and switch between local branches, enhancing your workflow efficiency.
+
+### 6. Display Repo Authors
+
+```bash
+# Alias
+au = "!sh -c \"git log --format='%aN - [%aE]' | grep -v 'users.noreply.github.com' | sort -u --ignore-case | awk -F' - ' '{printf \\\"\\033[33m%s\\033[0m - \\033[34m%s\\033[0m\\\\n\\\", \\$1, substr(\\$2, 2, length(\\$2)-2)}'\""
+
+# Usage
+git au
+```
+
+Lists unique authors in the repository, excluding anonymous GitHub users, in a formatted output. Great for identifying contributors and understanding the diversity of a project's codebase.
+
+> You might be wondering why the syntax is a little bit different than the others and starts with `!sh -c`. It is necessary for Git aliases when the command involves more complex shell operations, such as pipes (`|`), logical operations (`&&`), or the need to use advanced shell features like loops or conditionals.
+
+### 7. Checkout Local Branch with fzf
+
+```bash
+# Alias
+clb = "!sh -c 'git branch | grep -v \"^\\*\" | fzf --height=20% --reverse --info=inline | xargs git checkout'"
+
+# Usage
+git clb
+```
+
+<Callout>
+  To use this alias and the following two aliases, you must have [fzf](https://github.com/junegunn/fzf) (a general-purpose command-line fuzzy finder) installed on your machine. Check out [this link](https://github.com/junegunn/fzf?tab=readme-ov-file#installation) for installation options.
+</Callout>
+
+Uses fzf to display local branches, allowing you to select one to checkout interactively. It makes branch switching a breeze, especially in repositories with many branches. Use up and down arrow keys to navigate and hit return to checkout to the selected branch.
+
+### 8. Checkout Remote Branch with fzf
+
+```bash
+# Alias
+crb = "!sh -c 'git branch -r | grep -v \"^\\*\" | sed \"s|origin/||\" | fzf --height=20% --reverse --info=inline | xargs git checkout'"
+
+# Usage
+git crb
+```
+
+Has the same functionality as the above alias. The only difference is that it displays remote branches to checkout, not local ones.
+
+### 9. Add Multiple Files with fzf
+
+```bash
+# Alias
+afz = "!sh -c 'git ls-files -m -o --exclude-standard | fzf -m --print0 | xargs -0 git add'"
+
+# Usage
+git afz
+```
+
+Uses fzf for multi-select file staging, allowing you to navigate and add files interactively. Use up and down arrow keys to navigate, tab to select, and return to add the selected files to the staging area.
+
+### 10. List All Git Aliases
+
+```bash
+# Alias
+la = "!sh -c 'git config -l | grep alias | cut -c 7-'"
+
+# Usage
+git la
+```
+
+Lists all git aliases added in the configuration file. Especially useful until you get used to using and remembering your aliases.
+
+### Conclusion
+
+Custom Git aliases are a testament to the flexibility and power of Git. By adjusting commands to suit your workflow, you can significantly enhance your productivity and streamline your version control processes. From undoing commits and navigating branches to managing authors and staging files, these aliases are designed to simplify and accelerate your daily Git operations. Embrace the power of customization and take your Git experience to the next level.
+
