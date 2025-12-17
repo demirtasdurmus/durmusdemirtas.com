@@ -62,7 +62,7 @@ export const LatestPosts: React.FC<LatestPostsProps> = ({ posts }) => {
                 >
                   <Link
                     href={post.slug}
-                    className="group flex flex-col gap-3 py-6 transition-colors first:pt-0 last:pb-0 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+                    className="group my-2 flex flex-col gap-3 py-6 transition-colors first:pt-0 last:pb-0 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
                   >
                     <div className="flex-1 space-y-2">
                       <motion.h3
