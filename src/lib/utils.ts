@@ -18,6 +18,11 @@ export function absoluteUrl(path: string) {
   return `${process.env.NEXT_PUBLIC_APP_URL ?? ''}${path}`;
 }
 
+/**
+ * Get the initials of a name
+ * @param name - The name to get the initials of
+ * @returns The initials of the name
+ */
 export function getNameInitials(name: string) {
   return (
     name
