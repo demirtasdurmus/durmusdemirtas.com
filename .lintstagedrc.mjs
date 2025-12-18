@@ -4,7 +4,7 @@
  */
 const lintStagedConfig = {
   '*.{ts,tsx}': 'eslint',
-  '*.{ts,tsx}': 'tsc-files --noEmit',
+  '*.{ts,tsx}': 'bash -c "pnpm typecheck"',
   '*': 'prettier --write'
 };
 
