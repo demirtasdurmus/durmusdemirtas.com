@@ -21,6 +21,98 @@
           "value": "50+"
         }
       }
+    },
+    "highlightsSection": {
+      "fullStack": {
+        "title": "Full-Stack",
+        "description": "React, Next.js, Node.js"
+      },
+      "typeScriptFirst": {
+        "title": "TypeScript Öncelikli",
+        "description": "Type-safe ve sürdürülebilir kod"
+      },
+      "databases": {
+        "title": "Veri tabanları",
+        "description": "PostgreSQL, MongoDB, Redis"
+      },
+      "qualityFocused": {
+        "title": "Kalite Odaklı",
+        "description": "Temiz kod, güçlü kullanıcı deneyimi"
+      }
+    },
+    "featuredProjectsSection": {
+      "badge": "Portföy",
+      "title": "Öne Çıkan Projeler",
+      "description": "Full-Stack uygulamalardan açık kaynak araçlara kadar uzanan projelerimden bazıları",
+      "projects": {
+        "emparazon": {
+          "title": "Emparazon",
+          "description": "Amazon satıcılarının yüksek dönüşüm sağlayan anahtar kelimeleri keşfetmesine ve satış performansını artırmasına yardımcı olan bir e-ticaret analiz aracı."
+        },
+        "udao": {
+          "title": "Udao",
+          "description": "Decentralized eğitim platformu ve token yapısı hakkında bilgi sunan Udao platform web sitesi."
+        },
+        "udaoPlatform": {
+          "title": "Udao Platformu",
+          "description": "Blockchain teknolojisiyle şeffaf ve doğrulanabilir yetenekler kazanma fırsatı sunan decentralized eğitim ve öğrenme platformu."
+        },
+        "rexven": {
+          "title": "Rexven",
+          "description": "Tek bir çatı altında tedarik ve kargo süreçlerini birleştirerek stoksuz satış imkânı sunan küresel e-ticaret platformu."
+        },
+        "nexpresst": {
+          "title": "Nexpresst",
+          "description": "Next.js App Router üzerinde Express benzeri API’ler oluşturmak için geliştirilmiş hafif ve kullanımı kolay bir kütüphane."
+        },
+        "localBranchCleanup": {
+          "title": "Local Branch Cleanup",
+          "description": "Kullanılmayan git branch’lerini interaktif bir şekilde silmeye yarayan bir CLI aracı."
+        },
+        "todoQuill": {
+          "title": "Todo Quill",
+          "description": "React Native ve Expo ile geliştirilmiş, sade ve şık bir görev yönetim uygulaması."
+        }
+      },
+      "tags": {
+        "saas": "SaaS",
+        "ecommerce": "E-ticaret",
+        "analytics": "Analitik",
+        "web3": "Web3",
+        "blockchain": "Blockchain",
+        "landingPage": "Landing Page",
+        "dApp": "dApp",
+        "reactNative": "React Native",
+        "expo": "Expo",
+        "typescript": "TypeScript",
+        "logistics": "Lojistik",
+        "middleware": "Middleware",
+        "api": "API",
+        "cli": "CLI",
+        "git": "Git",
+        "nodejs": "Node.js",
+        "react": "React",
+        "fullStack": "Full-Stack",
+        "nextjs": "Next.js"
+      }
+    },
+    "latestPostsSection": {
+      "badge": "Blog",
+      "title": "Son Yazılar",
+      "description": "Yazılım geliştirme ve bu süreçte öğrendiklerim hakkında yazılar ve öğretici içerikler."
+    },
+    "homeCTA": {
+      "title": "Birlikte Çalışalım",
+      "description": "Aklında bir proje mi var ya da sadece fikirlerini paylaşmak istiyorsun? Yeni fırsatlar, yaratıcı fikirler veya vizyonunu hayata geçirmenin yolları hakkında konuşmaya her zaman açığım."
+    }
+  },
+  "AboutPage": {
+    "title": "Hakkımda",
+    "role": "Full-Stack Yazılım Geliştirici",
+    "body": {
+      "description1": "Ürün odaklı bir bakış açısına sahip, sistemlerin uçtan uca nasıl çalıştığını merak eden bir full-stack yazılım geliştiricisiyim. Karmaşık problemleri çözmek için gereken bilgiyi hızlıca araştırıp öğrenir, bunu temiz ve sürdürülebilir çözümlere dönüştürürüm.",
+      "description2": "Detaylara verdiğim önem, güçlü sahiplenme duygum ve kendi kendini motive edebilen çalışma tarzım sayesinde hem bağımsız hem de ekip içinde verimli şekilde çalışırım. Güvenilir bir ekip üyesiyim ve gerektiğinde inisiyatif alabilen, iletişimi güçlü bir iş ortağıyım. Hem yazılı hem de sözlü İngilizceyi ileri seviyede kullanıyorum.",
+      "description3": "Teknik deneyimim HTML, CSS, JavaScript/TypeScript, React ve Node.js gibi modern web teknolojilerini kapsıyor. RESTful API’ler ile uygulamalar geliştirdim; PostgreSQL, MongoDB ve Redis gibi ilişkisel ve ilişkisel olmayan veri tabanlarıyla, önbellekleme dahil olmak üzere çalıştım. İş dışında ise bilim, teknoloji ve uzay araştırmalarına ilgi duyuyor; okumayı, sulu boya yapmayı, kamp yapmayı ve yeni yerler keşfetmeyi seviyorum."
     }
   },
   "NotFoundPage": {
@@ -31,6 +123,10 @@
   "Shared": {
     "goHome": "Ana Sayfaya Dön",
     "viewProjects": "Projeleri Gör",
-    "readBlog": "Blog Yazılarını Oku"
+    "viewAllProjects": "Tüm Projeleri Gör",
+    "readBlog": "Blog Yazılarını Oku",
+    "viewAllPosts": "Tüm Blog Yazılarını Gör",
+    "getInTouch": "Bana Ulaş",
+    "learnMoreAboutMe": "Hakkımda Daha Fazla Bilgi"
   }
 }

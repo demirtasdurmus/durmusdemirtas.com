@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 
 import { siteConfig } from '@/config/site';
 import { cn, getNameInitials } from '@/lib/utils';
@@ -12,7 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Icons } from '@/components/icons';
 import { containerVariants, itemVariants, cardVariants } from '@/components/motion';
-import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 
 const skills = ['React/React Native', 'Node.js', 'TypeScript', 'PostgreSQL', 'Docker'];
 
@@ -149,14 +149,14 @@ export const HeroSection: React.FC = () => {
                   whileHover={{ scale: 1.2, y: -2 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <Link
+                  <a
                     href={social.href}
                     target="_blank"
                     rel="noreferrer"
                     className="text-muted-foreground hover:text-foreground transition-colors"
                   >
                     {social.icon}
-                  </Link>
+                  </a>
                 </motion.div>
               ))}
             </motion.div>

@@ -1,21 +1,25 @@
 'use client';
 
 import * as React from 'react';
-import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { motion, useInView } from 'motion/react';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Icons } from '@/components/icons';
-import { featuredProjects } from '@/config/projects';
+import { getTranslatedFeaturedProjects } from '@/config/projects';
 import { containerVariants, cardVariants } from '@/components/motion';
+import { Link } from '@/i18n/navigation';
 
 export const FeaturedProjects: React.FC = () => {
+  const t = useTranslations();
   const ref = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+  const featuredProjects = React.useMemo(() => getTranslatedFeaturedProjects(t), [t]);
 
   return (
     <section className="py-20 lg:py-28">
@@ -28,12 +32,13 @@ export const FeaturedProjects: React.FC = () => {
           transition={{ duration: 0.5 }}
         >
           <Badge variant="secondary" className="mb-4">
-            Portfolio
+            {t('HomePage.featuredProjectsSection.badge')}
           </Badge>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Featured Projects</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            {t('HomePage.featuredProjectsSection.title')}
+          </h2>
           <p className="text-muted-foreground mt-4 text-lg">
-            A selection of projects I&apos;ve built, from full-stack applications to open-source
-            tools.
+            {t('HomePage.featuredProjectsSection.description')}
           </p>
         </motion.div>
 
@@ -61,25 +66,25 @@ export const FeaturedProjects: React.FC = () => {
                       <div className="flex gap-2">
                         {project.github && (
                           <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
-                            <Link
+                            <a
                               href={project.github}
                               target="_blank"
                               rel="noreferrer"
                               className="text-muted-foreground hover:text-foreground transition-colors"
                             >
                               <Icons.gitHub className="h-5 w-5" />
-                            </Link>
+                            </a>
                           </motion.div>
                         )}
                         <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
-                          <Link
+                          <a
                             href={project.href}
                             target="_blank"
                             rel="noreferrer"
                             className="text-muted-foreground hover:text-foreground transition-colors"
                           >
                             <ArrowUpRight className="h-5 w-5" />
-                          </Link>
+                          </a>
                         </motion.div>
                       </div>
                     </CardTitle>
@@ -116,7 +121,7 @@ export const FeaturedProjects: React.FC = () => {
               href="/projects"
               className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'gap-2')}
             >
-              View All Projects
+              {t('Shared.viewAllProjects')}
               <ArrowUpRight className="h-4 w-4" />
             </Link>
           </motion.div>

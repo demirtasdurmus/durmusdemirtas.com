@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 import { ArrowRight, Calendar } from 'lucide-react';
 import { motion, useInView } from 'motion/react';
 
@@ -22,6 +23,8 @@ type LatestPostsProps = {
 };
 
 export const LatestPosts: React.FC<LatestPostsProps> = ({ posts }) => {
+  const locale = useLocale();
+  const t = useTranslations();
   const ref = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
@@ -36,11 +39,13 @@ export const LatestPosts: React.FC<LatestPostsProps> = ({ posts }) => {
           transition={{ duration: 0.5 }}
         >
           <Badge variant="secondary" className="mb-4">
-            Blog
+            {t('HomePage.latestPostsSection.badge')}
           </Badge>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Latest Posts</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            {t('HomePage.latestPostsSection.title')}
+          </h2>
           <p className="text-muted-foreground mt-4 text-lg">
-            Thoughts on software development, tutorials, and things I&apos;ve learned along the way.
+            {t('HomePage.latestPostsSection.description')}
           </p>
         </motion.div>
 
@@ -79,7 +84,7 @@ export const LatestPosts: React.FC<LatestPostsProps> = ({ posts }) => {
                     </div>
                     <div className="text-muted-foreground flex shrink-0 items-center gap-2 text-sm">
                       <Calendar className="h-4 w-4" />
-                      <time dateTime={post.date}>{formatDate(post.date)}</time>
+                      <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
                     </div>
                   </Link>
                 </motion.div>
@@ -100,7 +105,7 @@ export const LatestPosts: React.FC<LatestPostsProps> = ({ posts }) => {
               href="/blog"
               className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'gap-2')}
             >
-              View All Posts
+              {t('Shared.viewAllPosts')}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>

@@ -35,6 +35,7 @@
     "velite": "^0.3.1"
   },
   "devDependencies": {
+    "@eslint/compat": "^2.0.0",
     "@eslint/eslintrc": "^3",
     "@lingual/i18n-check": "^0.8.16",
     "@tailwindcss/postcss": "^4",

@@ -21,6 +21,98 @@
           "value": "50+"
         }
       }
+    },
+    "highlightsSection": {
+      "fullStack": {
+        "title": "Full-Stack",
+        "description": "React, Next.js, Node.js"
+      },
+      "typeScriptFirst": {
+        "title": "TypeScript-First",
+        "description": "Type-safe, maintainable code"
+      },
+      "databases": {
+        "title": "Databases",
+        "description": "PostgreSQL, MongoDB, Redis"
+      },
+      "qualityFocused": {
+        "title": "Quality Focused",
+        "description": "Clean code, great UX"
+      }
+    },
+    "featuredProjectsSection": {
+      "badge": "Portfolio",
+      "title": "Featured Projects",
+      "description": "A selection of projects I've built, from full-stack applications to open-source tools.",
+      "projects": {
+        "emparazon": {
+          "title": "Emparazon",
+          "description": "Amazon keyword ranking tool that helps sellers discover high-converting keywords and improve sales performance."
+        },
+        "udao": {
+          "title": "Udao",
+          "description": "Udao platform website providing information about the decentralized education platform and token."
+        },
+        "udaoPlatform": {
+          "title": "Udao Platform",
+          "description": "Decentralized education and learning platform leveraging blockchain for transparent, verifiable credentials."
+        },
+        "rexven": {
+          "title": "Rexven",
+          "description": "Global e-commerce fulfillment platform enabling inventory-free selling through unified sourcing and shipping."
+        },
+        "nexpresst": {
+          "title": "Nexpresst",
+          "description": "A lightweight package for building Express-like APIs in Next.js App Router."
+        },
+        "localBranchCleanup": {
+          "title": "Local Branch Cleanup",
+          "description": "CLI to delete unused local git branches interactively."
+        },
+        "todoQuill": {
+          "title": "Todo Quill",
+          "description": "A simple and elegant task manager built with React Native and Expo."
+        }
+      },
+      "tags": {
+        "saas": "SaaS",
+        "ecommerce": "E-commerce",
+        "analytics": "Analytics",
+        "web3": "Web3",
+        "blockchain": "Blockchain",
+        "landingPage": "Landing Page",
+        "dApp": "dApp",
+        "reactNative": "React Native",
+        "expo": "Expo",
+        "typescript": "TypeScript",
+        "logistics": "Logistics",
+        "middleware": "Middleware",
+        "api": "API",
+        "cli": "CLI",
+        "git": "Git",
+        "nodejs": "Node.js",
+        "react": "React",
+        "fullStack": "Full-Stack",
+        "nextjs": "Next.js"
+      }
+    },
+    "latestPostsSection": {
+      "badge": "Blog",
+      "title": "Latest Posts",
+      "description": "Thoughts on software development, tutorials, and things I've learned along the way."
+    },
+    "homeCTA": {
+      "title": "Let's Work Together",
+      "description": "Have a project in mind or just want to chat? I'm always open to discussing new opportunities, creative ideas, or ways to help bring your vision to life."
+    }
+  },
+  "AboutPage": {
+    "title": "About Me",
+    "role": "Full-Stack Software Developer",
+    "body": {
+      "description1": "I'm a full-stack software developer with a strong product mindset and a deep curiosity for how systems work end to end. I'm known for my ability to quickly identify, research, and master the knowledge required to solve complex problems, and for translating that knowledge into clean, reliable, and maintainable solutions.",
+      "description2": "I bring a high level of attention to detail, strong ownership, and a self-driven work ethic, allowing me to work effectively both independently and within cross-functional teams. I'm a dependable team member and a confident collaborator, comfortable taking initiative and communicating clearly. I have full professional proficiency in both spoken and written English.",
+      "description3": "My technical experience spans modern web technologies including HTML, CSS, JavaScript/TypeScript, React, and Node.js. I've built and maintained applications using RESTful APIs and worked with both relational and non-relational databases such as PostgreSQL, MongoDB, and Redis, including caching strategies. Outside of work, I'm interested in science, technology, space research, and I enjoy reading, watercolor painting, camping, and exploring new places."
     }
   },
   "NotFoundPage": {
@@ -31,6 +123,10 @@
   "Shared": {
     "goHome": "Go Home",
     "viewProjects": "View Projects",
-    "readBlog": "Read Blog"
+    "viewAllProjects": "View All Projects",
+    "readBlog": "Read Blog",
+    "viewAllPosts": "View All Posts",
+    "getInTouch": "Get in Touch",
+    "learnMoreAboutMe": "Learn More About Me"
   }
 }
