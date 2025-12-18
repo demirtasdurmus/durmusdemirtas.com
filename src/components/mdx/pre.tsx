@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { cn } from '@/lib/utils';
-import { CopyButton } from '@/components/copy-button';
+import { CopyButton } from '@/components/mdx/copy-button';
 
 type PreProps = React.HTMLAttributes<HTMLPreElement> & {
   'data-language'?: string;

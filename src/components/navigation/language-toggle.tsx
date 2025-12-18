@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { useRouter, usePathname } from '@/i18n/navigation';
-import { Icons } from './icons';
+import { Icons } from '../icons';
 import { languages } from '@/config/i18n';
 
 export const LanguageToggle: React.FC = () => {

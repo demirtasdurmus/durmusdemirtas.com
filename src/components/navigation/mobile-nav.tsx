@@ -38,7 +38,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ items, children, onClose }
   return (
     <div
       className={cn(
-        'fixed inset-0 top-16 z-50 grid h-[calc(100vh-4rem)] grid-flow-row auto-rows-max overflow-auto p-6 pb-32 shadow-md transition-all md:hidden',
+        'fixed inset-0 top-16 z-50 grid h-[calc(100vh-4rem)] grid-flow-row auto-rows-max overflow-auto px-6 pb-32 shadow-md transition-all md:hidden',
         isClosing
           ? 'animate-out slide-out-to-right-80 fade-out-0'
           : 'animate-in slide-in-from-bottom-80 fade-in-0'
@@ -47,10 +47,10 @@ export const MobileNav: React.FC<MobileNavProps> = ({ items, children, onClose }
       onClick={handleClose}
     >
       <div
-        className="bg-popover text-popover-foreground relative z-20 grid gap-6 rounded-md p-4 shadow-md"
+        className="bg-popover text-popover-foreground border-secondary relative z-20 grid gap-4 rounded-md border p-4 shadow-md"
         onClick={(e) => e.stopPropagation()}
       >
-        <Link href="/" className="flex items-center space-x-2" onClick={handleClose}>
+        <Link href="/" className="flex items-center space-x-2 px-2" onClick={handleClose}>
           <Icons.logo />
           <span className="font-bold">Home</span>
         </Link>
