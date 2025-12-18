@@ -3,10 +3,18 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 import { defineCollection, defineConfig, s } from 'velite';
 
-const computedFields = <T extends { slug: string }>(data: T) => ({
-  ...data,
-  slugAsParams: data.slug.split('/').slice(1).join('/')
-});
+const computedFields = <T extends { slug: string }>(data: T) => {
+  // Extract locale and slug from path like "blog/en/post-name" or "blog/tr/post-name"
+  const slugParts = data.slug.split('/').slice(1); // Remove 'blog' prefix
+  const locale = slugParts[0]; // First part is locale (en/tr)
+  const slugAsParams = slugParts.slice(1).join('/'); // Rest is the actual slug
+
+  return {
+    ...data,
+    locale,
+    slugAsParams
+  };
+};
 
 const posts = defineCollection({
   name: 'Post',

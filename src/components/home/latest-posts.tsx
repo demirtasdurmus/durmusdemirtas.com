@@ -1,7 +1,6 @@
 'use client';
 
-import * as React from 'react';
-import Link from 'next/link';
+import React from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { ArrowRight, Calendar } from 'lucide-react';
 import { motion, useInView } from 'motion/react';
@@ -10,9 +9,11 @@ import { cn, formatDate } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { containerVariants, itemVariants } from '@/components/motion';
+import { Link } from '@/i18n/navigation';
 
 type Post = {
   slug: string;
+  slugAsParams: string;
   title: string;
   description?: string;
   date: string;
@@ -66,7 +67,10 @@ export const LatestPosts: React.FC<LatestPostsProps> = ({ posts }) => {
                   }}
                 >
                   <Link
-                    href={post.slug}
+                    href={{
+                      pathname: '/blog/[...slug]',
+                      params: { slug: post.slugAsParams.split('/') }
+                    }}
                     className="group my-2 flex flex-col gap-3 py-6 transition-colors first:pt-0 last:pb-0 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
                   >
                     <div className="flex-1 space-y-2">

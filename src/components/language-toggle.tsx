@@ -3,6 +3,7 @@
 import React from 'react';
 import { useLocale } from 'next-intl';
 import { motion } from 'motion/react';
+import { useParams } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 import {
@@ -19,6 +20,7 @@ export const LanguageToggle: React.FC = () => {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const params = useParams();
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => setMounted(true), []);
@@ -30,7 +32,16 @@ export const LanguageToggle: React.FC = () => {
   }
 
   const handleLanguageChange = (newLocale: string) => {
-    router.replace(pathname, { locale: newLocale });
+    /**
+     * @see https://next-intl.dev/docs/routing/navigation#userouter-change-locale
+     */
+    router.replace(
+      // @ts-expect-error -- TypeScript will validate that only known `params`
+      // are used in combination with a given `pathname`. Since the two will
+      // always match for the current route, we can skip runtime checks.
+      { pathname, params },
+      { locale: newLocale }
+    );
   };
 
   return (
@@ -41,7 +52,7 @@ export const LanguageToggle: React.FC = () => {
             type="button"
             aria-label="Change language"
             className={cn(
-              'from-background via-card to-muted relative h-10 w-10 rounded-full border bg-linear-to-br p-2 shadow-inner shadow-black/5',
+              'from-background via-card to-muted relative h-10 w-10 rounded-full p-2 shadow-inner shadow-black/5',
               'focus-visible:ring-ring/60 focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
               'transition-all duration-300 hover:shadow-md'
             )}
@@ -67,7 +78,7 @@ export const LanguageToggle: React.FC = () => {
           </button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent align="end" className="min-w-[140px]">
+        <DropdownMenuContent align="end" className="min-w-35">
           {languages.map((language) => (
             <DropdownMenuItem
               key={language.code}

@@ -13,6 +13,7 @@ function getLatestPosts() {
     .slice(0, 4)
     .map((post) => ({
       slug: post.slug,
+      slugAsParams: post.slugAsParams,
       title: post.title,
       description: post.description,
       date: post.date

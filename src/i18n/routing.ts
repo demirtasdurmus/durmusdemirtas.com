@@ -7,10 +7,17 @@ export const routing = defineRouting({
   localePrefix: 'never',
   pathnames: {
     '/': '/',
-    '/blog': '/blog',
+    '/blog': {
+      en: '/blog',
+      tr: '/blog'
+    },
+    '/blog/[...slug]': {
+      en: '/blog/[...slug]',
+      tr: '/blog/[...slug]'
+    },
     '/about': {
       en: '/about',
-      tr: '/hakkimda'
+      tr: '/hakkımda'
     },
     '/projects': {
       en: '/projects',

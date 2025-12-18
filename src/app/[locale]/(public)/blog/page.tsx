@@ -1,18 +1,23 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import type { Metadata } from 'next';
 import { compareDesc } from 'date-fns';
 
+import { Link } from '@/i18n/navigation';
 import { posts as allPosts } from '#site/content';
 import { formatDate } from '@/lib/utils';
+import type { PromiseParams } from '@/types';
 
 export const metadata: Metadata = {
   title: 'Blog'
 };
 
-export default async function BlogPage() {
+type BlogPageProps = { params: PromiseParams<{ locale: string }> };
+
+export default async function BlogPage(props: BlogPageProps) {
+  const { locale } = await props.params;
+
   const posts = allPosts
-    .filter((post) => post.published)
+    .filter((post) => post.published && post.locale === locale)
     .sort((a, b) => {
       return compareDesc(new Date(a.date), new Date(b.date));
     });
@@ -49,7 +54,13 @@ export default async function BlogPage() {
               {post.date && (
                 <p className="text-muted-foreground text-sm">{formatDate(post.date)}</p>
               )}
-              <Link href={post.slug} className="absolute inset-0">
+              <Link
+                href={{
+                  pathname: '/blog/[...slug]',
+                  params: { slug: post.slugAsParams.split('/') }
+                }}
+                className="absolute inset-0"
+              >
                 <span className="sr-only">View Article</span>
               </Link>
             </article>

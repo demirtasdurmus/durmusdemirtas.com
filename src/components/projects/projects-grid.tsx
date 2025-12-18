@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { ExternalLink, Star } from 'lucide-react';
 import { motion } from 'motion/react';
 
@@ -83,7 +82,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                 <div className="mt-6 flex gap-3">
                   {project.github && (
                     <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                      <Link
+                      <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -91,7 +90,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                       >
                         <Icons.gitHub className="h-4 w-4" />
                         GitHub
-                      </Link>
+                      </a>
                     </motion.div>
                   )}
 
@@ -100,7 +99,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                     whileTap={{ scale: 0.98 }}
                     className="flex-1"
                   >
-                    <Link
+                    <a
                       href={project.href}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -108,7 +107,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                     >
                       View Project
                       <ExternalLink className="h-4 w-4" />
-                    </Link>
+                    </a>
                   </motion.div>
                 </div>
               </div>

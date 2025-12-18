@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 import { useTranslations } from 'next-intl';
 import { motion, useInView } from 'motion/react';
 import { Code2, Database, Layers, Sparkles } from 'lucide-react';
