@@ -1,3 +1,17 @@
 {
-  "cSpell.words": ["Emparazon", "isodate", "rehype", "Rexven", "turbopack", "udao", "velite"]
+  "cSpell.language": "en,tr",
+  "cSpell.ignorePaths": [".velite", "pnpm-lock.yaml", ".vscode", ".next", "node_modules"],
+  "cSpell.words": [
+    "doesn",
+    "Emparazon",
+    "hakkimda",
+    "isodate",
+    "rehype",
+    "Rexven",
+    "turbopack",
+    "udao",
+    "velite"
+  ],
+  "i18n-ally.localesPaths": ["messages", "src/i18n"],
+  "i18n-ally.keystyle": "nested"
 }

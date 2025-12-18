@@ -1,3 +1,5 @@
+import createNextIntlPlugin from 'next-intl/plugin';
+
 const isDev = process.argv.indexOf('dev') !== -1;
 const isBuild = process.argv.indexOf('build') !== -1;
 if (!process.env.VELITE_STARTED && (isDev || isBuild)) {
@@ -11,4 +13,5 @@ const nextConfig = {
   /* config options here */
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin();
+export default withNextIntl(nextConfig);

@@ -23,6 +23,7 @@ import {
   User,
   X,
   Mail,
+  Globe,
   type LucideIcon
 } from 'lucide-react';
 
@@ -52,6 +53,7 @@ export const Icons = {
   moon: Moon,
   laptop: Laptop,
   check: Check,
+  globe: Globe,
   x: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

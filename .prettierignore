@@ -2,3 +2,6 @@
 .next
 .velite
 public/static
+.husky
+*.ico
+.prettierignore

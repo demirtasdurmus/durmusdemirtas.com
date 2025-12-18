@@ -1,11 +1,16 @@
+import { PropsWithChildren } from 'react';
 import type { Metadata, Viewport } from 'next';
+import { notFound } from 'next/navigation';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
+import { setRequestLocale } from 'next-intl/server';
 
-import '../styles/globals.css';
+import '../../styles/globals.css';
 import { siteConfig } from '@/config/site';
 import { Providers } from '@/components/providers';
-import { PropsWithChildren } from 'react';
 import { cn } from '@/lib/utils';
+import { PromiseParams } from '@/types';
+import { routing } from '@/i18n/routing';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -33,9 +38,20 @@ export const viewport: Viewport = {
   ]
 };
 
-export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
+type RootLayoutProps = PropsWithChildren<{ params: PromiseParams<{ locale: string }> }>;
+
+export default async function RootLayout({ children, params }: Readonly<RootLayoutProps>) {
+  const { locale } = await params;
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
+  // Enable static rendering
+  setRequestLocale(locale);
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head />
       <body
         className={cn(
@@ -44,7 +60,9 @@ export default function RootLayout({ children }: Readonly<PropsWithChildren>) {
           geistMono.variable
         )}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        </Providers>
       </body>
     </html>
   );

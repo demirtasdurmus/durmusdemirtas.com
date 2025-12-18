@@ -1,5 +1,5 @@
 export const siteConfig = {
-  name: 'Durmuş Demirtaş',
+  name: 'Durmuş',
   email: 'demirtasdurmus@gmail.com',
   url: 'https://durmusdemirtas.com',
   description: 'Portfolio&Blog website of Durmuş Demirtaş',

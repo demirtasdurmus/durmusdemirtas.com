@@ -1,0 +1,36 @@
+{
+  "Navigation": {
+    "about": "Hakkımda",
+    "blog": "Blog",
+    "projects": "Projeler"
+  },
+  "HomePage": {
+    "heroSection": {
+      "availableForNewProjects": "Yeni projelere açık",
+      "title": "Merhaba, ben <name>{name}</name>",
+      "role": "Full-Stack Yazılım Geliştirici",
+      "description": "Modern teknolojilerle sağlam ve ölçeklenebilir web/mobil uygulamalar geliştiriyorum. Temiz koda ve güçlü kullanıcı deneyimine odaklanarak karmaşık problemleri basit ve etkili çözümlere dönüştürmeyi seviyorum.",
+      "location": "Ankara, Türkiye",
+      "expertise": {
+        "yearsExp": {
+          "label": "Deneyim",
+          "value": "5+"
+        },
+        "projects": {
+          "label": "Projeler",
+          "value": "50+"
+        }
+      }
+    }
+  },
+  "NotFoundPage": {
+    "title": "404 — Sayfa Bulunamadı",
+    "subtitle": "Site içinde kayıp mı oldunuz?",
+    "description": "Aradığınız sayfa bulunamadı. Ana sayfaya dönerek tekrar deneyiniz."
+  },
+  "Shared": {
+    "goHome": "Ana Sayfaya Dön",
+    "viewProjects": "Projeleri Gör",
+    "readBlog": "Blog Yazılarını Oku"
+  }
+}

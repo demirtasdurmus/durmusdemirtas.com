@@ -5,7 +5,7 @@
 const lintStagedConfig = {
   '*.{ts,tsx}': 'eslint',
   '*.{ts,tsx}': 'tsc-files --noEmit',
-  '*': 'prettier --write --ignore-path .gitignore'
+  '*': 'prettier --write'
 };
 
 export default lintStagedConfig;

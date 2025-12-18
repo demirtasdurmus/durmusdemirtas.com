@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
@@ -11,14 +12,27 @@ import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Icons } from '@/components/icons';
 import { containerVariants, itemVariants, cardVariants } from '@/components/motion';
+import { useTranslations } from 'next-intl';
 
 const skills = ['React/React Native', 'Node.js', 'TypeScript', 'PostgreSQL', 'Docker'];
-const expertise = [
-  { value: '5+', label: 'Years Exp.' },
-  { value: '50+', label: 'Projects' }
-];
 
 export const HeroSection: React.FC = () => {
+  const t = useTranslations();
+
+  const expertise = React.useMemo(
+    () => [
+      {
+        value: t('HomePage.heroSection.expertise.yearsExp.value'),
+        label: t('HomePage.heroSection.expertise.yearsExp.label')
+      },
+      {
+        value: t('HomePage.heroSection.expertise.projects.value'),
+        label: t('HomePage.heroSection.expertise.projects.label')
+      }
+    ],
+    [t]
+  );
+
   return (
     <section className="relative overflow-hidden">
       {/* Animated background gradient blobs */}
@@ -67,7 +81,7 @@ export const HeroSection: React.FC = () => {
                   animate={{ scale: [1, 1.2, 1], opacity: [1, 0.7, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 />
-                Available for new projects
+                {t('HomePage.heroSection.availableForNewProjects')}
               </Badge>
             </motion.div>
 
@@ -75,26 +89,27 @@ export const HeroSection: React.FC = () => {
               variants={itemVariants}
               className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
             >
-              Hi, I&apos;m{' '}
-              <span className="from-primary to-primary/60 bg-linear-to-r bg-clip-text text-transparent">
-                {siteConfig.name}
-              </span>
+              {t.rich('HomePage.heroSection.title', {
+                name: () => (
+                  <span className="from-primary to-primary/60 bg-linear-to-r bg-clip-text text-transparent">
+                    {siteConfig.name}
+                  </span>
+                )
+              })}
             </motion.h1>
 
             <motion.p
               variants={itemVariants}
               className="text-muted-foreground mt-4 text-xl font-medium sm:text-2xl"
             >
-              Full-Stack Software Developer
+              {t('HomePage.heroSection.role')}
             </motion.p>
 
             <motion.p
               variants={itemVariants}
               className="text-muted-foreground mt-6 max-w-xl text-lg leading-relaxed"
             >
-              I build robust, scalable web applications with modern technologies. Passionate about
-              clean code, great user experiences, and turning complex problems into elegant
-              solutions.
+              {t('HomePage.heroSection.description')}
             </motion.p>
 
             <motion.div variants={itemVariants} className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -103,7 +118,7 @@ export const HeroSection: React.FC = () => {
                   href="/projects"
                   className={cn(buttonVariants({ size: 'lg' }), 'group gap-2')}
                 >
-                  View Projects
+                  {t('Shared.viewProjects')}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </motion.div>
@@ -112,7 +127,7 @@ export const HeroSection: React.FC = () => {
                   href="/blog"
                   className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
                 >
-                  Read Blog
+                  {t('Shared.readBlog')}
                 </Link>
               </motion.div>
             </motion.div>
@@ -169,16 +184,19 @@ export const HeroSection: React.FC = () => {
                   transition={{ type: 'spring', stiffness: 300 }}
                 >
                   <Avatar className="ring-primary/20 ring-offset-background h-32 w-32 ring-4 ring-offset-4">
-                    <AvatarImage src="/images/avatars/durmus-demirtas.jpeg" alt={siteConfig.name} />
+                    <AvatarImage
+                      src="/images/avatars/durmus-demirtas.jpeg"
+                      alt={siteConfig.author}
+                    />
                     <AvatarFallback className="text-2xl">
-                      {getNameInitials(siteConfig.name)}
+                      {getNameInitials(siteConfig.author)}
                     </AvatarFallback>
                   </Avatar>
                 </motion.div>
 
                 <div className="text-center">
-                  <h2 className="text-xl font-semibold">{siteConfig.name}</h2>
-                  <p className="text-muted-foreground mt-1">Ankara, Turkiye</p>
+                  <h2 className="text-xl font-semibold">{siteConfig.author}</h2>
+                  <p className="text-muted-foreground mt-1">{t('HomePage.heroSection.location')}</p>
                 </div>
 
                 <div className="flex flex-wrap justify-center gap-2">

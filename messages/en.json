@@ -1,0 +1,36 @@
+{
+  "Navigation": {
+    "about": "About Me",
+    "blog": "Blog",
+    "projects": "Projects"
+  },
+  "HomePage": {
+    "heroSection": {
+      "availableForNewProjects": "Available for new projects",
+      "title": "Hi, I'm <name>{name}</name>",
+      "role": "Full-Stack Software Developer",
+      "description": "I build robust, scalable web/mobile applications with modern technologies. Passionate about clean code, great user experiences, and turning complex problems into elegant solutions.",
+      "location": "Ankara, Turkiye",
+      "expertise": {
+        "yearsExp": {
+          "label": "Years Exp.",
+          "value": "5+"
+        },
+        "projects": {
+          "label": "Projects",
+          "value": "50+"
+        }
+      }
+    }
+  },
+  "NotFoundPage": {
+    "title": "404 — Not Found",
+    "subtitle": "Lost in the stack?",
+    "description": "The page you're looking for doesn't exist or has been moved. Let's get you back on track."
+  },
+  "Shared": {
+    "goHome": "Go Home",
+    "viewProjects": "View Projects",
+    "readBlog": "Read Blog"
+  }
+}
