@@ -8,7 +8,7 @@
     "heroSection": {
       "availableForNewProjects": "Available for new projects",
       "title": "Hi, I'm <name>{name}</name>",
-      "role": "Full-Stack Software Developer",
+      "role": "Full-Stack Software Engineer",
       "description": "I build robust, scalable web/mobile applications with modern technologies. Passionate about clean code, great user experiences, and turning complex problems into elegant solutions.",
       "location": "Ankara, Turkiye",
       "expertise": {
@@ -61,7 +61,7 @@
     "body": {
       "description1": "I'm a full-stack software developer with a strong product mindset and a deep curiosity for how systems work end to end. I'm known for my ability to quickly identify, research, and master the knowledge required to solve complex problems, and for translating that knowledge into clean, reliable, and maintainable solutions.",
       "description2": "I bring a high level of attention to detail, strong ownership, and a self-driven work ethic, allowing me to work effectively both independently and within cross-functional teams. I'm a dependable team member and a confident collaborator, comfortable taking initiative and communicating clearly. I have full professional proficiency in both spoken and written English.",
-      "description3": "My technical experience spans modern web technologies including HTML, CSS, JavaScript/TypeScript, React, and Node.js. I've built and maintained applications using RESTful APIs and worked with both relational and non-relational databases such as PostgreSQL, MongoDB, and Redis, including caching strategies. Outside of work, I'm interested in science, technology, space research, and I enjoy reading, watercolor painting, camping, and exploring new places."
+      "description3": "My technical experience spans modern web technologies including HTML, CSS, JavaScript/TypeScript, React, and Node.js. I've built and maintained applications using RESTful APIs and worked with both relational and non-relational databases such as PostgreSQL, MongoDB, and Redis. I've managed DevOps and CI/CD flows. Outside of work, I'm interested in science, technology, space research, and I enjoy reading, watercolor painting, camping, and exploring new places."
     }
   },
   "BlogPage": {
