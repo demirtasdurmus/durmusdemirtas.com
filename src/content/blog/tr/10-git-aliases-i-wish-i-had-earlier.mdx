@@ -1,17 +1,17 @@
 ---
 title: Keşke Daha Önce Bilseydim Dediğim 10 Git Alias’ı
-description: Tekrarlayan işleri otomatikleştirmenizi ve verimliliğinizi artırmanızı sağlayan güçlü Git alias’larından oluşan bir derleme.
+description: Sıklıkla kullanılan komutları otomatik hale getirerek verimliliğinizi artırmak için kullanabileceğiniz bazı Git aliasları.
 image: /images/blog/10-git-aliases.jpeg
 date: '2024-07-29'
 authors:
   - durmus-demirtas
 ---
 
-Git, modern versiyon kontrolünün temel taşlarından biridir ve geliştiricilerin kod tabanlarını hassasiyetle yönetmesini ve birlikte çalışmasını sağlar. Ancak en deneyimli Git kullanıcıları bile, tekrarlayan işleri otomatikleştirmek ve verimliliği artırmak için özelleştirmelerden fayda görebilir.
+Git, modern versiyon kontrol sistemlerinin temel taşlarından biridir ve geliştiricilerin projelerini hassasiyetle yönetmesini sağlar. Ancak en deneyimli Git kullanıcıları için bile, tekrarlayan işleri otomatik hale getirmek faydalı olabilir.
 
-Git alias’ları, Git komutlarını kendi çalışma şeklinize göre uyarlamanın güçlü bir yoludur. Bu yazıda, geliştirme sürecimi daha akıcı ve hızlı hale getiren en etkili Git alias’larımı paylaşacağım. Commit geri alma, branch’ler arasında gezinme veya repository yazarlarını yönetme gibi birçok senaryoda bu alias’lar zaman kazanmanızı ve hata riskini azaltmanızı sağlar.
+Git aliasları, Git komutlarını kendi çalışma şeklinize göre özelleştirmenin bir yoludur. Bu yazıda sizlerle geliştirme sürecimi daha akıcı ve hızlı hale getiren en etkili Git aliaslarımı paylaşacağım. Bu aliaslar commitleri geri alma, branchler arasında gezinme veya repository yazarlarını yönetme gibi birçok konuda size zaman kazandırır ve hata riskini azaltır.
 
-Önce tüm alias listesini paylaşacak ve bunları Git yapılandırmanıza nasıl ekleyebileceğinizi göstereceğim. Ardından her birini tek tek ele alarak kullanım senaryolarını ve sağladıkları avantajları açıklayacağım. Komutlar ve yapılandırmalar macOS için optimize edilmiştir ancak diğer işletim sistemlerine de kolayca uyarlanabilir.
+Öncelikle tüm listeyi paylaşacak ve bunları Git konfigurasyon dosyanıza nasıl ekleyebileceğinizi göstereceğim. Ardından her birini tek tek ele alarak kullanım senaryolarını ve sağladıkları avantajları açıklayacağım. Bu aliaslar macOS işletim sistemi için yapılmıştır ancak diğer işletim sistemlerine de kolayca uyarlanabilir.
 
 Hadi başlayalım.
 
@@ -21,46 +21,46 @@ Bir terminal açın ve `.gitconfig` dosyanızı tercih ettiğiniz bir kod editö
 code ~/.gitconfig
 ```
 
-Eğer alias’lar için bir bölümünüz yoksa ekleyin ya da aşağıdaki alias’ları mevcut alias bölümünüzün altına yapıştırın:
+Eğer açılan dosyada henüz aliaslar için bir bölümü yoksa ekleyin ya da aşağıdaki aliasları mevcut alias bölümünüzün altına yapıştırın:
 
 ```bash
 # ...other configuration options
 [alias]
-  # Undo the last commit
+  # Son commiti geri alma
   u = reset --soft HEAD~1
-  # Logs the history in a short and pretty format
-  # commitHash - (tag-HEAD) commitMessage (timeUntilNow) - [committerName]
+  # Commit geçmişini kısa ve renkli bir format ile gösterir
+  # commit hashı - (tag-HEAD) commit mesajı (şimdiye kadar geçen zaman) - [commit atan kişinin adı]
   ls = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %C(bold)%s%Creset %Cgreen(%cr) %C(bold blue)[%an]%Creset' --abbrev-commit --decorate
-  # Logs the history in the long format
-  # commitHash (tag-HEAD) commitMessage committerName
-  # insertedCount deletedCount file
+  # Commit geçmişini detaylı olarak gösterir
+  # commit hashı (tag-HEAD) commit mesajı commit atan kişinin adı
+  # eklenen dosya sayısı silinen dosya sayısı
   ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --numstat
-  # Display conflicts
+  # Conflictleri görüntüler
   cf = diff --name-only --diff-filter=U
-  # Display local branches in a nice list format
+  # Lokal branchleri liste formatında görüntüler
   lb = !git branch -vv | cut -c 3- | awk '$3 { print $1 }'
-  # Display repo authors in a nice list format
+  # Tüm katkıda bulunanları liste formatında görüntüler
   au = "!sh -c \"git log --format='%aN - [%aE]' | grep -v 'users.noreply.github.com' | sort -u --ignore-case | awk -F' - ' '{printf \\\"\\033[33m%s\\033[0m - \\033[34m%s\\033[0m\\\\n\\\", \\$1, substr(\\$2, 2, length(\\$2)-2)}'\""
-  # Use fzf to display local branches and select one to checkout
+  # fzf ile lokal branchleri görüntüle ve bir tanesini seçerek branch değiştir
   clb = "!sh -c 'git branch | grep -v \"^\\*\" | fzf --height=20% --reverse --info=inline | xargs git checkout'"
-  # Use fzf to display remote branches and select one to checkout
+  # fzf ile remote branchleri görüntüle ve bir tanesini seçerek branch değiştir
   crb = "!sh -c 'git branch -r | grep -v \"^\\*\" | sed \"s|origin/||\" | fzf --height=20% --reverse --info=inline | xargs git checkout'"
-  # Add multiple with fzf, use arrows to navigate, tab to select and return to add
+  # fzf ile birden fazla dosya seçerek staginge atmaya yarar
   afz = "!sh -c 'git ls-files -m -o --exclude-standard | fzf -m --print0 | xargs -0 git add'"
-  # List all aliases
+  # Tüm aliasları görüntüle
   la = "!sh -c 'git config -l | grep alias | cut -c 7-'"
-# ...other configuration parts
+# ...diğer konfigürasyon seçenekleri
 ```
 
-Dosyayı kaydedin ve mevcut git repository’lerinizden birine gidin. Şimdi bu alias’ları tek tek inceleyelim ve kullanım senaryolarını görelim.
+Dosyayı kaydedin ve mevcut git repository’lerinizden birine gidin. Şimdi bu alias’ları tek tek inceleyelim ve kullanım alanlarını görelim.
 
-### 1. Son Commit’i Geri Alma
+### 1. Son Commiti Geri Alma
 
 ```bash
 # Alias
 u = reset --soft HEAD~1
 
-# Usage
+# Kullanımı
 git u
 ```
 
@@ -72,11 +72,11 @@ Son commit’i hızlıca geri alır ve değişiklikleri working directory’de t
 # Alias
 ls = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %C(bold)%s%Creset %Cgreen(%cr) %C(bold blue)[%an]%Creset' --abbrev-commit --decorate
 
-# Usage
+# Kullanımı
 git ls
 ```
 
-Commit geçmişini kısa ve görsel olarak anlaşılır bir formatta gösterir. Commit hash’i, etiketler, mesaj, zaman ve yazar bilgilerini içerir. Repository geçmişine hızlıca göz atmak için idealdir.
+Commit geçmişini kısa ve görsel olarak anlaşılır bir formatta gösterir. Commit hash’i, tagler, mesaj, zaman ve author bilgilerini içerir. Repository geçmişine hızlıca göz atmak için idealdir.
 
 ### 3. Detaylı Commit Geçmişi
 
@@ -84,11 +84,11 @@ Commit geçmişini kısa ve görsel olarak anlaşılır bir formatta gösterir. 
 # Alias
 ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%an]" --decorate --numstat
 
-# Usage
+# Kullanımı
 git ll
 ```
 
-Commit hash’i, etiketler, mesaj, yazar ve dosya bazlı değişiklikleri (eklenen ve silinen satırlar) içeren detaylı bir log sunar. Özellikle code review veya debugging sırasında oldukça faydalıdır.
+Commit hash’i, tagler, mesaj, author ve dosya bazlı değişiklikleri (eklenen ve silinen satırlar) içeren detaylı bir log sunar. Özellikle code review veya debugging sırasında oldukça faydalıdır.
 
 ### 4. Conflictleri Görüntüleme
 
@@ -96,92 +96,92 @@ Commit hash’i, etiketler, mesaj, yazar ve dosya bazlı değişiklikleri (eklen
 # Alias
 cf = diff --name-only --diff-filter=U
 
-# Usage
+# Kullanımı
 git cf
 ```
 
-Merge sırasında oluşan çakışmalı dosyaları listeler. Çakışmaları hızlıca tespit edip çözmenizi sağlar.
+Merge sırasında oluşan conflictleri listeler. Bunları hızlıca tespit edip çözmenizi sağlar.
 
-### 5. Lokal Branch’leri Görüntüleme
+### 5. Lokal Branchleri Görüntüleme
 
 ```bash
 # Alias
 lb = !git branch -vv | cut -c 3- | awk '$3 { print $1 }'
 
-# Usage
+# Kullanımı
 git lb
 ```
 
-Lokal branch’leri sade ve okunabilir bir formatta listeler. Branch yönetimini kolaylaştırır.
+Lokal branchleri sade ve okunabilir bir formatta listeler. Branch yönetimini kolaylaştırır.
 
-### 6. Repository Contributor’larını Görüntüleme
+### 6. Repository authorlarını Görüntüleme
 
 ```bash
 # Alias
 au = "!sh -c \"git log --format='%aN - [%aE]' | grep -v 'users.noreply.github.com' | sort -u --ignore-case | awk -F' - ' '{printf \\\"\\033[33m%s\\033[0m - \\033[34m%s\\033[0m\\\\n\\\", \\$1, substr(\\$2, 2, length(\\$2)-2)}'\""
 
-# Usage
+# Kullanımı
 git au
 ```
 
-Repository contributor’larını, anonim GitHub kullanıcılarını hariç tutarak, formatlı bir şekilde listeler. Projeye katkıda bulunanları görmek için idealdir.
+Repository authorlarını, anonim GitHub kullanıcılarını hariç tutarak, sade bir formatta listeler. Projeye katkıda bulunanları görmek için idealdir.
 
-> Bu syntax’ın diğerlerinden biraz farklı olduğunu ve `!sh -c` ile başladığını merak ediyor olabilirsiniz. Bu, komut daha karmaşık shell işlemleri içerdiğinde (örneğin `|`), mantıksal işlemler (`&&`) veya döngüler veya koşullar gibi gelişmiş shell özellikleri gerektirdiğinde Git alias’ları için gereklidir.
+> Bu yazım tarzının neden diğerlerinden biraz farklı olduğunu ve `!sh -c` ile başladığını merak ediyor olabilirsiniz. Bu, komut daha karmaşık shell işlemleri içerdiğinde (örneğin `|`), mantıksal işlemler (`&&`) veya döngüler veya koşullar gibi gelişmiş shell özellikleri gerektirdiğinde kullanılmalıdır.
 
-### 7. fzf ile Yerel Branch’e Geçiş
+### 7. fzf ile Lokal Branche Geçiş
 
 ```bash
 # Alias
 clb = "!sh -c 'git branch | grep -v \"^\\*\" | fzf --height=20% --reverse --info=inline | xargs git checkout'"
 
-# Usage
+# Kullanımı
 git clb
 ```
 
 <Callout>
-  Bu alias ve aşağıdaki iki alias’ı kullanabilmek için bilgisayarınızda
+  Bu alias ve aşağıdaki iki aliası kullanabilmek için bilgisayarınızda
   [fzf](https://github.com/junegunn/fzf) kurulu olmalıdır. Kurulum seçenekleri için [bu
   bağlantıya](https://github.com/junegunn/fzf?tab=readme-ov-file#installation) göz atabilirsiniz.
 </Callout>
 
-fzf kullanarak local branch’leri listeler ve etkileşimli olarak checkout yapmanızı sağlar. Çok sayıda branch olan projelerde büyük kolaylık sağlar.
+`fzf` kullanarak local branchleri listeler ve etkileşimli olarak checkout yapmanızı sağlar. Çok sayıda branch olan projelerde büyük kolaylık sağlar.
 
-### 8. fzf ile Remote Branch’e Geçiş
+### 8. fzf ile Remote Branche Geçiş
 
 ```bash
 # Alias
 crb = "!sh -c 'git branch -r | grep -v \"^\\*\" | sed \"s|origin/||\" | fzf --height=20% --reverse --info=inline | xargs git checkout'"
 
-# Usage
+# Kullanımı
 git crb
 ```
 
-Yukarıdaki alias ile aynı mantıkta çalışır; tek fark remote branch’leri listelemesidir.
+Yukarıdaki alias ile aynı mantıkta çalışır; tek fark remote branchleri listelemesidir.
 
-### 9. fzf ile Çoklu Dosya Staging’e Ekleme
+### 9. fzf ile Birden fazla Dosyayı Staging’e Ekleme
 
 ```bash
 # Alias
 afz = "!sh -c 'git ls-files -m -o --exclude-standard | fzf -m --print0 | xargs -0 git add'"
 
-# Usage
+# Kullanımı
 git afz
 ```
 
-fzf kullanarak dosyaları çoklu seçimle stage etmenizi sağlar. Ok tuşlarıyla gezinip, tab ile seçim yapabilir ve enter ile ekleyebilirsiniz.
+`fzf` kullanarak dosyaları çoklu seçimle stage etmenizi sağlar. Ok tuşlarıyla gezinip, tab ile seçim yapabilir ve enter ile ekleyebilirsiniz.
 
-### 10. Tüm Git Alias’larını Listeleme
+### 10. Tüm Git Aliaslarını Listeleme
 
 ```bash
 # Alias
 la = "!sh -c 'git config -l | grep alias | cut -c 7-'"
 
-# Usage
+# Kullanımı
 git la
 ```
 
-Konfigürasyon dosyanıza eklenmiş tüm Git alias’larını listeler. Alias’lara alışana kadar oldukça kullanışlıdır.
+Konfigürasyon dosyanıza eklenmiş tüm Git aliaslarını listeler. Aliaslara alışana kadar oldukça kullanışlıdır.
 
 ### Sonuç
 
-Git alias’ları, Git’in ne kadar esnek ve güçlü olduğunu gösteren harika bir örnektir. Çalışma şeklinize uygun özelleştirmeler yaparak verimliliğinizi ciddi şekilde artırabilirsiniz. Commit geri alma, branch yönetimi, yazarları görüntüleme ve dosya stage etme gibi günlük işlemleri hızlandıran bu alias’lar, Git kullanım deneyiminizi bir üst seviyeye taşır. Özelleştirmenin gücünü benimseyin ve Git’i kendi akışınıza göre şekillendirin.
+Git aliasları, Git’in ne kadar esnek ve güçlü olduğunu gösteren harika bir örnektir. Çalışma şeklinize uygun düzenlemeler yaparak verimliliğinizi ciddi şekilde artırabilirsiniz. Commit geri alma, branch yönetimi, authorları görüntüleme ve dosya stage etme gibi günlük işlemleri hızlandıran bu aliaslar, Git kullanım deneyiminizi bir üst seviyeye taşır. Siz de kendi akışınıza uygun başka aliaslar bulabilir ve Git deneyiminizi iyileştirebilirsiniz.
