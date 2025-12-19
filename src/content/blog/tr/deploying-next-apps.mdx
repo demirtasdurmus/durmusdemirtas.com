@@ -1,0 +1,211 @@
+---
+title: Next.js Uygulamalarını Deploy Etme
+description: Next.js uygulamalarınızı Vercel'de nasıl deploy edersiniz.
+image: /images/blog/blog-post-3.jpg
+date: '2023-01-02'
+authors:
+  - durmus-demirtas
+---
+
+<Callout>
+  Aşağıdaki metin [Tailwind CSS](https://play.tailwindcss.com/uj1vGACRJA?layout=preview)
+  dokümantasyonundan alınmıştır. Markdown stillerini test etmek için buraya kopyaladım. **Tailwind
+  harika. Kullanmalısınız.**
+</Callout>
+
+Şimdiye kadar Tailwind ile bir makale, belge veya blog yazısını stillendirmeye çalışmak, tipografi konusunda keskin bir göz ve çok fazla karmaşık özel CSS gerektiren sıkıcı bir görevdi.
+
+Varsayılan olarak Tailwind, paragraflar, başlıklar, listeler ve daha fazlasından tüm varsayılan tarayıcı stillerini kaldırır. Bu, uygulama UI'ları oluştururken gerçekten kullanışlıdır çünkü user-agent stillerini geri almaya daha az zaman harcarsınız, ancak gerçekten bir CMS'teki zengin metin editöründen veya bir markdown dosyasından gelen içeriği stillendirmeye çalıştığınızda, bu şaşırtıcı ve sezgisel olmayan olabilir.
+
+Aslında bununla ilgili çok fazla şikayet alıyoruz, insanlar bize düzenli olarak şunları soruyor:
+
+> Tailwind neden `h1` elementlerimdeki varsayılan stilleri kaldırıyor? Bunu nasıl devre dışı bırakırım? Diğer tüm base stilleri de kaybettiğimi mi söylüyorsunuz?
+> Sizi duyuyoruz, ancak base stillerimizi basitçe devre dışı bırakmanın gerçekten istediğiniz şey olduğuna ikna olmadık. Dashboard UI'ınızın bir parçasında `p` elementi kullandığınızda her seferinde sinir bozucu margin'leri kaldırmak zorunda kalmak istemezsiniz. Ve blog yazılarınızın user-agent stillerini kullanmasını gerçekten istediğinizden de şüpheliyim — onların _harika_ görünmesini istiyorsunuz, berbat değil.
+
+`@tailwindcss/typography` eklentisi, base stillerimizi devre dışı bırakmak gibi aptalca bir şey yapmanın dezavantajları olmadan gerçekten _istediğiniz_ şeyi size verme girişimimizdir.
+
+Vanilya HTML içeriğinin herhangi bir bloğuna ekleyebileceğiniz ve onu güzel, iyi formatlanmış bir belgeye dönüştürebileceğiniz yeni bir `prose` sınıfı ekler:
+
+```html
+<article class="prose">
+  <h1>Garlic bread with cheese: What the science tells us</h1>
+  <p>
+    For years parents have espoused the health benefits of eating garlic bread with cheese to their
+    children, with the food earning such an iconic status in our culture that kids will often dress
+    up as warm, cheesy loaf for Halloween.
+  </p>
+  <p>
+    But a recent study shows that the celebrated appetizer may be linked to a series of rabies cases
+    springing up around the country.
+  </p>
+</article>
+```
+
+Eklentinin nasıl kullanılacağı ve içerdiği özellikler hakkında daha fazla bilgi için [dokümantasyonu okuyun](https://github.com/tailwindcss/typography/blob/master/README.md).
+
+---
+
+## Bundan sonra ne beklenmeli
+
+Bundan sonra gelenler, eklentinin kendisini test etmek için yazdığım bir sürü saçma sapan şey. **Kalın metin**, sırasız listeler, sıralı listeler, kod blokları, block quote'lar, _ve hatta italikler_ gibi düşünebileceğim her mantıklı tipografik elementi içeriyor.
+
+Tüm bu kullanım durumlarını kapsamak birkaç nedenden ötürü önemli:
+
+1.  Her şeyin kutudan çıktığı gibi iyi görünmesini istiyoruz.
+2.  Gerçekten sadece ilk neden, eklentinin tüm amacı bu.
+3.  İşte üçüncü bir sahte neden, ancak üç öğeli bir liste iki öğeli bir listeden daha gerçekçi görünüyor.
+
+Şimdi başka bir başlık stili deneyeceğiz.
+
+### Tipografi kolay olmalı
+
+İşte size bir başlık — eğer işimizi doğru yaptıysak, şans eseri oldukça makul görünecek.
+
+Tipografi hakkında bilge birinin bir zamanlar söylediği bir şey:
+
+> Tipografi, eşyalarınızın çöp gibi görünmesini istemiyorsanız oldukça önemlidir. İyi yapın o zaman kötü olmaz.
+
+Görsellerin varsayılan olarak burada iyi görünmesi de muhtemelen önemli:
+
+<Image src="/images/blog/blog-post-4.jpg" width="718" height="404" alt="Image" />
+
+Yaygın inanışın aksine, Lorem Ipsum sadece rastgele bir metin değildir. MÖ 45'ten kalma klasik Latin edebiyatının bir parçasından kökleri vardır, bu da onu 2000 yaşından fazla yapar.
+
+Şimdi size sırasız bir listenin bir örneğini göstereceğim, bunun da iyi göründüğünden emin olmak için:
+
+- İşte bu listedeki ilk öğe.
+- Bu örnekte öğeleri kısa tutuyoruz.
+- Daha sonra daha uzun, daha karmaşık liste öğeleri kullanacağız.
+
+Ve bu bölümün sonu.
+
+## Başlıkları üst üste koyarsak ne olur?
+
+### Bunun da iyi göründüğünden emin olmalıyız.
+
+Bazen başlıklarınız birbirinin hemen altında olur. Bu durumlarda genellikle ikinci başlıktaki üst margin'i geri almanız gerekir çünkü başlıkların birbirine yakın olması, bir paragrafın ardından gelen bir başlıktan daha iyi görünür.
+
+### Bir başlık paragraftan sonra geldiğinde …
+
+Bir başlık paragraftan sonra geldiğinde, yukarıda bahsettiğim gibi biraz daha fazla boşluğa ihtiyacımız var. Şimdi daha karmaşık bir listenin nasıl görüneceğine bakalım.
+
+- **Liste öğelerinin başlıkları olduğu bu şeyi sık sık yapıyorum.**
+
+  Bir nedenden dolayı bunun havalı göründüğünü düşünüyorum ki bu talihsiz çünkü stilleri doğru yapmak oldukça sinir bozucu.
+
+  Bu liste öğelerinde genellikle iki veya üç paragraf da var, bu yüzden zor kısım paragraflar, liste öğesi başlığı ve ayrı liste öğeleri arasındaki boşluğun hepsinin mantıklı olmasını sağlamak. Dürüst olmak gerekirse oldukça zor, bu şekilde yazmamanız gerektiği konusunda güçlü bir argüman yapabilirsiniz.
+
+- **Bu bir liste olduğu için en az iki öğeye ihtiyacım var.**
+
+  Ne yaptığımı zaten önceki liste öğesinde açıkladım, ancak bir liste sadece bir öğeye sahipse liste olmaz ve bunun gerçekçi görünmesini gerçekten istiyoruz. Bu yüzden bu ikinci liste öğesini ekledim, böylece stilleri yazarken gerçekten bakacak bir şeyim var.
+
+- **Üçüncü bir öğe eklemek de kötü bir fikir değil.**
+
+  Sadece iki öğe kullanmanın muhtemelen yeterli olacağını düşünüyorum ama üç kesinlikle daha kötü değil ve rastgele yazılacak şeyler uydurmakta hiç sorun yaşamıyormuşum gibi göründüğü için, bunu da dahil edebilirim.
+
+Bu tür bir listeden sonra genellikle bir kapanış ifadesi veya paragrafı olur, çünkü doğrudan bir başlığa atlamak biraz garip görünüyor.
+
+## Kod varsayılan olarak iyi görünmeli.
+
+Çoğu insanın kod bloklarını stillendirmek istiyorlarsa [highlight.js](https://highlightjs.org/) veya [Prism](https://prismjs.com/) veya benzeri bir şey kullanacağını düşünüyorum ama syntax highlighting olmadan bile kutudan çıktığı gibi _iyi_ görünmelerini sağlamak zarar vermez.
+
+Yazıldığı sırada varsayılan bir `tailwind.config.js` dosyasının nasıl göründüğü:
+
+```js
+module.exports = {
+  purge: [],
+  theme: {
+    extend: {}
+  },
+  variants: {},
+  plugins: []
+};
+```
+
+Umarım bu size yeterince iyi görünür.
+
+### İç içe listeler ne olacak?
+
+İç içe listeler temelde her zaman kötü görünür, bu yüzden Medium gibi editörler bunu yapmanıza bile izin vermez, ancak bazılarınız bunu yapacak gibi göründüğü için en azından çalışmasını sağlama yükünü taşımak zorundayız.
+
+1.  **İç içe listeler nadiren iyi bir fikirdir.**
+    - Gerçekten "organize" olduğunuzu falan hissedebilirsiniz ama sadece ekranda okuması zor çirkin bir şekil oluşturuyorsunuz.
+    - UI'larda iç içe navigasyon da kötü bir fikirdir, her şeyi mümkün olduğunca düz tutun.
+    - Kaynak kodunuzda tonlarca klasörü iç içe geçirmek de yardımcı olmaz.
+2.  **Daha fazla öğeye sahip olmamız gerektiği için, işte bir tane daha.**
+    - İki seviyeden daha derin stillendirmeyle uğraşacağımızdan emin değilim.
+    - İki zaten çok fazla, üç kesinlikle kötü bir fikir olacak.
+    - Dört seviye derinliğinde iç içe geçirirseniz hapse girmelisiniz.
+3.  **İki öğe gerçekten bir liste değil, üç iyi ama.**
+    - Tekrar lütfen insanların gerçekten içeriğinizi okumasını istiyorsanız listeleri iç içe geçirmeyin.
+    - Kimse buna bakmak istemiyor.
+    - Bunu stillendirmekle uğraşmak zorunda olmamızdan bile rahatsızım.
+
+Markdown'daki listeler hakkında en sinir bozucu şey, liste öğesinde birden fazla paragraf olmadığı sürece `<li>` elementlerine bir child `<p>` etiketi verilmemesidir. Bu, o sinir bozucu durumu da stillendirmeyle ilgilenmem gerektiği anlamına geliyor.
+
+- **Örneğin, işte başka bir iç içe liste.**
+
+  Ama bu sefer ikinci bir paragrafla.
+  - Bu liste öğelerinin `<p>` etiketleri olmayacak
+  - Çünkü her biri sadece bir satır
+
+- **Ama bu ikinci üst seviye liste öğesinde olacaklar.**
+
+  Bu paragraftaki boşluk nedeniyle özellikle sinir bozucu.
+  - Burada görebileceğiniz gibi, ikinci bir satır eklediğim için bu liste öğesi artık bir `<p>` etiketine sahip.
+
+    Bu arada bahsettiğim ikinci satır bu.
+
+  - Son olarak işte daha çok liste gibi görünmesi için başka bir liste öğesi.
+
+- İç içe liste olmayan bir kapanış liste öğesi, çünkü neden olmasın?
+
+Ve son olarak bu bölümü kapatmak için bir cümle.
+
+## Stilendirmemiz gereken başka elementler var
+
+Neredeyse linklerden bahsetmeyi unutuyordum, [Tailwind CSS web sitesine bu link](https://tailwindcss.com) gibi. Neredeyse mavi yapıyorduk ama bu çok dün, bu yüzden koyu griye gittik, daha keskin hissediyor.
+
+Tablo stillerini bile dahil ettik, bir bakın:
+
+| Wrestler                | Origin       | Finisher           |
+| ----------------------- | ------------ | ------------------ |
+| Bret "The Hitman" Hart  | Calgary, AB  | Sharpshooter       |
+| Stone Cold Steve Austin | Austin, TX   | Stone Cold Stunner |
+| Randy Savage            | Sarasota, FL | Elbow Drop         |
+| Vader                   | Boulder, CO  | Vader Bomb         |
+| Razor Ramon             | Chuluota, FL | Razor's Edge       |
+
+Inline kodun da iyi göründüğünden emin olmamız gerekiyor, örneğin `<span>` elementleri hakkında konuşmak veya `@tailwindcss/typography` hakkındaki iyi haberi söylemek isteseydim.
+
+### Bazen başlıklarda bile `code` kullanıyorum
+
+Muhtemelen kötü bir fikir olsa da ve tarihsel olarak bunu iyi görünmesini sağlamakta zorlandım. Bu _"kod bloklarını backtick'lerle sarmalama"_ hilesi gerçekten de oldukça iyi çalışıyor.
+
+Geçmişte yaptığım başka bir şey de bir linkin içine `code` etiketi koymak, örneğin size [`tailwindcss/docs`](https://github.com/tailwindcss/docs) repository'sinden bahsetmek isteseydim. Backtick'lerin altında bir alt çizgi olmasını sevmiyorum ama bundan kaçınmak için gereken çılgınlığa kesinlikle değmez.
+
+#### Henüz bir `h4` kullanmadık
+
+Ama şimdi kullandık. Lütfen içeriğinizde `h5` veya `h6` kullanmayın, Medium'un sadece iki başlık seviyesini desteklemesinin bir nedeni var, hayvanlar. Dürüst olmak gerekirse, bir `h5` veya `h6` kullanırsanız size bağırmak için bir `before` pseudo-element kullanmayı düşündüm.
+
+Onları kutudan çıktığı gibi hiç stillendirmiyoruz çünkü `h4` elementleri zaten o kadar küçük ki body metniyle aynı boyuttalar. Bir `h5` ile ne yapmamız gerekiyor, body metninden _daha küçük_ mi yapalım? Hayır teşekkürler.
+
+### Yine de üst üste başlıklar hakkında düşünmemiz gerekiyor.
+
+#### `h4` elementleriyle de bunu berbat etmediğimizden emin olalım.
+
+Şükürler olsun, umarım bu metnin üstündeki başlıkları stillendirdik ve oldukça iyi görünüyorlar.
+
+Buraya bir kapanış paragrafı ekleyelim, böylece şeyler makul boyutta bir metin bloğuyla biter. Şeylerin neden bu şekilde bitmesini istediğimi açıklayamam ama bunun nedeni, belgenin sonuna çok yakın bir başlık varsa şeylerin garip veya dengesiz görüneceğini düşünmem olmalı.
+
+Burada yazdıklarım muhtemelen yeterince uzun, ama bu son cümleyi eklemek zarar vermez.
+
+## GitHub Flavored Markdown
+
+`remark-gfm` kullanarak GitHub Flavored Markdown desteği de ekledim.
+
+`remark-gfm` ile markdown'ımızda birkaç ekstra özellik elde ediyoruz. Örnek: autolink literal'ları.
+
+www.example.com veya https://example.com gibi bir link otomatik olarak bir `a` etiketine dönüştürülecektir.
+
+Bu email linkleri için de çalışır: contact@example.com.
