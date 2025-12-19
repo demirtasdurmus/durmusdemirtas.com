@@ -13,7 +13,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
 import type { PromiseParams } from '@/types';
 
-type BlogPostProps = { params: PromiseParams<{ locale: string; slug: string[] }> };
+type BlogPostProps = PromiseParams<{ locale: string; slug: string[] }>;
 
 function getPostBySlug(slug: string[], locale: string) {
   const slugPath = slug.join('/');

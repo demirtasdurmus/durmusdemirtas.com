@@ -1,13 +1,13 @@
 import { posts } from '#site/content';
 
+import type { PromiseParams } from '@/types';
 import { HeroSection } from '@/components/home/hero-section';
 import { HighlightsSection } from '@/components/home/highlights-section';
 import { FeaturedProjects } from '@/components/home/featured-projects';
 import { LatestPosts } from '@/components/home/latest-posts';
 import { HomeCTA } from '@/components/home/home-cta';
-import { PromiseParams } from '@/types';
 
-type HomePageProps = { params: PromiseParams<{ locale: string }> };
+type HomePageProps = PromiseParams<{ locale: string }>;
 
 export default async function HomePage(props: HomePageProps) {
   const { locale } = await props.params;

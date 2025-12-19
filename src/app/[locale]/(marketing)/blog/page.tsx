@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: 'Blog'
 };
 
-type BlogPageProps = { params: PromiseParams<{ locale: string }> };
+type BlogPageProps = PromiseParams<{ locale: string }>;
 
 export default async function BlogPage(props: BlogPageProps) {
   const t = await getTranslations();

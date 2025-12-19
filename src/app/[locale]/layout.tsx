@@ -9,7 +9,7 @@ import '../../styles/globals.css';
 import { siteConfig } from '@/config/site';
 import { Providers } from '@/components/providers';
 import { cn } from '@/lib/utils';
-import { PromiseParams } from '@/types';
+import type { PromiseParams } from '@/types';
 import { routing } from '@/i18n/routing';
 
 const geistSans = Geist({
@@ -38,7 +38,7 @@ export const viewport: Viewport = {
   ]
 };
 
-type RootLayoutProps = PropsWithChildren<{ params: PromiseParams<{ locale: string }> }>;
+type RootLayoutProps = PropsWithChildren<PromiseParams<{ locale: string }>>;
 
 export default async function RootLayout({ children, params }: Readonly<RootLayoutProps>) {
   const { locale } = await params;
