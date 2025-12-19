@@ -4,6 +4,7 @@ import { authors as allAuthors, posts as allPosts } from '#site/content';
 import '@/styles/mdx.css';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 
 import { Link } from '@/i18n/navigation';
 import { cn, formatDate } from '@/lib/utils';
@@ -75,6 +76,7 @@ export function generateStaticParams() {
 
 export default async function PostPage(props: BlogPostProps) {
   const { slug, locale } = await props.params;
+  const t = await getTranslations();
   const post = getPostBySlug(slug, locale);
 
   if (!post) {
@@ -95,12 +97,12 @@ export default async function PostPage(props: BlogPostProps) {
         )}
       >
         <Icons.chevronLeft className="mr-2 size-4" />
-        See all posts
+        {t('Shared.seeAllPosts')}
       </Link>
       <div>
         {post.date && (
           <time dateTime={post.date} className="text-muted-foreground block text-sm">
-            Published on {formatDate(post.date)}
+            {t('Shared.publishedOn', { date: formatDate(post.date, locale) })}
           </time>
         )}
         <h1 className="font-heading mt-2 inline-block text-4xl leading-tight lg:text-5xl">
@@ -113,6 +115,7 @@ export default async function PostPage(props: BlogPostProps) {
                 <a
                   key={author.slug}
                   href={`https://twitter.com/${author.twitter}`}
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-2 text-sm"
                 >
@@ -148,7 +151,7 @@ export default async function PostPage(props: BlogPostProps) {
       <div className="flex justify-center py-6 lg:py-10">
         <Link href="/blog" className={cn(buttonVariants({ variant: 'ghost' }))}>
           <Icons.chevronLeft className="mr-2 size-4" />
-          See all posts
+          {t('Shared.seeAllPosts')}
         </Link>
       </div>
     </article>

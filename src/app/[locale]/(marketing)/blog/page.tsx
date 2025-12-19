@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { compareDesc } from 'date-fns';
+import { getTranslations } from 'next-intl/server';
 
 import { Link } from '@/i18n/navigation';
 import { posts as allPosts } from '#site/content';
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
 type BlogPageProps = { params: PromiseParams<{ locale: string }> };
 
 export default async function BlogPage(props: BlogPageProps) {
+  const t = await getTranslations();
   const { locale } = await props.params;
 
   const posts = allPosts
@@ -26,11 +28,10 @@ export default async function BlogPage(props: BlogPageProps) {
     <div className="container mx-auto max-w-4xl px-6 py-6 lg:py-10">
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
         <div className="flex-1 space-y-4">
-          <h1 className="font-heading inline-block text-4xl tracking-tight lg:text-5xl">Blog</h1>
-          <p className="text-muted-foreground text-xl">
-            A collection of posts about software development, tutorials, and things I&apos;ve
-            learned along the way.
-          </p>
+          <h1 className="font-heading inline-block text-4xl tracking-tight lg:text-5xl">
+            {t('BlogPage.title')}
+          </h1>
+          <p className="text-muted-foreground text-xl">{t('BlogPage.description')}</p>
         </div>
       </div>
       <hr className="my-8" />
@@ -52,7 +53,7 @@ export default async function BlogPage(props: BlogPageProps) {
               <h2 className="text-2xl font-extrabold">{post.title}</h2>
               {post.description && <p className="text-muted-foreground">{post.description}</p>}
               {post.date && (
-                <p className="text-muted-foreground text-sm">{formatDate(post.date)}</p>
+                <p className="text-muted-foreground text-sm">{formatDate(post.date, locale)}</p>
               )}
               <Link
                 href={{
@@ -61,13 +62,13 @@ export default async function BlogPage(props: BlogPageProps) {
                 }}
                 className="absolute inset-0"
               >
-                <span className="sr-only">View Article</span>
+                <span className="sr-only">{t('Shared.viewArticle')}</span>
               </Link>
             </article>
           ))}
         </div>
       ) : (
-        <p>No posts published.</p>
+        <p>{t('BlogPage.noPostsPublished')}</p>
       )}
     </div>
   );

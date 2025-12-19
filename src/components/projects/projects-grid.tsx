@@ -4,6 +4,7 @@ import * as React from 'react';
 import Image from 'next/image';
 import { ExternalLink, Star } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
@@ -25,6 +26,8 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
   refProp,
   showStars
 }) => {
+  const t = useTranslations();
+
   return (
     <motion.div
       ref={refProp}
@@ -105,7 +108,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                       rel="noopener noreferrer"
                       className={cn(buttonVariants({ variant: 'outline' }), 'w-full gap-2')}
                     >
-                      View Project
+                      {t('Shared.viewProject')}
                       <ExternalLink className="h-4 w-4" />
                     </a>
                   </motion.div>

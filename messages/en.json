@@ -43,58 +43,7 @@
     "featuredProjectsSection": {
       "badge": "Portfolio",
       "title": "Featured Projects",
-      "description": "A selection of projects I've built, from full-stack applications to open-source tools.",
-      "projects": {
-        "emparazon": {
-          "title": "Emparazon",
-          "description": "Amazon keyword ranking tool that helps sellers discover high-converting keywords and improve sales performance."
-        },
-        "udao": {
-          "title": "Udao",
-          "description": "Udao platform website providing information about the decentralized education platform and token."
-        },
-        "udaoPlatform": {
-          "title": "Udao Platform",
-          "description": "Decentralized education and learning platform leveraging blockchain for transparent, verifiable credentials."
-        },
-        "rexven": {
-          "title": "Rexven",
-          "description": "Global e-commerce fulfillment platform enabling inventory-free selling through unified sourcing and shipping."
-        },
-        "nexpresst": {
-          "title": "Nexpresst",
-          "description": "A lightweight package for building Express-like APIs in Next.js App Router."
-        },
-        "localBranchCleanup": {
-          "title": "Local Branch Cleanup",
-          "description": "CLI to delete unused local git branches interactively."
-        },
-        "todoQuill": {
-          "title": "Todo Quill",
-          "description": "A simple and elegant task manager built with React Native and Expo."
-        }
-      },
-      "tags": {
-        "saas": "SaaS",
-        "ecommerce": "E-commerce",
-        "analytics": "Analytics",
-        "web3": "Web3",
-        "blockchain": "Blockchain",
-        "landingPage": "Landing Page",
-        "dApp": "dApp",
-        "reactNative": "React Native",
-        "expo": "Expo",
-        "typescript": "TypeScript",
-        "logistics": "Logistics",
-        "middleware": "Middleware",
-        "api": "API",
-        "cli": "CLI",
-        "git": "Git",
-        "nodejs": "Node.js",
-        "react": "React",
-        "fullStack": "Full-Stack",
-        "nextjs": "Next.js"
-      }
+      "description": "A selection of projects I've built, from full-stack applications to open-source tools."
     },
     "latestPostsSection": {
       "badge": "Blog",
@@ -115,6 +64,68 @@
       "description3": "My technical experience spans modern web technologies including HTML, CSS, JavaScript/TypeScript, React, and Node.js. I've built and maintained applications using RESTful APIs and worked with both relational and non-relational databases such as PostgreSQL, MongoDB, and Redis, including caching strategies. Outside of work, I'm interested in science, technology, space research, and I enjoy reading, watercolor painting, camping, and exploring new places."
     }
   },
+  "BlogPage": {
+    "title": "Blog",
+    "description": "A collection of posts about software development, tutorials, and things I've learned along the way.",
+    "noPostsPublished": "No posts published."
+  },
+  "ProjectsPage": {
+    "title": "Projects",
+    "description": "A collection of professional work and open-source projects.",
+    "clientProjects": "Client Projects",
+    "openSourceProjects": "Open Source",
+    "projects": {
+      "emparazon": {
+        "title": "Emparazon",
+        "description": "Amazon keyword ranking tool that helps sellers discover high-converting keywords and improve sales performance."
+      },
+      "udao": {
+        "title": "Udao",
+        "description": "Udao platform website providing information about the decentralized education platform and token."
+      },
+      "udaoPlatform": {
+        "title": "Udao Platform",
+        "description": "Decentralized education and learning platform leveraging blockchain for transparent, verifiable credentials."
+      },
+      "rexven": {
+        "title": "Rexven",
+        "description": "Global e-commerce fulfillment platform enabling inventory-free selling through unified sourcing and shipping."
+      },
+      "nexpresst": {
+        "title": "Nexpresst",
+        "description": "A lightweight package for building Express-like APIs in Next.js App Router."
+      },
+      "localBranchCleanup": {
+        "title": "Local Branch Cleanup",
+        "description": "CLI to delete unused local git branches interactively."
+      },
+      "todoQuill": {
+        "title": "Todo Quill",
+        "description": "A simple and elegant task manager built with React Native and Expo."
+      }
+    },
+    "tags": {
+      "saas": "SaaS",
+      "ecommerce": "E-commerce",
+      "analytics": "Analytics",
+      "web3": "Web3",
+      "blockchain": "Blockchain",
+      "landingPage": "Landing Page",
+      "dApp": "dApp",
+      "reactNative": "React Native",
+      "expo": "Expo",
+      "typescript": "TypeScript",
+      "logistics": "Logistics",
+      "middleware": "Middleware",
+      "api": "API",
+      "cli": "CLI",
+      "git": "Git",
+      "nodejs": "Node.js",
+      "react": "React",
+      "fullStack": "Full-Stack",
+      "nextjs": "Next.js"
+    }
+  },
   "NotFoundPage": {
     "title": "404 — Not Found",
     "subtitle": "Lost in the stack?",
@@ -122,11 +133,15 @@
   },
   "Shared": {
     "goHome": "Go Home",
+    "viewProject": "View Project",
     "viewProjects": "View Projects",
     "viewAllProjects": "View All Projects",
     "readBlog": "Read Blog",
     "viewAllPosts": "View All Posts",
     "getInTouch": "Get in Touch",
-    "learnMoreAboutMe": "Learn More About Me"
+    "learnMoreAboutMe": "Learn More About Me",
+    "viewArticle": "View Article",
+    "seeAllPosts": "See All Posts",
+    "publishedOn": "Published on {date}"
   }
 }
