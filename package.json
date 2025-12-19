@@ -6,9 +6,11 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
+    "i18n:check": "i18n-check --source en --locales messages",
     "lint": "eslint",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "typecheck": "tsc --noEmit",
     "prepare": "husky"
   },
   "dependencies": {
@@ -23,6 +25,7 @@
     "lucide-react": "^0.561.0",
     "motion": "^12.23.26",
     "next": "15.5.9",
+    "next-intl": "^4.6.1",
     "next-themes": "^0.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -33,7 +36,9 @@
     "velite": "^0.3.1"
   },
   "devDependencies": {
+    "@eslint/compat": "^2.0.0",
     "@eslint/eslintrc": "^3",
+    "@lingual/i18n-check": "^0.8.16",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

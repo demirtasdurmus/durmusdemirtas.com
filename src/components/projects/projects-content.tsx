@@ -1,16 +1,21 @@
 'use client';
 
-import * as React from 'react';
+import React from 'react';
 import { motion, useInView } from 'motion/react';
+import { useTranslations } from 'next-intl';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { clientProjects, openSourceProjects } from '@/config/projects';
+import { getTranslatedClientProjects, getTranslatedOpenSourceProjects } from '@/config/projects';
 import { ProjectGrid } from './projects-grid';
 import { containerVariants, itemVariants } from '@/components/motion';
 
 export const ProjectsContent = () => {
   const ref = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const t = useTranslations();
+
+  const translatedOpenSourceProjects = React.useMemo(() => getTranslatedOpenSourceProjects(t), [t]);
+  const translatedClientProjects = React.useMemo(() => getTranslatedClientProjects(t), [t]);
 
   return (
     <div className="container mx-auto max-w-6xl px-6 py-6 lg:py-10">
@@ -22,11 +27,9 @@ export const ProjectsContent = () => {
       >
         <motion.div className="flex-1 space-y-4" variants={itemVariants}>
           <h1 className="font-heading inline-block text-4xl tracking-tight lg:text-5xl">
-            Projects
+            {t('ProjectsPage.title')}
           </h1>
-          <p className="text-muted-foreground text-xl">
-            A collection of professional work and open-source projects.
-          </p>
+          <p className="text-muted-foreground text-xl">{t('ProjectsPage.description')}</p>
         </motion.div>
       </motion.div>
 
@@ -34,13 +37,13 @@ export const ProjectsContent = () => {
 
       <Tabs defaultValue="work" className="w-full">
         <TabsList>
-          <TabsTrigger value="work">Client Projects</TabsTrigger>
-          <TabsTrigger value="oss">Open Source</TabsTrigger>
+          <TabsTrigger value="work">{t('ProjectsPage.clientProjects')}</TabsTrigger>
+          <TabsTrigger value="oss">{t('ProjectsPage.openSourceProjects')}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="work" className="pt-4">
           <ProjectGrid
-            items={clientProjects}
+            items={translatedClientProjects}
             isInView={isInView}
             refProp={ref as React.RefObject<HTMLDivElement>}
           />
@@ -48,7 +51,7 @@ export const ProjectsContent = () => {
 
         <TabsContent value="oss" className="pt-4">
           <ProjectGrid
-            items={openSourceProjects}
+            items={translatedOpenSourceProjects}
             isInView={isInView}
             refProp={ref as React.RefObject<HTMLDivElement>}
             showStars

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { containerVariants, itemVariants, avatarVariants } from '@/components/motion';
@@ -8,6 +9,8 @@ import { siteConfig } from '@/config/site';
 import { getNameInitials } from '@/lib/utils';
 
 export const AboutContent: React.FC = () => {
+  const t = useTranslations();
+
   return (
     <motion.div
       className="container mx-auto max-w-6xl px-6 py-6 lg:py-10"
@@ -21,7 +24,7 @@ export const AboutContent: React.FC = () => {
       >
         <div className="flex-1 space-x-4">
           <h1 className="font-heading inline-block text-4xl tracking-tight lg:text-5xl">
-            About Me
+            {t('AboutPage.title')}
           </h1>
         </div>
       </motion.div>
@@ -52,7 +55,7 @@ export const AboutContent: React.FC = () => {
             className="text-muted-foreground text-center wrap-break-word"
             variants={itemVariants}
           >
-            Software Developer
+            {t('AboutPage.role')}
           </motion.p>
         </motion.div>
 
@@ -63,10 +66,7 @@ export const AboutContent: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ type: 'spring', stiffness: 100, damping: 12, delay: 0.3 }}
           >
-            I&apos;m a full-stack software developer with a strong product mindset and a deep
-            curiosity for how systems work end to end. I&apos;m known for my ability to quickly
-            identify, research, and master the knowledge required to solve complex problems, and for
-            translating that knowledge into clean, reliable, and maintainable solutions.
+            {t('AboutPage.body.description1')}
           </motion.p>
           <motion.p
             className="text-muted-foreground mt-6 text-lg leading-relaxed"
@@ -74,11 +74,7 @@ export const AboutContent: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ type: 'spring', stiffness: 100, damping: 12, delay: 0.45 }}
           >
-            I bring a high level of attention to detail, strong ownership, and a self-driven work
-            ethic, allowing me to work effectively both independently and within cross-functional
-            teams. I&apos;m a dependable team member and a confident collaborator, comfortable
-            taking initiative and communicating clearly. I have full professional proficiency in
-            both spoken and written English.
+            {t('AboutPage.body.description2')}
           </motion.p>
           <motion.p
             className="text-muted-foreground mt-6 text-lg leading-relaxed"
@@ -86,12 +82,7 @@ export const AboutContent: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ type: 'spring', stiffness: 100, damping: 12, delay: 0.6 }}
           >
-            My technical experience spans modern web technologies including HTML, CSS,
-            JavaScript/TypeScript, React, and Node.js. I&apos;ve built and maintained applications
-            using RESTful APIs and worked with both relational and non-relational databases such as
-            PostgreSQL, MongoDB, and Redis, including caching strategies. Outside of work, I&apos;m
-            interested in science, technology, space research, and I enjoy reading, watercolor
-            painting, camping, and exploring new places.
+            {t('AboutPage.body.description3')}
           </motion.p>
         </motion.div>
       </div>

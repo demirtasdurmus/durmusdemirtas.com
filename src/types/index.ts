@@ -20,4 +20,4 @@ export type Project = {
   category: ProjectCategory;
 };
 
-export type PromiseParams<T> = Promise<{ [K in keyof T]: T[K] }>;
+export type PromiseParams<T> = { params: Promise<{ [K in keyof T]: T[K] }> };

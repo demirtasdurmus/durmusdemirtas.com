@@ -3,9 +3,9 @@ import Image from 'next/image';
 import * as runtime from 'react/jsx-runtime';
 
 import { cn } from '@/lib/utils';
-import { Callout } from '@/components/callout';
-import { MdxCard } from '@/components/mdx-card';
-import { Pre } from '@/components/pre';
+import { Callout } from '@/components/mdx/callout';
+import { MdxCard } from '@/components/mdx/mdx-card';
+import { Pre } from '@/components/mdx/pre';
 
 const useMDXComponent = (code: string) => {
   const fn = new Function(code);

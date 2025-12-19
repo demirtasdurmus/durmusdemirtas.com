@@ -1,14 +1,17 @@
 'use client';
 
-import Link from 'next/link';
 import { Mail, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
+import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { siteConfig } from '@/config/site';
+import { Link } from '@/i18n/navigation';
 
 export const HomeCTA: React.FC = () => {
+  const t = useTranslations();
+
   return (
     <section className="py-20 lg:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -67,7 +70,7 @@ export const HomeCTA: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
               >
-                Let&apos;s Work Together
+                {t('HomePage.homeCTA.title')}
               </motion.h2>
 
               <motion.p
@@ -77,8 +80,7 @@ export const HomeCTA: React.FC = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                Have a project in mind or just want to chat? I&apos;m always open to discussing new
-                opportunities, creative ideas, or ways to help bring your vision to life.
+                {t('HomePage.homeCTA.description')}
               </motion.p>
 
               <motion.div
@@ -89,20 +91,20 @@ export const HomeCTA: React.FC = () => {
                 transition={{ delay: 0.3 }}
               >
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Link
+                  <a
                     href={`mailto:${siteConfig.email}`}
                     className={cn(buttonVariants({ size: 'lg' }), 'group gap-2')}
                   >
-                    Get in Touch
+                    {t('Shared.getInTouch')}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
+                  </a>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
                     href="/about"
                     className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
                   >
-                    Learn More About Me
+                    {t('Shared.learnMoreAboutMe')}
                   </Link>
                 </motion.div>
               </motion.div>

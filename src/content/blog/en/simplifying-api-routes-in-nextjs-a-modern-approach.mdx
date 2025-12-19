@@ -55,9 +55,7 @@ import { ApiRouter, TNextContext, jsonParser, expressMiddlewareAdapter } from 'n
 import helmet from 'helmet';
 
 export const apiRouter = (req: NextRequest, ctx: TNextContext) =>
-  new ApiRouter(req, ctx)
-    .use(expressMiddlewareAdapter(helmet()))
-    .use(jsonParser)
+  new ApiRouter(req, ctx).use(expressMiddlewareAdapter(helmet())).use(jsonParser);
 ```
 
 ### Setting Up an Error Handler
@@ -74,7 +72,7 @@ type TErrorResponse = { name: string; message: string };
 const errorHandler: IMiddlewareHandler<unknown, unknown, unknown, TErrorResponse> = (
   req,
   res,
-  next,
+  next
 ) => {
   return next().catch((err: unknown) => {
     if (err instanceof Error) {
@@ -101,7 +99,7 @@ export const apiRouter = (req: NextRequest, ctx: TNextContext) =>
   new ApiRouter(req, ctx)
     .onError(errorHandler)
     .use(expressMiddlewareAdapter(helmet()))
-    .use(jsonParser)
+    .use(jsonParser);
 ```
 
 ### Handling 404 Routes: A Catch-All Setup
@@ -120,7 +118,7 @@ const notFoundHandler: IRouteHandler = async (req, res) => {
 
 export const { GET, POST, PUT, DELETE, PATCH, HEAD } = exportAllHttpMethods(
   apiRouter,
-  notFoundHandler,
+  notFoundHandler
 );
 ```
 

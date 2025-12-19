@@ -32,7 +32,7 @@ export const ModeToggle: React.FC = () => {
         onClick={handleClick}
         aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
         className={cn(
-          'from-background via-card to-muted relative h-11 w-11 rounded-full border bg-linear-to-br p-2 shadow-inner shadow-black/5',
+          'from-background via-card to-muted relative h-10 w-10 rounded-full p-2 shadow-inner shadow-black/5',
           'focus-visible:ring-ring/60 focus-visible:ring-offset-background focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none',
           'transition-all duration-300 hover:shadow-md'
         )}

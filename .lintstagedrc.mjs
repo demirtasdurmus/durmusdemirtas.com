@@ -4,8 +4,8 @@
  */
 const lintStagedConfig = {
   '*.{ts,tsx}': 'eslint',
-  '*.{ts,tsx}': 'tsc-files --noEmit',
-  '*': 'prettier --write --ignore-path .gitignore'
+  '*.{ts,tsx}': 'bash -c "pnpm typecheck"',
+  '*': 'prettier --write'
 };
 
 export default lintStagedConfig;

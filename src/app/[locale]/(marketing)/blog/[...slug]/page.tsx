@@ -4,24 +4,25 @@ import { authors as allAuthors, posts as allPosts } from '#site/content';
 import '@/styles/mdx.css';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 
+import { Link } from '@/i18n/navigation';
 import { cn, formatDate } from '@/lib/utils';
 import { Mdx } from '@/components/mdx';
 import { buttonVariants } from '@/components/ui/button';
 import { Icons } from '@/components/icons';
 import type { PromiseParams } from '@/types';
 
-type BlogPostProps = { params: PromiseParams<{ slug: string[] }> };
+type BlogPostProps = PromiseParams<{ locale: string; slug: string[] }>;
 
-function getPostBySlug(slug: string[]) {
+function getPostBySlug(slug: string[], locale: string) {
   const slugPath = slug.join('/');
-  return allPosts.find((post) => post.slugAsParams === slugPath) ?? null;
+  return allPosts.find((post) => post.slugAsParams === slugPath && post.locale === locale) ?? null;
 }
 
 export async function generateMetadata(props: BlogPostProps): Promise<Metadata> {
-  const { slug } = await props.params;
-  const post = getPostBySlug(slug);
+  const { slug, locale } = await props.params;
+  const post = getPostBySlug(slug, locale);
 
   if (!post) {
     return {};
@@ -68,13 +69,15 @@ export async function generateMetadata(props: BlogPostProps): Promise<Metadata> 
 
 export function generateStaticParams() {
   return allPosts.map((post) => ({
+    locale: post.locale,
     slug: post.slugAsParams.split('/')
   }));
 }
 
 export default async function PostPage(props: BlogPostProps) {
-  const { slug } = await props.params;
-  const post = getPostBySlug(slug);
+  const { slug, locale } = await props.params;
+  const t = await getTranslations();
+  const post = getPostBySlug(slug, locale);
 
   if (!post) {
     notFound();
@@ -90,16 +93,16 @@ export default async function PostPage(props: BlogPostProps) {
         href="/blog"
         className={cn(
           buttonVariants({ variant: 'ghost' }),
-          'absolute top-14 left-[-200px] hidden xl:inline-flex'
+          'absolute top-14 -left-50 hidden xl:inline-flex'
         )}
       >
         <Icons.chevronLeft className="mr-2 size-4" />
-        See all posts
+        {t('Shared.seeAllPosts')}
       </Link>
       <div>
         {post.date && (
           <time dateTime={post.date} className="text-muted-foreground block text-sm">
-            Published on {formatDate(post.date)}
+            {t('Shared.publishedOn', { date: formatDate(post.date, locale) })}
           </time>
         )}
         <h1 className="font-heading mt-2 inline-block text-4xl leading-tight lg:text-5xl">
@@ -109,9 +112,11 @@ export default async function PostPage(props: BlogPostProps) {
           <div className="mt-4 flex space-x-4">
             {authors.map((author) =>
               author ? (
-                <Link
+                <a
                   key={author.slug}
                   href={`https://twitter.com/${author.twitter}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center space-x-2 text-sm"
                 >
                   <Image
@@ -125,7 +130,7 @@ export default async function PostPage(props: BlogPostProps) {
                     <p className="font-medium">{author.title}</p>
                     <p className="text-muted-foreground text-[12px]">@{author.twitter}</p>
                   </div>
-                </Link>
+                </a>
               ) : null
             )}
           </div>
@@ -146,7 +151,7 @@ export default async function PostPage(props: BlogPostProps) {
       <div className="flex justify-center py-6 lg:py-10">
         <Link href="/blog" className={cn(buttonVariants({ variant: 'ghost' }))}>
           <Icons.chevronLeft className="mr-2 size-4" />
-          See all posts
+          {t('Shared.seeAllPosts')}
         </Link>
       </div>
     </article>

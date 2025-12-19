@@ -1,0 +1,147 @@
+{
+  "Navigation": {
+    "about": "Hakkımda",
+    "blog": "Blog",
+    "projects": "Projeler"
+  },
+  "HomePage": {
+    "heroSection": {
+      "availableForNewProjects": "Yeni projelere açık",
+      "title": "Merhaba, ben <name>{name}</name>",
+      "role": "Full-Stack Yazılım Mühendisi",
+      "description": "Modern teknolojileri kullanarak kaliteli ve ölçeklenebilir web ve mobil uygulamalar geliştiriyorum. Temiz koda ve kullanıcı deneyimine odaklanarak karmaşık problemleri basit ve etkili bir şekilde çözmeyi seviyorum.",
+      "location": "Ankara, Türkiye",
+      "expertise": {
+        "yearsExp": {
+          "label": "Deneyim",
+          "value": "5+"
+        },
+        "projects": {
+          "label": "Projeler",
+          "value": "50+"
+        }
+      }
+    },
+    "highlightsSection": {
+      "fullStack": {
+        "title": "Full-Stack",
+        "description": "React, Next.js, Node.js"
+      },
+      "typeScriptFirst": {
+        "title": "TypeScript Öncelikli",
+        "description": "Type-safe ve sürdürülebilir kod"
+      },
+      "databases": {
+        "title": "Veri tabanları",
+        "description": "PostgreSQL, MongoDB, Redis"
+      },
+      "qualityFocused": {
+        "title": "Kalite Odaklı",
+        "description": "Temiz kod, güçlü kullanıcı deneyimi"
+      }
+    },
+    "featuredProjectsSection": {
+      "badge": "Portföy",
+      "title": "Öne Çıkan Projeler",
+      "description": "Full-Stack uygulamalardan açık kaynak yazılım araçlarına kadar uzanan projelerimden bazıları"
+    },
+    "latestPostsSection": {
+      "badge": "Blog",
+      "title": "Son Blog Yazıları",
+      "description": "Yazılım geliştirme sürecinde öğrendiklerim hakkında yazılar ve diğer öğretici içerikler."
+    },
+    "homeCTA": {
+      "title": "Birlikte Çalışalım",
+      "description": "Aklında bir proje mi var ya da sadece bir şey mi danışmak istiyorsun? Yeni fırsatlar, yaratıcı fikirler veya vizyonunu hayata geçirmenin yolları hakkında konuşmaya her zaman açığım."
+    }
+  },
+  "AboutPage": {
+    "title": "Hakkımda",
+    "role": "Full-Stack Yazılım Mühendisi",
+    "body": {
+      "description1": "Ürün odaklı bir bakış açısına sahip, sistemlerin uçtan uca nasıl çalıştığını merak eden bir yazılımcıyım. Karmaşık problemlerin üstesinden gelmek için gereken bilgiyi hızlıca araştırıp öğrenebilir, bunu basit ve sürdürülebilir çözümlere dönüştürebilirim.",
+      "description2": "Detaylara verdiğim önem, güçlü sahiplenme duygusu ve kendi kendini motive edebilen çalışma tarzım sayesinde hem bağımsız hem de ekip içinde verimli şekilde çalışabilirim. Gerektiğinde inisiyatif alabilir birlikte çalıştığım insanlarla güçlü iletişim kurabilirim. İngilizce'yi profesyonel hayatımda etkili bir şekilde kullanabilirim.",
+      "description3": "Teknik deneyimim HTML, CSS, JavaScript/TypeScript, React, Node.js ve Docker gibi modern teknolojileri kapsıyor. RESTful API’ler ile uygulamalar geliştirdim; PostgreSQL, MongoDB ve Redis gibi ilişkisel ve ilişkisel olmayan veri tabanlarıyla çalıştım. Devops ve CI/CD süreçlerinde aktif olarak rol aldım. İş dışında ise bilim, teknoloji ve uzay araştırmalarına ilgi duyuyor; okumayı, sulu boya yapmayı, kamp yapmayı ve yeni yerler keşfetmeyi seviyorum."
+    }
+  },
+  "BlogPage": {
+    "title": "Blog",
+    "description": "Yazılım geliştirme ve bu süreçte öğrendiklerim hakkında yazılar ve öğretici içerikler.",
+    "noPostsPublished": "Henüz herhangi bir yazı yayınlanmamış."
+  },
+  "ProjectsPage": {
+    "title": "Projeler",
+    "description": "Profesyonel çalışmalar ve açık kaynak kodlu projeler",
+    "clientProjects": "Müşteri Projeleri",
+    "openSourceProjects": "Açık Kaynak",
+    "projects": {
+      "emparazon": {
+        "title": "Emparazon",
+        "description": "Amazon satıcılarının yüksek dönüşüm sağlayan anahtar kelimeleri keşfetmesine ve satış performansını artırmasına yardımcı olan bir e-ticaret analiz aracı."
+      },
+      "udao": {
+        "title": "Udao",
+        "description": "Decentralize(Merkeziyetsiz) eğitim platformu ve token yapısı hakkında bilgi sunan Udao platform web sitesi."
+      },
+      "udaoPlatform": {
+        "title": "Udao Platformu",
+        "description": "Blockchain teknolojisiyle şeffaf ve doğrulanabilir yetenekler kazanma fırsatı sunan decentralized eğitim ve öğrenme platformu."
+      },
+      "rexven": {
+        "title": "Rexven",
+        "description": "Tek bir çatı altında tedarik ve kargo süreçlerini birleştirerek stoksuz satış imkânı sunan küresel e-ticaret platformu."
+      },
+      "nexpresst": {
+        "title": "Nexpresst",
+        "description": "Next.js App Router ile Express.js benzeri API’ler oluşturmak için geliştirilmiş hafif ve kullanımı kolay bir kütüphane."
+      },
+      "localBranchCleanup": {
+        "title": "Local Branch Cleanup",
+        "description": "Kullanılmayan git branch’lerini interaktif bir şekilde silmeye yarayan bir CLI aracı."
+      },
+      "todoQuill": {
+        "title": "Todo Quill",
+        "description": "React Native ve Expo ile geliştirilmiş, sade ve şık bir görev yönetim uygulaması."
+      }
+    },
+    "tags": {
+      "saas": "SaaS",
+      "ecommerce": "E-ticaret",
+      "analytics": "Analitik",
+      "web3": "Web3",
+      "blockchain": "Blockchain",
+      "landingPage": "Landing Page",
+      "dApp": "dApp",
+      "reactNative": "React Native",
+      "expo": "Expo",
+      "typescript": "TypeScript",
+      "logistics": "Lojistik",
+      "middleware": "Middleware",
+      "api": "API",
+      "cli": "CLI",
+      "git": "Git",
+      "nodejs": "Node.js",
+      "react": "React",
+      "fullStack": "Full-Stack",
+      "nextjs": "Next.js"
+    }
+  },
+  "NotFoundPage": {
+    "title": "404 — Sayfa Bulunamadı",
+    "subtitle": "Kayıp mı oldunuz?",
+    "description": "Aradığınız sayfa bulunamadı. Ana sayfaya dönerek tekrar deneyiniz."
+  },
+  "Shared": {
+    "goHome": "Ana Sayfaya Dön",
+    "viewProject": "Projeyi Gör",
+    "viewProjects": "Projeleri Gör",
+    "viewAllProjects": "Tüm Projeleri Gör",
+    "readBlog": "Blog Yazılarını Oku",
+    "viewAllPosts": "Tüm Blog Yazılarını Gör",
+    "getInTouch": "Bana Ulaş",
+    "learnMoreAboutMe": "Hakkımda Daha Fazla Bilgi",
+    "viewArticle": "Yazıyı Gör",
+    "seeAllPosts": "Tüm Yazıları Gör",
+    "publishedOn": "Yayınlanma Tarihi: {date}"
+  }
+}

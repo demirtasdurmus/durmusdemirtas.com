@@ -48,7 +48,10 @@ Traditional engines parse JavaScript source code at runtime, which slows down ap
 At launch, the engine loads this bytecode directly, eliminating the parsing step and significantly improving startup performance. Apps typically see faster cold starts, reduced memory usage, and bytecode bundles that are 20–30% smaller than their plain-JavaScript equivalents.
 
 <Callout>
-  **Hermes** was designed specifically for mobile constraints: limited memory, battery-conscious CPU usage, and fast startup requirements. Unlike V8 (Chrome's engine) or JavaScriptCore (Safari's engine), which optimize for desktop browser scenarios, Hermes prioritizes the mobile experience from the ground up.
+  **Hermes** was designed specifically for mobile constraints: limited memory, battery-conscious CPU
+  usage, and fast startup requirements. Unlike V8 (Chrome's engine) or JavaScriptCore (Safari's
+  engine), which optimize for desktop browser scenarios, Hermes prioritizes the mobile experience
+  from the ground up.
 </Callout>
 
 ![main.jsbundle compiled with Hermes bytecode](/images/blog/mainjs-bundle-hermes.webp)
