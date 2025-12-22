@@ -14,8 +14,12 @@ export const CopyButton: React.FC<CopyButtonProps> = ({ text, className, ...prop
   const timeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const copy = async () => {
-    await navigator.clipboard.writeText(text);
-    setIsCopied(true);
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+      setIsCopied(true);
+    } else {
+      alert('Clipboard API not supported');
+    }
 
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
