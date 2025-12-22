@@ -1,12 +1,12 @@
-import Image from 'next/image';
 import type { Metadata } from 'next';
+import Image from 'next/image';
+import type { PromiseParams } from '@/types';
+import { posts as allPosts } from '#site/content';
 import { compareDesc } from 'date-fns';
 import { getTranslations } from 'next-intl/server';
 
-import { Link } from '@/i18n/navigation';
-import { posts as allPosts } from '#site/content';
 import { formatDate } from '@/lib/utils';
-import type { PromiseParams } from '@/types';
+import { Link } from '@/i18n/navigation';
 
 export const metadata: Metadata = {
   title: 'Blog'

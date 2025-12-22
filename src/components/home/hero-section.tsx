@@ -1,18 +1,17 @@
 'use client';
 
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 
 import { siteConfig } from '@/config/site';
 import { cn, getNameInitials } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Icons } from '@/components/icons';
-import { containerVariants, itemVariants, cardVariants } from '@/components/motion';
 import { Link } from '@/i18n/navigation';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { buttonVariants } from '@/components/ui/button';
+import { Icons } from '@/components/ui/icons';
+import { cardVariants, containerVariants, itemVariants } from '@/components/motion';
 
 const skills = ['React/React Native', 'Node.js', 'TypeScript', 'PostgreSQL', 'Docker'];
 
@@ -119,7 +118,7 @@ export const HeroSection: React.FC = () => {
                   className={cn(buttonVariants({ size: 'lg' }), 'group gap-2')}
                 >
                   {t('Shared.viewProjects')}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  <Icons.ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </motion.div>
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
@@ -134,14 +133,14 @@ export const HeroSection: React.FC = () => {
 
             <motion.div variants={itemVariants} className="mt-8 flex items-center gap-4">
               {[
-                { href: siteConfig.links.github, icon: <Icons.gitHub className="h-5 w-5" /> },
+                { href: siteConfig.links.github, icon: <Icons.Github className="h-5 w-5" /> },
                 {
                   href: siteConfig.links.twitter,
-                  icon: <Icons.x className="h-5 w-5" />
+                  icon: <Icons.X className="h-5 w-5" />
                 },
                 {
                   href: siteConfig.links.linkedin,
-                  icon: <Icons.linkedin className="h-5 w-5" />
+                  icon: <Icons.Linkedin className="h-5 w-5" />
                 }
               ].map((social, index) => (
                 <motion.div

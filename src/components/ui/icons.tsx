@@ -1,60 +1,59 @@
 import {
-  AlertTriangle,
   ArrowRight,
+  ArrowUpRight,
+  Calendar,
   Check,
+  CheckIcon,
   ChevronLeft,
-  ChevronRight,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  CircleIcon,
   Code2,
-  CreditCard,
-  File,
-  FileText,
-  HelpCircle,
-  Image,
-  Laptop,
-  Loader2,
-  LucideProps,
-  Moon,
-  MoreVertical,
-  Pizza,
-  Plus,
-  Settings,
-  SunMedium,
-  Trash,
-  User,
-  X,
-  Mail,
+  Copy,
+  Database,
+  ExternalLink,
   Globe,
+  Layers,
+  LucideProps,
+  Mail,
+  MenuIcon,
+  Moon,
+  MoreHorizontalIcon,
+  Sparkles,
+  Star,
+  SunMedium,
+  X,
   type LucideIcon
 } from 'lucide-react';
 
 export type Icon = LucideIcon;
 
 export const Icons = {
-  mail: Mail,
-  logo: Code2,
-  close: X,
-  spinner: Loader2,
-  chevronLeft: ChevronLeft,
-  chevronRight: ChevronRight,
-  trash: Trash,
-  post: FileText,
-  page: File,
-  media: Image,
-  settings: Settings,
-  billing: CreditCard,
-  ellipsis: MoreVertical,
-  add: Plus,
-  warning: AlertTriangle,
-  user: User,
-  arrowRight: ArrowRight,
-  help: HelpCircle,
-  pizza: Pizza,
-  sun: SunMedium,
-  moon: Moon,
-  laptop: Laptop,
-  check: Check,
-  globe: Globe,
-  x: ({ ...props }: LucideProps) => (
+  SiteLogo: Code2,
+  Mail: Mail,
+  Close: X,
+  ChevronLeft: ChevronLeft,
+  Sun: SunMedium,
+  Moon: Moon,
+  Globe: Globe,
+  MenuIcon: MenuIcon,
+  Code2: Code2,
+  Database: Database,
+  Layers: Layers,
+  Sparkles: Sparkles,
+  ArrowRight: ArrowRight,
+  ArrowUpRight: ArrowUpRight,
+  Calendar: Calendar,
+  Copy: Copy,
+  Check: Check,
+  ExternalLink: ExternalLink,
+  Star: Star,
+  CheckIcon: CheckIcon,
+  CircleIcon: CircleIcon,
+  ChevronRightIcon: ChevronRightIcon,
+  ChevronLeftIcon: ChevronLeftIcon,
+  MoreHorizontalIcon: MoreHorizontalIcon,
+  X: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
       focusable="false"
@@ -69,7 +68,7 @@ export const Icons = {
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
     </svg>
   ),
-  gitHub: ({ ...props }: LucideProps) => (
+  Github: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
       focusable="false"
@@ -86,7 +85,7 @@ export const Icons = {
       ></path>
     </svg>
   ),
-  linkedin: ({ ...props }: LucideProps) => (
+  Linkedin: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"
       focusable="false"

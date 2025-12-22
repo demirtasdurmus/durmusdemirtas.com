@@ -1,11 +1,11 @@
+import type { PromiseParams } from '@/types';
 import { posts } from '#site/content';
 
-import type { PromiseParams } from '@/types';
+import { FeaturedProjects } from '@/components/home/featured-projects';
 import { HeroSection } from '@/components/home/hero-section';
 import { HighlightsSection } from '@/components/home/highlights-section';
-import { FeaturedProjects } from '@/components/home/featured-projects';
-import { LatestPosts } from '@/components/home/latest-posts';
 import { HomeCTA } from '@/components/home/home-cta';
+import { LatestPosts } from '@/components/home/latest-posts';
 
 type HomePageProps = PromiseParams<{ locale: string }>;
 

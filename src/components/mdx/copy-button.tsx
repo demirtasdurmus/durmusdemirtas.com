@@ -1,8 +1,9 @@
 'use client';
 
 import * as React from 'react';
-import { Check, Copy } from 'lucide-react';
+
 import { cn } from '@/lib/utils';
+import { Icons } from '@/components/ui/icons';
 
 type CopyButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
   text: string;
@@ -41,9 +42,9 @@ export const CopyButton: React.FC<CopyButtonProps> = ({ text, className, ...prop
       {...props}
     >
       {isCopied ? (
-        <Check className="text-success size-full" />
+        <Icons.Check className="text-success size-full" />
       ) : (
-        <Copy className="text-muted-foreground size-full" />
+        <Icons.Copy className="text-muted-foreground size-full" />
       )}
     </button>
   );

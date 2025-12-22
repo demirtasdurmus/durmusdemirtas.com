@@ -1,18 +1,17 @@
 'use client';
 
 import React from 'react';
-import { ArrowUpRight } from 'lucide-react';
 import { motion, useInView } from 'motion/react';
 import { useTranslations } from 'next-intl';
 
-import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Icons } from '@/components/icons';
 import { getTranslatedFeaturedProjects } from '@/config/projects';
-import { containerVariants, cardVariants } from '@/components/motion';
+import { cn } from '@/lib/utils';
 import { Link } from '@/i18n/navigation';
+import { Badge } from '@/components/ui/badge';
+import { buttonVariants } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Icons } from '@/components/ui/icons';
+import { cardVariants, containerVariants } from '@/components/motion';
 
 export const FeaturedProjects: React.FC = () => {
   const t = useTranslations();
@@ -72,7 +71,7 @@ export const FeaturedProjects: React.FC = () => {
                               rel="noreferrer"
                               className="text-muted-foreground hover:text-foreground transition-colors"
                             >
-                              <Icons.gitHub className="h-5 w-5" />
+                              <Icons.Github className="h-5 w-5" />
                             </a>
                           </motion.div>
                         )}
@@ -83,7 +82,7 @@ export const FeaturedProjects: React.FC = () => {
                             rel="noreferrer"
                             className="text-muted-foreground hover:text-foreground transition-colors"
                           >
-                            <ArrowUpRight className="h-5 w-5" />
+                            <Icons.ArrowUpRight className="h-5 w-5" />
                           </a>
                         </motion.div>
                       </div>
@@ -122,7 +121,7 @@ export const FeaturedProjects: React.FC = () => {
               className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'gap-2')}
             >
               {t('Shared.viewAllProjects')}
-              <ArrowUpRight className="h-4 w-4" />
+              <Icons.ArrowUpRight className="h-4 w-4" />
             </Link>
           </motion.div>
         </motion.div>

@@ -1,16 +1,18 @@
 import { PropsWithChildren } from 'react';
 import type { Metadata, Viewport } from 'next';
-import { notFound } from 'next/navigation';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { notFound } from 'next/navigation';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 
 import '../../styles/globals.css';
-import { siteConfig } from '@/config/site';
-import { Providers } from '@/components/providers';
-import { cn } from '@/lib/utils';
+
 import type { PromiseParams } from '@/types';
+
+import { siteConfig } from '@/config/site';
+import { cn } from '@/lib/utils';
 import { routing } from '@/i18n/routing';
+import { Providers } from '@/components/providers';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

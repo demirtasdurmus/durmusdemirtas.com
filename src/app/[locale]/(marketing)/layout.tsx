@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-import { SiteFooter } from '@/components/site-footer';
-import { PropsWithChildren } from 'react';
 import { Navigation } from '@/components/navigation';
+import { SiteFooter } from '@/components/site-footer';
 
 export default async function MarketingLayout({ children }: PropsWithChildren) {
   return (

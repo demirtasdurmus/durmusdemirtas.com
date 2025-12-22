@@ -1,15 +1,15 @@
 'use client';
 
 import React from 'react';
-import { useLocale, useTranslations } from 'next-intl';
-import { ArrowRight, Calendar } from 'lucide-react';
 import { motion, useInView } from 'motion/react';
+import { useLocale, useTranslations } from 'next-intl';
 
 import { cn, formatDate } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { containerVariants, itemVariants } from '@/components/motion';
 import { Link } from '@/i18n/navigation';
+import { Badge } from '@/components/ui/badge';
+import { buttonVariants } from '@/components/ui/button';
+import { Icons } from '@/components/ui/icons';
+import { containerVariants, itemVariants } from '@/components/motion';
 
 type Post = {
   slug: string;
@@ -87,7 +87,7 @@ export const LatestPosts: React.FC<LatestPostsProps> = ({ posts }) => {
                       )}
                     </div>
                     <div className="text-muted-foreground flex shrink-0 items-center gap-2 text-sm">
-                      <Calendar className="h-4 w-4" />
+                      <Icons.Calendar className="h-4 w-4" />
                       <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
                     </div>
                   </Link>
@@ -110,7 +110,7 @@ export const LatestPosts: React.FC<LatestPostsProps> = ({ posts }) => {
               className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'gap-2')}
             >
               {t('Shared.viewAllPosts')}
-              <ArrowRight className="h-4 w-4" />
+              <Icons.ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>
         </motion.div>

@@ -4,10 +4,10 @@ import React from 'react';
 import { motion, useInView } from 'motion/react';
 import { useTranslations } from 'next-intl';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getTranslatedClientProjects, getTranslatedOpenSourceProjects } from '@/config/projects';
-import { ProjectGrid } from './projects-grid';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { containerVariants, itemVariants } from '@/components/motion';
+import { ProjectGrid } from '@/components/projects/projects-grid';
 
 export const ProjectsContent = () => {
   const ref = React.useRef<HTMLDivElement>(null);

@@ -1,20 +1,20 @@
 'use client';
 
 import React from 'react';
-import { useLocale } from 'next-intl';
-import { motion } from 'motion/react';
 import { useParams } from 'next/navigation';
+import { motion } from 'motion/react';
+import { useLocale } from 'next-intl';
 
+import { languages } from '@/config/i18n';
 import { cn } from '@/lib/utils';
+import { usePathname, useRouter } from '@/i18n/navigation';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
-import { useRouter, usePathname } from '@/i18n/navigation';
-import { Icons } from '../icons';
-import { languages } from '@/config/i18n';
+import { Icons } from '@/components/ui/icons';
 
 export const LanguageToggle: React.FC = () => {
   const locale = useLocale();
@@ -26,9 +26,7 @@ export const LanguageToggle: React.FC = () => {
   React.useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    return (
-      <div className="bg-muted/50 h-11 w-11 rounded-full border shadow-sm" aria-hidden="true" />
-    );
+    return <div className="bg-muted/50 h-10 w-10 rounded-full shadow-sm" aria-hidden="true" />;
   }
 
   const handleLanguageChange = (newLocale: string) => {
@@ -73,7 +71,7 @@ export const LanguageToggle: React.FC = () => {
               transition={{ type: 'spring', stiffness: 260, damping: 18 }}
               className="text-foreground flex items-center justify-center"
             >
-              <Icons.globe className="h-6 w-6" />
+              <Icons.Globe className="h-6 w-6" />
             </motion.div>
           </button>
         </DropdownMenuTrigger>

@@ -3,10 +3,10 @@
 import { motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { containerVariants, itemVariants, avatarVariants } from '@/components/motion';
 import { siteConfig } from '@/config/site';
 import { getNameInitials } from '@/lib/utils';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { avatarVariants, containerVariants, itemVariants } from '@/components/motion';
 
 export const AboutContent: React.FC = () => {
   const t = useTranslations();

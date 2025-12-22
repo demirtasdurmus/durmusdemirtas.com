@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import { useTranslations } from 'next-intl';
 import { motion, useInView } from 'motion/react';
-import { Code2, Database, Layers, Sparkles } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
+import { Icons } from '@/components/ui/icons';
 import { containerVariants, itemVariants } from '@/components/motion';
 
 export const HighlightsSection: React.FC = () => {
@@ -15,22 +15,22 @@ export const HighlightsSection: React.FC = () => {
   const highlights = React.useMemo(
     () => [
       {
-        icon: Code2,
+        icon: Icons.Code2,
         title: t('HomePage.highlightsSection.fullStack.title'),
         description: t('HomePage.highlightsSection.fullStack.description')
       },
       {
-        icon: Layers,
+        icon: Icons.Layers,
         title: t('HomePage.highlightsSection.typeScriptFirst.title'),
         description: t('HomePage.highlightsSection.typeScriptFirst.description')
       },
       {
-        icon: Database,
+        icon: Icons.Database,
         title: t('HomePage.highlightsSection.databases.title'),
         description: t('HomePage.highlightsSection.databases.description')
       },
       {
-        icon: Sparkles,
+        icon: Icons.Sparkles,
         title: t('HomePage.highlightsSection.qualityFocused.title'),
         description: t('HomePage.highlightsSection.qualityFocused.description')
       }

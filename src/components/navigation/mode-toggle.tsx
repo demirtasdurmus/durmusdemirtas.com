@@ -1,11 +1,11 @@
 'use client';
 
 import React from 'react';
-import { useTheme } from 'next-themes';
 import { motion } from 'motion/react';
+import { useTheme } from 'next-themes';
 
 import { cn } from '@/lib/utils';
-import { Icons } from '@/components/icons';
+import { Icons } from '@/components/ui/icons';
 
 export const ModeToggle: React.FC = () => {
   const { setTheme, resolvedTheme } = useTheme();
@@ -14,9 +14,7 @@ export const ModeToggle: React.FC = () => {
   React.useEffect(() => setMounted(true), []);
 
   if (!mounted) {
-    return (
-      <div className="bg-muted/50 h-11 w-11 rounded-full border shadow-sm" aria-hidden="true" />
-    );
+    return <div className="bg-muted/50 h-10 w-10 rounded-full shadow-sm" aria-hidden="true" />;
   }
 
   const isDark = resolvedTheme === 'dark';
@@ -56,11 +54,11 @@ export const ModeToggle: React.FC = () => {
         >
           {isDark ? (
             <motion.div animate={{ rotate: -10 }} transition={{ duration: 0.6, ease: 'easeInOut' }}>
-              <Icons.moon className="h-6 w-6" />
+              <Icons.Moon className="h-6 w-6" />
             </motion.div>
           ) : (
             <motion.div animate={{ rotate: 15 }} transition={{ duration: 0.6, ease: 'easeInOut' }}>
-              <Icons.sun className="h-6 w-6" />
+              <Icons.Sun className="h-6 w-6" />
             </motion.div>
           )}
         </motion.div>

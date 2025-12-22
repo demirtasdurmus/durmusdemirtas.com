@@ -1,10 +1,10 @@
 import * as React from 'react';
 import Link from 'next/link';
+import type { MainNavItem } from '@/types';
 
 import { cn } from '@/lib/utils';
 import { useLockBody } from '@/hooks/use-lock-body';
-import { Icons } from '@/components/icons';
-import type { MainNavItem } from '@/types';
+import { Icons } from '@/components/ui/icons';
 
 type MobileNavProps = {
   items: MainNavItem[];
@@ -51,7 +51,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ items, children, onClose }
         onClick={(e) => e.stopPropagation()}
       >
         <Link href="/" className="flex items-center space-x-2 px-2" onClick={handleClose}>
-          <Icons.logo />
+          <Icons.SiteLogo />
           <span className="font-bold">Home</span>
         </Link>
         <nav className="grid grid-flow-row auto-rows-max text-sm">

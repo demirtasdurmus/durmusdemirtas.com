@@ -2,16 +2,15 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import { ExternalLink, Star } from 'lucide-react';
+import { Project } from '@/types';
 import { motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Icons } from '@/components/icons';
-import { Project } from '@/types';
-import { containerVariants, cardVariants } from '@/components/motion';
+import { Icons } from '@/components/ui/icons';
+import { cardVariants, containerVariants } from '@/components/motion';
 
 type ProjectGridProps = {
   items: Project[];
@@ -63,7 +62,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
 
                   {showStars && project.stars && (
                     <div className="text-muted-foreground bg-muted inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium">
-                      <Star className="h-3.5 w-3.5" />
+                      <Icons.Star className="h-3.5 w-3.5" />
                       {project.stars}
                     </div>
                   )}
@@ -91,7 +90,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                         rel="noopener noreferrer"
                         className={cn(buttonVariants({ variant: 'outline' }), 'gap-2')}
                       >
-                        <Icons.gitHub className="h-4 w-4" />
+                        <Icons.Github className="h-4 w-4" />
                         GitHub
                       </a>
                     </motion.div>
@@ -109,7 +108,7 @@ export const ProjectGrid: React.FC<ProjectGridProps> = ({
                       className={cn(buttonVariants({ variant: 'outline' }), 'w-full gap-2')}
                     >
                       {t('Shared.viewProject')}
-                      <ExternalLink className="h-4 w-4" />
+                      <Icons.ExternalLink className="h-4 w-4" />
                     </a>
                   </motion.div>
                 </div>

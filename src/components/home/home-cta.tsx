@@ -1,13 +1,13 @@
 'use client';
 
-import { Mail, ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 
-import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
 import { siteConfig } from '@/config/site';
+import { cn } from '@/lib/utils';
 import { Link } from '@/i18n/navigation';
+import { buttonVariants } from '@/components/ui/button';
+import { Icons } from '@/components/ui/icons';
 
 export const HomeCTA: React.FC = () => {
   const t = useTranslations();
@@ -60,7 +60,7 @@ export const HomeCTA: React.FC = () => {
                 whileHover={{ scale: 1.1, rotate: 10 }}
                 transition={{ type: 'spring', stiffness: 400 }}
               >
-                <Mail className="h-8 w-8" />
+                <Icons.Mail className="h-8 w-8" />
               </motion.div>
 
               <motion.h2
@@ -96,7 +96,7 @@ export const HomeCTA: React.FC = () => {
                     className={cn(buttonVariants({ size: 'lg' }), 'group gap-2')}
                   >
                     {t('Shared.getInTouch')}
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <Icons.ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </a>
                 </motion.div>
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

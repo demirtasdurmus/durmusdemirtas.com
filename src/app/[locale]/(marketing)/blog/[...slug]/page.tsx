@@ -2,16 +2,17 @@ import { notFound } from 'next/navigation';
 import { authors as allAuthors, posts as allPosts } from '#site/content';
 
 import '@/styles/mdx.css';
+
 import { Metadata } from 'next';
 import Image from 'next/image';
+import type { PromiseParams } from '@/types';
 import { getTranslations } from 'next-intl/server';
 
-import { Link } from '@/i18n/navigation';
 import { cn, formatDate } from '@/lib/utils';
-import { Mdx } from '@/components/mdx';
+import { Link } from '@/i18n/navigation';
 import { buttonVariants } from '@/components/ui/button';
-import { Icons } from '@/components/icons';
-import type { PromiseParams } from '@/types';
+import { Icons } from '@/components/ui/icons';
+import { Mdx } from '@/components/mdx';
 
 type BlogPostProps = PromiseParams<{ locale: string; slug: string[] }>;
 
@@ -96,7 +97,7 @@ export default async function PostPage(props: BlogPostProps) {
           'absolute top-14 -left-50 hidden xl:inline-flex'
         )}
       >
-        <Icons.chevronLeft className="mr-2 size-4" />
+        <Icons.ChevronLeft className="mr-2 size-4" />
         {t('Shared.seeAllPosts')}
       </Link>
       <div>
@@ -150,7 +151,7 @@ export default async function PostPage(props: BlogPostProps) {
       <hr className="mt-12" />
       <div className="flex justify-center py-6 lg:py-10">
         <Link href="/blog" className={cn(buttonVariants({ variant: 'ghost' }))}>
-          <Icons.chevronLeft className="mr-2 size-4" />
+          <Icons.ChevronLeft className="mr-2 size-4" />
           {t('Shared.seeAllPosts')}
         </Link>
       </div>

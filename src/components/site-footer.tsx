@@ -5,7 +5,7 @@ import { motion, useInView } from 'motion/react';
 
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
-import { Icons } from '@/components/icons';
+import { Icons } from '@/components/ui/icons';
 import { containerVariants, itemVariants } from '@/components/motion';
 
 export const SiteFooter: React.FC<React.HTMLAttributes<HTMLElement>> = ({ className }) => {
@@ -16,22 +16,22 @@ export const SiteFooter: React.FC<React.HTMLAttributes<HTMLElement>> = ({ classN
     () => [
       {
         href: `mailto:${siteConfig.email}`,
-        icon: <Icons.mail className="h-6 w-6 transition-transform hover:scale-150" />,
+        icon: <Icons.Mail className="h-6 w-6 transition-transform hover:scale-150" />,
         label: 'Mail'
       },
       {
         href: siteConfig.links.twitter,
-        icon: <Icons.x className="h-6 w-6 transition-transform hover:scale-150" />,
+        icon: <Icons.X className="h-6 w-6 transition-transform hover:scale-150" />,
         label: 'Twitter'
       },
       {
         href: siteConfig.links.github,
-        icon: <Icons.gitHub className="h-6 w-6 transition-transform hover:scale-150" />,
+        icon: <Icons.Github className="h-6 w-6 transition-transform hover:scale-150" />,
         label: 'GitHub'
       },
       {
         href: siteConfig.links.linkedin,
-        icon: <Icons.linkedin className="h-6 w-6 transition-transform hover:scale-150" />,
+        icon: <Icons.Linkedin className="h-6 w-6 transition-transform hover:scale-150" />,
         label: 'LinkedIn'
       }
     ],

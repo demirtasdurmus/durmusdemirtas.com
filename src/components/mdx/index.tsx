@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Image from 'next/image';
 import * as runtime from 'react/jsx-runtime';
+import Image from 'next/image';
 
 import { cn } from '@/lib/utils';
 import { Callout } from '@/components/mdx/callout';
