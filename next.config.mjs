@@ -10,7 +10,8 @@ if (!process.env.VELITE_STARTED && (isDev || isBuild)) {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  // @see https://nextjs.org/docs/15/app/api-reference/config/next-config-js/output#automatically-copying-traced-files
+  ...(process.env.NEXT_BUILD_OUTPUT === 'standalone' ? { output: 'standalone' } : {})
 };
 
 const withNextIntl = createNextIntlPlugin();

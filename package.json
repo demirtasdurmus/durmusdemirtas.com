@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
+    "docker-build": "export NEXT_BUILD_OUTPUT=standalone && pnpm build && docker build -f Dockerfile . -t durmusdemirtas:latest",
     "start": "next start",
     "i18n:check": "i18n-check --source en --locales messages",
     "lint": "eslint",
