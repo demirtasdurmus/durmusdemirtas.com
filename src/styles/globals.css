@@ -152,3 +152,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Show copy button on touch devices, hide on hover-capable devices until hover */
+.copy-button-visible {
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .copy-button-visible {
+    opacity: 0;
+  }
+
+  .group:hover .copy-button-visible {
+    opacity: 1;
+  }
+}
+/* end copy button */

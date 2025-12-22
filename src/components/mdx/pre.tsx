@@ -24,10 +24,7 @@ export const Pre: React.FC<PreProps> = ({ className, children, raw, ...props }) 
 
   return (
     <div className="group relative">
-      <CopyButton
-        text={codeText}
-        className="opacity-0 transition-opacity group-hover:opacity-100"
-      />
+      <CopyButton text={codeText} className="copy-button-visible transition-opacity" />
       <pre
         ref={preRef}
         className={cn('mt-6 mb-4 overflow-x-auto rounded-lg border bg-black py-4', className)}
