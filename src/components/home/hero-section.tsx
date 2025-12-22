@@ -92,7 +92,7 @@ export const HeroSection: React.FC = () => {
               className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
             >
               {t.rich('HomePage.heroSection.title', {
-                name: () => (
+                name: (_chunks) => (
                   <span className="from-primary to-primary/60 bg-linear-to-r bg-clip-text text-transparent">
                     {siteConfig.name}
                   </span>

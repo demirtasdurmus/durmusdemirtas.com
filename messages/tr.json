@@ -7,7 +7,7 @@
   "HomePage": {
     "heroSection": {
       "availableForNewProjects": "Yeni projelere açık",
-      "title": "Merhaba, ben <name>{name}</name>",
+      "title": "Merhaba, ben <name></name>",
       "role": "Full-Stack Yazılım Mühendisi",
       "description": "Modern teknolojileri kullanarak kaliteli ve ölçeklenebilir web ve mobil uygulamalar geliştiriyorum. Temiz koda ve kullanıcı deneyimine odaklanarak karmaşık problemleri basit ve etkili bir şekilde çözmeyi seviyorum.",
       "location": "Ankara, Türkiye",
@@ -143,5 +143,10 @@
     "viewArticle": "Yazıyı Gör",
     "seeAllPosts": "Tüm Yazıları Gör",
     "publishedOn": "Yayınlanma Tarihi: {date}"
+  },
+  "Examples": {
+    "dynamicMessage": "Merhaba {name}!",
+    "cardinalPluralization": "Senin {count, plural, =0 {yok} =1 {bir} other {#}} takipçin var.",
+    "richText": "Lütfen <guidelines>yönergeleri</guidelines> takip edin."
   }
 }
