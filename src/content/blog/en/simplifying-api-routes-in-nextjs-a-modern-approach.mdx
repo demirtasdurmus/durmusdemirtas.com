@@ -51,8 +51,8 @@ And also for security purposes, it’s common to use middleware like `helmet`. W
 // @/lib/api-router.ts
 
 import { NextRequest } from 'next/server';
-import { ApiRouter, TNextContext, jsonParser, expressMiddlewareAdapter } from 'nexpresst';
 import helmet from 'helmet';
+import { ApiRouter, expressMiddlewareAdapter, jsonParser, TNextContext } from 'nexpresst';
 
 export const apiRouter = (req: NextRequest, ctx: TNextContext) =>
   new ApiRouter(req, ctx).use(expressMiddlewareAdapter(helmet())).use(jsonParser);
@@ -91,8 +91,9 @@ And then in your `api-router.ts` file:
 // @/lib/api-router.ts
 
 import { NextRequest } from 'next/server';
-import { ApiRouter, TNextContext, jsonParser, expressMiddlewareAdapter } from 'nexpresst';
 import helmet from 'helmet';
+import { ApiRouter, expressMiddlewareAdapter, jsonParser, TNextContext } from 'nexpresst';
+
 import { errorHandler } from '@/lib/middlewares/error-handler';
 
 export const apiRouter = (req: NextRequest, ctx: TNextContext) =>
@@ -109,8 +110,9 @@ To ensure your API can handle non-existent routes properly, we’ll set up a cat
 ```ts
 // @/app/api/[[...params]]/route.ts
 
-import { apiRouter } from '@/lib/api-router';
 import { exportAllHttpMethods, IRouteHandler } from 'nexpresst';
+
+import { apiRouter } from '@/lib/api-router';
 
 const notFoundHandler: IRouteHandler = async (req, res) => {
   return res.statusCode(404).send();
@@ -127,8 +129,9 @@ Attach it to the router:
 ```ts
 // @/lib/api-router.ts
 import { NextRequest } from 'next/server';
-import { ApiRouter, TNextContext, jsonParser, expressMiddlewareAdapter } from 'nexpresst';
 import helmet from 'helmet';
+import { ApiRouter, expressMiddlewareAdapter, jsonParser, TNextContext } from 'nexpresst';
+
 import { errorHandler } from '@/lib/middlewares/error-handler';
 
 export const apiRouter = (req: NextRequest, ctx: TNextContext) =>
@@ -147,9 +150,10 @@ With the foundation set, let’s create our first API routes. We’ll start with
 ```ts
 // @/app/api/posts/route.ts
 
-import { apiRouter } from '@/lib/api-router';
 import { NextRequest } from 'next/server';
 import { IRouteHandler, TNextContext } from 'nexpresst';
+
+import { apiRouter } from '@/lib/api-router';
 
 const getPostsHandler: IRouteHandler = async (req, res) => {
   return res.statusCode(200).send({ message: 'Hello from posts' });
