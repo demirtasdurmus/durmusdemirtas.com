@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { Icons } from '@/components/ui/icons';
 import { cardVariants, containerVariants, itemVariants } from '@/components/motion';
+import { ParticleBackground } from '@/components/particles/particle-background';
 
 const skills = ['React/React Native', 'Node.js', 'TypeScript', 'PostgreSQL', 'Docker'];
 
@@ -34,6 +35,8 @@ export const HeroSection: React.FC = () => {
 
   return (
     <section className="relative overflow-hidden">
+      <ParticleBackground />
+
       {/* Animated background gradient blobs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div

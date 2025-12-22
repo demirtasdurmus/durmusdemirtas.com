@@ -1,11 +1,39 @@
+import dynamic from 'next/dynamic';
 import type { PromiseParams } from '@/types';
 import { posts } from '#site/content';
 
-import { FeaturedProjects } from '@/components/home/featured-projects';
 import { HeroSection } from '@/components/home/hero-section';
-import { HighlightsSection } from '@/components/home/highlights-section';
-import { HomeCTA } from '@/components/home/home-cta';
-import { LatestPosts } from '@/components/home/latest-posts';
+
+const HighlightsSection = dynamic(
+  () =>
+    import('@/components/home/highlights-section').then((mod) => ({
+      default: mod.HighlightsSection
+    })),
+  {
+    ssr: true
+  }
+);
+const FeaturedProjects = dynamic(
+  () =>
+    import('@/components/home/featured-projects').then((mod) => ({
+      default: mod.FeaturedProjects
+    })),
+  {
+    ssr: true
+  }
+);
+const LatestPosts = dynamic(
+  () => import('@/components/home/latest-posts').then((mod) => ({ default: mod.LatestPosts })),
+  {
+    ssr: true
+  }
+);
+const HomeCTA = dynamic(
+  () => import('@/components/home/home-cta').then((mod) => ({ default: mod.HomeCTA })),
+  {
+    ssr: true
+  }
+);
 
 type HomePageProps = PromiseParams<{ locale: string }>;
 

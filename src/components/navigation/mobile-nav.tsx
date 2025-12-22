@@ -52,7 +52,6 @@ export const MobileNav: React.FC<MobileNavProps> = ({ items, children, onClose }
       >
         <Link href="/" className="flex items-center space-x-2 px-2" onClick={handleClose}>
           <Icons.SiteLogo />
-          <span className="font-bold">Home</span>
         </Link>
         <nav className="grid grid-flow-row auto-rows-max text-sm">
           {items.map((item, index) => (
