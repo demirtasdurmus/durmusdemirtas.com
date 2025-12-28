@@ -54,7 +54,9 @@ pnpm start
 
 ## Project Structure
 
-```
+```sh
+messages/
+├── [locale].json          # Localization files
 src/
 ├── app/[locale]/          # App Router with locale routing
 │   └── (marketing)/       # Marketing pages (home, blog, projects, about)
