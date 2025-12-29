@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import dynamic from 'next/dynamic';
 import { motion } from 'motion/react';
 import { useTranslations } from 'next-intl';
 
@@ -12,7 +13,16 @@ import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { Icons } from '@/components/ui/icons';
 import { cardVariants, containerVariants, itemVariants } from '@/components/motion';
-import { ParticleBackground } from '@/components/particles/particle-background';
+
+const ParticleBackground = dynamic(
+  () =>
+    import('@/components/particles/particle-background').then((mod) => ({
+      default: mod.ParticleBackground
+    })),
+  {
+    ssr: false
+  }
+);
 
 const skills = ['React/React Native', 'Node.js', 'TypeScript', 'PostgreSQL', 'Docker'];
 
