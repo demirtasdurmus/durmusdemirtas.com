@@ -85,7 +85,7 @@ export default async function PostPage(props: BlogPostProps) {
   }
 
   const authors = post.authors.map((author) =>
-    allAuthors.find(({ slug }) => slug === `authors/${author}`)
+    allAuthors.find(({ slug }) => slug === `authors/${locale}/${author}`)
   );
 
   return (

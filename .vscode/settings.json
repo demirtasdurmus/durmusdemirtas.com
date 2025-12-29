@@ -1,3 +1,13 @@
 {
-  "cSpell.words": ["durmusdemirtas", "ianvs", "rehype", "rgba", "turbopack", "VELITE", "vercel"]
+  "cSpell.words": [
+    "durmusdemirtas",
+    "ianvs",
+    "isodate",
+    "rehype",
+    "rgba",
+    "turbopack",
+    "VELITE",
+    "vercel"
+  ],
+  "i18n-ally.localesPaths": ["messages", "src/i18n"]
 }

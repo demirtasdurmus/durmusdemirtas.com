@@ -1,0 +1,427 @@
+---
+title: Create Your Own Terminal Command Set Like a Pro - A JavaScript Guide to Building an Interactive Currency Converter
+description: Learn how to build custom terminal commands with JavaScript and Node.js by creating an interactive currency converter tool.
+image: /images/blog/create-your-own-command-set.webp
+date: '2024-07-22'
+authors:
+  - durmus-demirtas
+---
+
+Terminal commands are powerful tools that allow users to perform various tasks efficiently through the command line. While many built-in commands are available in Unix-like systems, it's possible to create custom commands using virtually any programming language. For a deeper understanding of how terminal commands work, check out my previous article, [The Magic Behind Terminal Commands - Understanding the PATH Variable](/blog/the-magic-behind-terminal-commands-understanding-the-path-variable).
+
+JavaScript, particularly with Node.js, is a fantastic choice for creating custom terminal commands due to its ease of use, extensive APIs, and active community.
+
+In this article, we'll create a command-line tool that allows users to convert amounts between different currencies interactively using JavaScript. We'll use the free API provided by [Frankfurter](https://www.frankfurter.app/docs/), which updates currency rates once a day. Note that if you need real-time updates, you might want to consider a paid service.
+
+## Prerequisites
+
+- **Node.js 18 or higher:** Ensure you have Node.js installed. You can download it from [here](https://nodejs.org/). (We need v18 or higher because we will use the fetch API to send HTTP requests; older versions do not support this API.)
+- **Basic terminal knowledge:** Understanding how to navigate and execute commands in the terminal.
+- **Basic JavaScript knowledge:** Familiarity with JavaScript syntax and basic concepts.
+
+As a general plan, we want to create a command to prompt the user interactively to collect the following data:
+
+1. `from`: The currency which the user wants to convert from.
+2. `to`: The currency/currencies which the user wants to convert to.
+3. `amount`: The amount which the user wants to convert.
+
+We will set default values for each in case the user do not pass anything. We will validate user input according to the supported currencies to ensure the data passed is valid. If invalid data is passed, we will print user-friendly messages to the console. You can fetch the supported currencies from [here](https://api.frankfurter.app/currencies).
+
+Enough talk, let's write some code.
+
+Create a file named `currency.js` in your preferred working directory and open it up with your favorite code editor. I will be using VS Code.
+
+```bash
+touch currency.js
+code .
+```
+
+The first step is adding a couple of imports at the top of the file.
+
+```javascript
+const readline = require('readline/promises');
+const { stdin, stdout } = require('process');
+```
+
+We will be using these modules to prompt the user and read the input from the command line interactively.
+
+Next, we will define supported currencies and some default values to use in case user does not pass anything.
+
+```javascript
+const SUPPORTED_CURRENCIES = [
+  'EUR',
+  'AUD',
+  'BGN',
+  'BRL',
+  'CAD',
+  'CHF',
+  'CNY',
+  'CZK',
+  'DKK',
+  'GBP',
+  'HKD',
+  'HUF',
+  'IDR',
+  'ILS',
+  'INR',
+  'ISK',
+  'JPY',
+  'KRW',
+  'MXN',
+  'MYR',
+  'NOK',
+  'NZD',
+  'PHP',
+  'PLN',
+  'RON',
+  'SEK',
+  'SGD',
+  'THB',
+  'TRY',
+  'USD',
+  'ZAR'
+];
+const DEFAULT_FROM = 'EUR';
+const DEFAULT_TO = 'USD,GBP,TRY';
+const DEFAULT_AMOUNT = '1';
+```
+
+Now it is time to define some helper functions to handle input and output.
+
+```javascript
+const logger = {
+  info(message) {
+    console.log(`\x1b[32m${message}\x1b[0m`); // in green colour
+  },
+  warn(message) {
+    console.log(`\x1b[33m${message}\x1b[0m`); // in yellow colour
+  },
+  error(message) {
+    console.log(`\x1b[31m${message}\x1b[0m`); // in red colour
+  }
+};
+const formatInput = (input) => {
+  return input.toUpperCase().trim();
+};
+const renderSupportedCurrencies = (currencies) => {
+  logger.warn(`Supported Currencies:\n${SUPPORTED_CURRENCIES.join(', ')}`);
+};
+```
+
+The `logger` and the `formatInput` functions are pretty straightforward. The former is to print messages in different colours to the console according to their purposes. The `renderSupportedCurrencies` function is for printing the supported currencies before prompts to give the user a hint.
+
+Next, we will create functions to validate and parse user input for amount and currencies.
+
+```javascript
+const parseAmount = (input) => {
+  const trimmed = input.trim();
+  if (isNaN(+trimmed)) {
+    return { isError: true, value: '' };
+  }
+  return { isError: false, value: trimmed };
+};
+const parseCurrency = (input) => {
+  // handle the case in which multiple currencies passed
+  if (input.includes(',')) {
+    const formattedInputArr = input.split(',').map(formatInput);
+    const isError = !formattedInputArr.every((value) => SUPPORTED_CURRENCIES.includes(value));
+    return { isError, value: isError ? '' : formattedInputArr.join(',') };
+  }
+  // handle the case in which a single currency is passed
+  const formattedInput = formatInput(input);
+  const isError = !SUPPORTED_CURRENCIES.includes(formattedInput);
+  return { isError, value: isError ? '' : formattedInput };
+};
+```
+
+The `parseAmount` function ensures the passed amount is a numeric value while the `parseCurrency` function is checking passed currency/currencies against the supported currencies. Note that users will be able to pass comma-separated multiple currencies to convert the source currency to.
+
+The last utility function will prompt the user and get the passed value for further processing.
+
+```javascript
+const promptUser = async (query) => {
+  const readLine = readline.createInterface({ input: stdin, output: stdout });
+  const answer = await readLine.question(query);
+  readLine.close();
+  if (answer.toLowerCase() === 'q') {
+    logger.warn('Exiting...');
+    process.exit(0);
+  }
+  return answer;
+};
+```
+
+This function is designed to prompt the user for input through the terminal. It starts by setting up an input/output interface using `readline.createInterface`. This interface is configured to take input from the standard input (`stdin`) and output to the standard output (`stdout`). The function then displays the provided `query` to the user and waits for their response using the `readLine.question` method. Once the user provides their input, the interface is closed to free up resources. If the user types 'q', the function displays an exit message and terminates the process. Otherwise, it returns the user's input for further processing.
+
+And finally, we will have a `main` function that ties everything together, guiding the user through the process of entering the required information.
+
+```javascript
+const main = async () => {
+  try {
+    let from, to, amount;
+    renderSupportedCurrencies(SUPPORTED_CURRENCIES);
+    // Read 'from' value
+    while (true) {
+      const res = await promptUser(
+        `Enter the currency you want to convert from (Default=${DEFAULT_FROM}): `
+      );
+      if (!res) break;
+      const data = parseCurrency(res);
+      if (!data.isError) {
+        from = data.value;
+        break;
+      } else {
+        logger.error(`Invalid currency: ${res}`);
+        renderSupportedCurrencies(SUPPORTED_CURRENCIES);
+      }
+    }
+    // Read 'to' value
+    while (true) {
+      const res = await promptUser(
+        `Enter the currency(ies) you want to convert to (comma separated if more than one)(Default=${DEFAULT_TO}): `
+      );
+      if (!res) break;
+      const data = parseCurrency(res);
+      if (!data.isError) {
+        to = data.value;
+        break;
+      } else {
+        logger.error(`Invalid currency: ${res}`);
+        renderSupportedCurrencies(SUPPORTED_CURRENCIES);
+      }
+    }
+    // Read 'amount' value
+    while (true) {
+      const res = await promptUser(
+        `Enter the amount you want to convert to (Default=${DEFAULT_AMOUNT}): `
+      );
+      if (!res) break;
+      const data = parseAmount(res);
+      if (!data.isError) {
+        amount = data.value;
+        break;
+      } else {
+        logger.error(`Invalid amount: ${res}, must be a valid integer.`);
+      }
+    }
+    // Fetch result
+    const url =
+      'https://api.frankfurter.app/latest?' +
+      new URLSearchParams({
+        from: from || DEFAULT_FROM,
+        to: to || DEFAULT_TO,
+        amount: amount || DEFAULT_AMOUNT
+      });
+    const res = await fetch(url);
+    const data = await res.json();
+    logger.info(JSON.stringify(data, null, 2));
+  } catch (error) {
+    logger.error(error instanceof Error ? error.message : 'An error occurred');
+  }
+};
+main();
+```
+
+From top to bottom;
+
+- Declaring `from`, `to` and `amount` variables to use for api request.
+- Rendering supported currencies above the prompts to inform users.
+- Setting up a while loop to prompt the user for the `from` value, parsing and validating the input, assigning it to the already declared `from` variable, and breaking the loop if valid. Print an error message along with supported currencies if validation fails.
+- For `to` and `amount` loops, the process is essentially the same as the `from` loop.
+- Finally, building the Frankfurter API URL with query parameters and logging the result to the terminal console. Note that we are passing the default values if the user does not enter anything.
+- Handling errors in a user-friendly manner and invoking the main function at the very bottom.
+
+Here's the complete script:
+
+```javascript
+const readline = require('readline/promises');
+const { stdin, stdout } = require('process');
+const SUPPORTED_CURRENCIES = [
+  'EUR',
+  'AUD',
+  'BGN',
+  'BRL',
+  'CAD',
+  'CHF',
+  'CNY',
+  'CZK',
+  'DKK',
+  'GBP',
+  'HKD',
+  'HUF',
+  'IDR',
+  'ILS',
+  'INR',
+  'ISK',
+  'JPY',
+  'KRW',
+  'MXN',
+  'MYR',
+  'NOK',
+  'NZD',
+  'PHP',
+  'PLN',
+  'RON',
+  'SEK',
+  'SGD',
+  'THB',
+  'TRY',
+  'USD',
+  'ZAR'
+];
+const DEFAULT_FROM = 'EUR';
+const DEFAULT_TO = 'USD,GBP,TRY';
+const DEFAULT_AMOUNT = '1';
+const logger = {
+  info(message) {
+    console.log(`\x1b[32m${message}\x1b[0m`); // in green colour
+  },
+  warn(message) {
+    console.log(`\x1b[33m${message}\x1b[0m`); // in yellow colour
+  },
+  error(message) {
+    console.log(`\x1b[31m${message}\x1b[0m`); // in red colour
+  }
+};
+const formatInput = (input) => {
+  return input.toUpperCase().trim();
+};
+const renderSupportedCurrencies = (currencies) => {
+  logger.warn(`Supported Currencies:\n${SUPPORTED_CURRENCIES.join(', ')}`);
+};
+const parseAmount = (input) => {
+  const trimmed = input.trim();
+  if (isNaN(+trimmed)) {
+    return { isError: true, value: '' };
+  }
+  return { isError: false, value: trimmed };
+};
+const parseCurrency = (input) => {
+  // handle the case in which multiple currencies passed
+  if (input.includes(',')) {
+    const formattedInputArr = input.split(',').map(formatInput);
+    const isError = !formattedInputArr.every((value) => SUPPORTED_CURRENCIES.includes(value));
+    return { isError, value: isError ? '' : formattedInputArr.join(',') };
+  }
+  // handle the case in which a single currency is passed
+  const formattedInput = formatInput(input);
+  const isError = !SUPPORTED_CURRENCIES.includes(formattedInput);
+  return { isError, value: isError ? '' : formattedInput };
+};
+const promptUser = async (query) => {
+  const readLine = readline.createInterface({ input: stdin, output: stdout });
+  const answer = await readLine.question(query);
+  readLine.close();
+  if (answer.toLowerCase() === 'q') {
+    logger.warn('Exiting...');
+    process.exit(0);
+  }
+  return answer;
+};
+const main = async () => {
+  try {
+    let from, to, amount;
+    renderSupportedCurrencies(SUPPORTED_CURRENCIES);
+    // Read 'from' value
+    while (true) {
+      const res = await promptUser(
+        `Enter the currency you want to convert from (Default=${DEFAULT_FROM}): `
+      );
+      if (!res) break;
+      const data = parseCurrency(res);
+      if (!data.isError) {
+        from = data.value;
+        break;
+      } else {
+        logger.error(`Invalid currency: ${res}`);
+        renderSupportedCurrencies(SUPPORTED_CURRENCIES);
+      }
+    }
+    // Read 'to' value
+    while (true) {
+      const res = await promptUser(
+        `Enter the currency(ies) you want to convert to (comma separated if more than one)(Default=${DEFAULT_TO}): `
+      );
+      if (!res) break;
+      const data = parseCurrency(res);
+      if (!data.isError) {
+        to = data.value;
+        break;
+      } else {
+        logger.error(`Invalid currency: ${res}`);
+        renderSupportedCurrencies(SUPPORTED_CURRENCIES);
+      }
+    }
+    // Read 'amount' value
+    while (true) {
+      const res = await promptUser(
+        `Enter the amount you want to convert to (Default=${DEFAULT_AMOUNT}): `
+      );
+      if (!res) break;
+      const data = parseAmount(res);
+      if (!data.isError) {
+        amount = data.value;
+        break;
+      } else {
+        logger.error(`Invalid amount: ${res}, must be a valid integer.`);
+      }
+    }
+    // Fetch result
+    const url =
+      'https://api.frankfurter.app/latest?' +
+      new URLSearchParams({
+        from: from || DEFAULT_FROM,
+        to: to || DEFAULT_TO,
+        amount: amount || DEFAULT_AMOUNT
+      });
+    const res = await fetch(url);
+    const data = await res.json();
+    logger.info(JSON.stringify(data, null, 2));
+  } catch (error) {
+    logger.error(error instanceof Error ? error.message : 'An error occurred');
+  }
+};
+main();
+```
+
+At this point, if you run this script with `node currency.js` from your terminal, it will work. But we are not done yet. We will convert it to a terminal command so that we will be able to run it like the following:
+
+```bash
+currency
+```
+
+To achieve this, we should follow the below steps.
+
+1. Rename the script file as `currency` by removing the `.js` extension at the end.
+
+```bash
+mv currency.js currency
+```
+
+2. Add the shebang (`#!/usr/bin/env node`) at the top of the file to indicate that this script should be executed using Node.js.
+
+```javascript
+#!/usr/bin/env node
+const readline = require('readline/promises');
+const { stdin, stdout } = require('process');
+// rest of the code
+```
+
+3. Create a folder named `myCustomCommands` in your home directory and add it to your PATH variable. For more information, check out [The Magic Behind Terminal Commands - Understanding the PATH Variable](/blog/the-magic-behind-terminal-commands-understanding-the-path-variable).
+
+```bash
+mkdir ~/myCustomCommands
+echo 'export PATH="$PATH:~/myCustomCommands"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+4. Move the `currency` file to this directory and make it executable.
+
+```bash
+mv currency ~/myCustomCommands/currency
+chmod +x ~/myCustomCommands/currency
+```
+
+Now, you can run `currency` command from anywhere in your terminal to convert currencies interactively.
+
+Creating custom terminal commands with JavaScript paves the way for automating tasks and enhancing your productivity. The interactive currency converter we've built is just one example of what you can achieve. Experiment, customize, and enjoy the power of custom commands and feel free to enhance the command we've built further! Happy hacking.

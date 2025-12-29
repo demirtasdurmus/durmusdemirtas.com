@@ -5,7 +5,7 @@
 const lintStagedConfig = {
   '*.{ts,tsx}': 'eslint',
   '*.{ts,tsx}': 'bash -c "pnpm typecheck"',
-  '*': 'prettier --write',
+  '*.{ts,tsx,mdx,md,json,yaml,yml}': 'prettier --write',
   'messages/**/*.json': 'bash -c "pnpm i18n:check"'
 };
 

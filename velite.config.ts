@@ -22,7 +22,7 @@ const posts = defineCollection({
   schema: s
     .object({
       slug: s.path(),
-      title: s.string().max(99),
+      title: s.string().max(150),
       description: s.string().max(999).optional(),
       date: s.isodate(),
       published: s.boolean().default(true),
