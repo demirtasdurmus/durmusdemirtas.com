@@ -25,9 +25,56 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: siteConfig.author,
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? siteConfig.url),
+  title: {
+    default: siteConfig.author,
+    template: `%s | ${siteConfig.author}`
+  },
   description: siteConfig.description,
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? siteConfig.url)
+  keywords: [
+    'Durmuş Demirtaş',
+    'Software Engineer',
+    'Full Stack Developer',
+    'Web Development',
+    'Next.js',
+    'React',
+    'TypeScript',
+    'Portfolio',
+    'Blog'
+  ],
+  authors: [
+    {
+      name: siteConfig.author,
+      url: siteConfig.url
+    }
+  ],
+  creator: siteConfig.author,
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    alternateLocale: ['tr_TR'],
+    url: siteConfig.url,
+    title: siteConfig.author,
+    description: siteConfig.description,
+    siteName: siteConfig.author
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.author,
+    description: siteConfig.description,
+    creator: '@drmsdmrts'
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
+  }
 };
 
 /**

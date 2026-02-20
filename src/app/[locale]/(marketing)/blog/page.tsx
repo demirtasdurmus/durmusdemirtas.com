@@ -5,12 +5,24 @@ import { posts as allPosts } from '#site/content';
 import { compareDesc } from 'date-fns';
 import { getTranslations } from 'next-intl/server';
 
+import { generateMetadata as genMeta } from '@/lib/seo';
 import { formatDate } from '@/lib/utils';
 import { Link } from '@/i18n/navigation';
 
-export const metadata: Metadata = {
-  title: 'Blog'
-};
+export const metadata: Metadata = genMeta({
+  title: 'Blog',
+  description: 'Read my latest articles about software development, web technologies, and more',
+  path: '/blog',
+  type: 'website',
+  keywords: [
+    'Blog',
+    'Software Development',
+    'Web Development',
+    'Programming',
+    'Technology',
+    'Tutorials'
+  ]
+});
 
 type BlogPageProps = PromiseParams<{ locale: string }>;
 
