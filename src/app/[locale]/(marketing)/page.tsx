@@ -1,8 +1,27 @@
+import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 import type { PromiseParams } from '@/types';
 import { posts } from '#site/content';
 
+import { generateStructuredData, generateMetadata as genMeta } from '@/lib/seo';
 import { HeroSection } from '@/components/home/hero-section';
+
+export const metadata: Metadata = genMeta({
+  path: '/',
+  type: 'website',
+  keywords: [
+    'Durmuş Demirtaş',
+    'Software Engineer',
+    'Full Stack Developer',
+    'Portfolio',
+    'Web Development',
+    'Next.js',
+    'React',
+    'TypeScript'
+  ]
+});
+
+const structuredData = generateStructuredData('person');
 
 const HighlightsSection = dynamic(
   () =>
@@ -43,6 +62,10 @@ export default async function HomePage(props: HomePageProps) {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <HeroSection />
       <HighlightsSection />
       <FeaturedProjects />
